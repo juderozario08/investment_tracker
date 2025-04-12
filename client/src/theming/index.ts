@@ -1,45 +1,43 @@
-import { Themes } from "./types";
+import { Theme, Themes } from "./types";
 
 export const themes: Themes = {
-    catppuccinMocha: {
-        name: 'Catppuccin Mocha',
+    light: {
+        name: 'Soft Aura',
         colors: {
-            background: '#1e1e2e',
-            text: '#cdd6f4',
-            primary: '#89b4fa',
-            secondary: '#f38ba8',
-            accent: '#b4befe',
-            muted: '#45475a',
-            border: '#585b70',
-            card: '#313244',
-        },
-    },
-    tokyoNightStorm: {
-        name: 'TokyoNight Storm',
-        colors: {
-            background: '#1a1b26',
-            text: '#a9b1d6',
-            primary: '#627cd6',
-            secondary: '#9d7cd8',
-            accent: '#5ab0f6',
-            muted: '#2e3440',
-            border: '#2c3043',
-            card: '#16161e',
-        },
-    },
-    lightMode: {
-        name: 'Light Mode',
-        colors: {
-            background: '#ffffff',
-            text: '#111827',
+            background: '#f9fafb',
+            card: '#ffffff',
+            text: '#1c1e21',
             primary: '#2563eb',
-            secondary: '#fbbf24',
-            accent: '#ef4444',
-            muted: '#f3f4f6',
-            border: '#e5e7eb',
-            card: '#f9fafb',
+            secondary: '#f472b6',
+            accent: '#22c55e',
+            muted: '#e5e7eb',
+            border: '#d1d5db',
+            tabBarBackground: '#ffffff',
+            tabBarActive: '#2563eb',
+            tabBarInactive: '#9ca3af',
+            headerBackground: '#ffffff',
+            headerText: '#1c1e21',
+        },
+    },
+    dark: {
+        name: 'Midnight Luxe',
+        colors: {
+            background: '#121417',
+            card: '#1c1f26',
+            text: '#e6e8eb',
+            primary: '#5ea1ff',
+            secondary: '#ff85a2',
+            accent: '#72faca',
+            muted: '#2a2d33',
+            border: '#2e323a',
+            tabBarBackground: '#1c1f26',
+            tabBarActive: '#5ea1ff',
+            tabBarInactive: '#6b7280',
+            headerBackground: '#1c1f26',
+            headerText: '#e6e8eb',
         },
     },
 };
-
 export type ThemeNames = keyof typeof themes;
+
+export const DefaultTheme: Theme = themes.dark

@@ -7,6 +7,11 @@ export interface ThemeColors {
     muted: string,
     border: string,
     card: string,
+    tabBarBackground: string,
+    tabBarActive: string,
+    tabBarInactive: string,
+    headerBackground: string,
+    headerText: string,
 }
 
 export interface Theme {
@@ -15,7 +20,6 @@ export interface Theme {
 }
 
 export interface Themes {
-    catppuccinMocha: Theme;
-    tokyoNightStorm: Theme;
-    lightMode: Theme;
+    light: Theme;
+    dark: Theme;
 }

@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet } from "react-native"
 import { useTheme } from "../../../../theming/ThemeProvider"
 
-export const More = () => {
+export const Options = () => {
     const { theme } = useTheme();
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <Text style={{ color: theme.colors.text }}>Export Accounts!</Text>
+            <Text style={{ color: theme.colors.text }}>Options!</Text>
         </View>
     )
 }

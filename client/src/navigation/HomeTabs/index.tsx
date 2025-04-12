@@ -4,42 +4,43 @@ import { History } from './screens/History';
 import { Calendar } from './screens/Calendar';
 import { Statistics } from './screens/Statistics';
 import { Annual } from './screens/Annual';
-import { More } from './screens/More';
+import { Options } from './screens/Options';
 import { BarChart, BookOpen, Calendar as CalendarIco, MoreHorizontal, PieChart } from 'react-native-feather';
 
 const Tab = createBottomTabNavigator();
 
 export const BottomTab = () => {
     const { theme } = useTheme();
+    const getTabColor = (focused: boolean) =>
+        focused ? theme.colors.tabBarActive : theme.colors.tabBarInactive
     return (
         <Tab.Navigator screenOptions={{
             headerTitleAlign: 'center',
-            headerStyle: { backgroundColor: theme.colors.secondary },
-            headerTitleStyle: { color: theme.colors.background },
-            tabBarStyle: { backgroundColor: theme.colors.secondary },
-            tabBarActiveTintColor: theme.colors.text,
-            tabBarInactiveTintColor: theme.colors.muted,
-            tabBarActiveBackgroundColor: theme.colors.muted
+            headerStyle: { backgroundColor: theme.colors.tabBarBackground },
+            headerTitleStyle: { color: theme.colors.text },
+            tabBarStyle: { backgroundColor: theme.colors.tabBarBackground },
+            tabBarActiveTintColor: theme.colors.tabBarActive,
+            tabBarInactiveTintColor: theme.colors.tabBarInactive,
         }} initialRouteName='Transactions'>
             <Tab.Screen name='Transactions' component={History} options={{
                 tabBarIcon: ({ focused }) =>
-                    <BookOpen color={focused ? theme.colors.text : theme.colors.muted} />
+                    <BookOpen color={getTabColor(focused)} />
             }} />
             <Tab.Screen name='Calendar' component={Calendar} options={{
                 tabBarIcon: ({ focused }) =>
-                    <CalendarIco color={focused ? theme.colors.text : theme.colors.muted} />
+                    <CalendarIco color={getTabColor(focused)} />
             }} />
             <Tab.Screen name='Stats' component={Statistics} options={{
                 tabBarIcon: ({ focused }) =>
-                    <PieChart color={focused ? theme.colors.text : theme.colors.muted} />
+                    <PieChart color={getTabColor(focused)} />
             }} />
             <Tab.Screen name='Annual' component={Annual} options={{
                 tabBarIcon: ({ focused }) =>
-                    <BarChart color={focused ? theme.colors.text : theme.colors.muted} />
+                    <BarChart color={getTabColor(focused)} />
             }} />
-            <Tab.Screen name='More' component={More} options={{
+            <Tab.Screen name='More' component={Options} options={{
                 tabBarIcon: ({ focused }) =>
-                    <MoreHorizontal color={focused ? theme.colors.text : theme.colors.muted} />
+                    <MoreHorizontal color={getTabColor(focused)} />
             }} />
         </Tab.Navigator>
     )

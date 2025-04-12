@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
-import { themes } from './index';
+import { DefaultTheme, themes } from './index';
 import { Theme } from './types';
 
 type ThemeName = keyof typeof themes;
@@ -13,7 +13,7 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [themeName, setThemeName] = useState<ThemeName>('tokyoNightStorm');
+    const [themeName, setThemeName] = useState<ThemeName>('dark');
     const theme = themes[themeName];
 
     return (
