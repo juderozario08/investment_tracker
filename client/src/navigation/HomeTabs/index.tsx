@@ -4,7 +4,8 @@ import { History } from './screens/History';
 import { Calendar } from './screens/Calendar';
 import { Statistics } from './screens/Statistics';
 import { Annual } from './screens/Annual';
-import { Export } from './screens/Export';
+import { More } from './screens/More';
+import { BarChart, BookOpen, Calendar as CalendarIco, MoreHorizontal, PieChart } from 'react-native-feather';
 
 const Tab = createBottomTabNavigator();
 
@@ -13,24 +14,33 @@ export const BottomTab = () => {
     return (
         <Tab.Navigator screenOptions={{
             headerTitleAlign: 'center',
-            headerStyle: {
-                backgroundColor: theme.colors.secondary
-            },
-            headerTitleStyle: {
-                color: theme.colors.background
-            },
-            tabBarStyle: {
-                backgroundColor: theme.colors.secondary
-            },
-            tabBarLabelStyle: {
-                color: theme.colors.background
-            },
-        }}>
-            <Tab.Screen name='History' component={History} />
-            <Tab.Screen name='Calendar' component={Calendar} />
-            <Tab.Screen name='Stats' component={Statistics} />
-            <Tab.Screen name='Annual' component={Annual} />
-            <Tab.Screen name='Export' component={Export} />
+            headerStyle: { backgroundColor: theme.colors.secondary },
+            headerTitleStyle: { color: theme.colors.background },
+            tabBarStyle: { backgroundColor: theme.colors.secondary },
+            tabBarActiveTintColor: theme.colors.text,
+            tabBarInactiveTintColor: theme.colors.muted,
+            tabBarActiveBackgroundColor: theme.colors.muted
+        }} initialRouteName='Transactions'>
+            <Tab.Screen name='Transactions' component={History} options={{
+                tabBarIcon: ({ focused }) =>
+                    <BookOpen color={focused ? theme.colors.text : theme.colors.muted} />
+            }} />
+            <Tab.Screen name='Calendar' component={Calendar} options={{
+                tabBarIcon: ({ focused }) =>
+                    <CalendarIco color={focused ? theme.colors.text : theme.colors.muted} />
+            }} />
+            <Tab.Screen name='Stats' component={Statistics} options={{
+                tabBarIcon: ({ focused }) =>
+                    <PieChart color={focused ? theme.colors.text : theme.colors.muted} />
+            }} />
+            <Tab.Screen name='Annual' component={Annual} options={{
+                tabBarIcon: ({ focused }) =>
+                    <BarChart color={focused ? theme.colors.text : theme.colors.muted} />
+            }} />
+            <Tab.Screen name='More' component={More} options={{
+                tabBarIcon: ({ focused }) =>
+                    <MoreHorizontal color={focused ? theme.colors.text : theme.colors.muted} />
+            }} />
         </Tab.Navigator>
     )
 }

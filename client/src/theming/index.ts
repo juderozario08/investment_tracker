@@ -17,14 +17,14 @@ export const themes: Themes = {
     tokyoNightStorm: {
         name: 'TokyoNight Storm',
         colors: {
-            background: '#24283b',
-            text: '#c0caf5',
-            primary: '#7aa2f7',
-            secondary: '#bb9af7',
-            accent: '#7dcfff',
-            muted: '#414868',
-            border: '#3b4261',
-            card: '#1f2335',
+            background: '#1a1b26',
+            text: '#a9b1d6',
+            primary: '#627cd6',
+            secondary: '#9d7cd8',
+            accent: '#5ab0f6',
+            muted: '#2e3440',
+            border: '#2c3043',
+            card: '#16161e',
         },
     },
     lightMode: {

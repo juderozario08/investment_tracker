@@ -5,7 +5,7 @@ export function History() {
     const { theme } = useTheme();
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <Text style={{ color: theme.colors.text }}>Home Screen</Text>
+            <Text style={{ color: theme.colors.text }}>Transaction Logs</Text>
         </View>
     );
 }
