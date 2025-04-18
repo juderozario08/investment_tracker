@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
-import { DefaultTheme, themes } from './index';
+import { themes } from './index';
 import { Theme } from './types';
 
 type ThemeName = keyof typeof themes;

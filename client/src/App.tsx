@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { BottomTab } from './navigation/HomeTabs';
+import { BottomTab } from './navigation';
 import { NavigationContainer } from '@react-navigation/native';
 import { ThemeProvider } from './theming/ThemeProvider';
 

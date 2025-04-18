@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useTheme } from '../../theming/ThemeProvider';
-import { History } from './screens/History';
+import { useTheme } from '../theming/ThemeProvider';
+import { Transactions } from './screens/Transactions';
 import { Calendar } from './screens/Calendar';
 import { Statistics } from './screens/Statistics';
 import { Annual } from './screens/Annual';
@@ -15,14 +15,15 @@ export const BottomTab = () => {
         focused ? theme.colors.tabBarActive : theme.colors.tabBarInactive
     return (
         <Tab.Navigator screenOptions={{
-            headerTitleAlign: 'center',
-            headerStyle: { backgroundColor: theme.colors.tabBarBackground },
-            headerTitleStyle: { color: theme.colors.text },
+            headerShown: false,
+            //headerTitleAlign: 'center',
+            //headerStyle: { backgroundColor: theme.colors.tabBarBackground },
+            //headerTitleStyle: { color: theme.colors.text },
             tabBarStyle: { backgroundColor: theme.colors.tabBarBackground },
             tabBarActiveTintColor: theme.colors.tabBarActive,
             tabBarInactiveTintColor: theme.colors.tabBarInactive,
         }} initialRouteName='Transactions'>
-            <Tab.Screen name='Transactions' component={History} options={{
+            <Tab.Screen name='Transactions' component={Transactions} options={{
                 tabBarIcon: ({ focused }) =>
                     <BookOpen color={getTabColor(focused)} />
             }} />

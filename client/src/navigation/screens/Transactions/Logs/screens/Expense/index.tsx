@@ -1,11 +1,11 @@
 import { View, Text, StyleSheet } from "react-native"
-import { useTheme } from "../../../../theming/ThemeProvider"
+import { useTheme } from "../../../../../../theming/ThemeProvider";
 
-export const Calendar = () => {
+export const ExpenseForm = () => {
     const { theme } = useTheme();
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <Text style={{ color: theme.colors.text }}>Calendar!</Text>
+            <Text>Expense Tracker</Text>
         </View>
     )
 }
@@ -15,6 +15,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        gap: 10,
-    },
-});
+        gap: 10
+    }
+})

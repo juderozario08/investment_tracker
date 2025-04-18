@@ -1,11 +1,12 @@
-import { View, Text, StyleSheet } from "react-native"
+import { StyleSheet, View, Text } from "react-native"
 import { useTheme } from "../../../../theming/ThemeProvider"
 
-export const Options = () => {
+// This will be the Material top navigator
+export const Logs = () => {
     const { theme } = useTheme();
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <Text style={{ color: theme.colors.text }}>Options!</Text>
+            <Text style={{ color: theme.colors.text }}>Logs</Text>
         </View>
     )
 }
@@ -15,6 +16,6 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        gap: 10,
-    },
-});
+        gap: 10
+    }
+})
