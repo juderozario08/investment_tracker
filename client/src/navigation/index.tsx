@@ -31,13 +31,13 @@ export const BottomTab = () => {
                 tabBarIcon: ({ focused }) =>
                     <CalendarIco color={getTabColor(focused)} />
             }} />
-            <Tab.Screen name='Stats' component={Statistics} options={{
-                tabBarIcon: ({ focused }) =>
-                    <PieChart color={getTabColor(focused)} />
-            }} />
             <Tab.Screen name='Annual' component={Annual} options={{
                 tabBarIcon: ({ focused }) =>
                     <BarChart color={getTabColor(focused)} />
+            }} />
+            <Tab.Screen name='Stats' component={Statistics} options={{
+                tabBarIcon: ({ focused }) =>
+                    <PieChart color={getTabColor(focused)} />
             }} />
             <Tab.Screen name='More' component={Options} options={{
                 tabBarIcon: ({ focused }) =>
