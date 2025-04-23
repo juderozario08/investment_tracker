@@ -12,6 +12,9 @@ export interface ThemeColors {
     tabBarInactive: string,
     headerBackground: string,
     headerText: string,
+    income: string,
+    investment: string,
+    spending: string
 }
 
 export interface Theme {

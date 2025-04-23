@@ -17,6 +17,9 @@ export const themes: Themes = {
             tabBarInactive: '#9ca3af',
             headerBackground: '#ffffff',
             headerText: '#1c1e21',
+            income: '#22c55e',
+            spending: '#ef4444',
+            investment: '#8b5cf6',
         },
     },
     dark: {
@@ -35,6 +38,9 @@ export const themes: Themes = {
             tabBarInactive: '#6b7280',
             headerBackground: '#1c1f26',
             headerText: '#e6e8eb',
+            income: '#4ade80',
+            spending: '#f87171',
+            investment: '#a78bfa',
         },
     },
 };
