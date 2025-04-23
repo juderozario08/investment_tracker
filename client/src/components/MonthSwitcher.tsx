@@ -1,43 +1,27 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { useTheme } from "../theming/ThemeProvider"
 import { ChevronLeft, ChevronRight } from "react-native-feather";
-import { useState } from "react";
+import React from "react";
+import { Months } from "../lib/constants";
 
-const Months: string[] = [
-    'Jan',
-    'Feb',
-    'Mar',
-    'Apr',
-    'May',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Oct',
-    'Nov',
-    'Dec'
-]
+interface MonthSwitcherProps {
+    month: number;
+    setMonth: React.Dispatch<React.SetStateAction<number>>;
+    prevMonth: () => void;
+    nextMonth: () => void;
+}
 
-export const MonthSwitcher = () => {
-    const [monthNum, setMonthNum] = useState<number>(new Date().getMonth());
+export const MonthSwitcher: React.FC<MonthSwitcherProps> = ({ month, prevMonth, nextMonth }) => {
     const { theme } = useTheme();
-    const prevMonth = () => {
-        setMonthNum((monthNum + 1) % 12)
-    }
-    const nextMonth = () => {
-        setMonthNum((monthNum + 1) % 12)
-    }
     return (
-        <View style={[{ backgroundColor: theme.colors.muted }, styles.container]}>
-            <View style={[styles.flex]}>
-                <TouchableOpacity style={[styles.center]} onPress={prevMonth}>
-                    <ChevronLeft color={'white'} />
-                </TouchableOpacity>
-                <Text style={[{ color: theme.colors.text }, styles.textCenter, styles.center]}>{Months[monthNum]}</Text>
-                <TouchableOpacity style={[styles.center]} onPress={nextMonth}>
-                    <ChevronRight color={'white'} />
-                </TouchableOpacity>
-            </View>
+        <View style={[styles.flex]}>
+            <TouchableOpacity style={[styles.center]} onPress={prevMonth}>
+                <ChevronLeft color={theme.colors.text} />
+            </TouchableOpacity>
+            <Text style={[{ color: theme.colors.text }, styles.text, styles.center]}>{Months[month]}</Text>
+            <TouchableOpacity style={[styles.center]} onPress={nextMonth}>
+                <ChevronRight color={theme.colors.text} />
+            </TouchableOpacity>
         </View>
     )
 }
@@ -49,8 +33,7 @@ const styles = StyleSheet.create({
         top: 25,
         padding: 10
     },
-    textCenter: {
-        textAlign: 'center',
+    text: {
         fontSize: 17,
         paddingLeft: 5,
         paddingRight: 5
