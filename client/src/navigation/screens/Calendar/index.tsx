@@ -6,6 +6,7 @@ import { useState } from "react";
 export const Calendar = () => {
     const { theme } = useTheme();
     const [month, setMonth] = useState<number>(new Date().getMonth());
+    const [year, setYear] = useState<number>(new Date().getFullYear())
     const prevMonth = () => {
         const newMonth = month - 1;
         setMonth(((newMonth % 12) + 12) % 12);
@@ -16,7 +17,7 @@ export const Calendar = () => {
     };
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <MonthSwitcher month={month} setMonth={setMonth} prevMonth={prevMonth} nextMonth={nextMonth} />
+            <MonthSwitcher month={month} setMonth={setMonth} prevMonth={prevMonth} nextMonth={nextMonth} year={year} setYear={setYear}/>
             <Text style={{ color: theme.colors.text }}>Calendar!</Text>
         </View>
     )

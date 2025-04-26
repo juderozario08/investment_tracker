@@ -13,12 +13,15 @@ const CardHeader: React.FC<{
     const total = income - spending;
     return (
         <View style={[styles.header]}>
-            <Text style={[{ color: theme.colors.text }]}>{`${date.getDate()} ${Days[date.getDay()]}`}</Text>
+            <View style={{ flex: 1, flexDirection: 'row', gap: 10, alignItems: 'center' }}>
+                <Text style={{ color: 'rgba(255, 70, 28, 0.7)', fontSize: 20, width: 30 }}>{date.getDate()}</Text>
+                <Text style={{ color: theme.colors.text, fontSize: 13, fontWeight: '600' }}>{Days[date.getDay()]}</Text>
+            </View>
             <View style={[styles.headerValues]}>
-                <Text style={[{ color: theme.colors.investment }]}>{`$${investments}`}</Text>
-                <Text style={[{ color: theme.colors.income }]}>{`$${income}`}</Text>
-                <Text style={[{ color: theme.colors.spending }]}>{`$${spending}`}</Text>
-                <Text style={[{ color: total < 0 ? theme.colors.spending : theme.colors.income }]}>{`$${Math.abs(total)}`}</Text>
+                <Text style={[{ width: 100, textAlign: 'right', color: theme.colors.investment }]}>{`$${investments}`}</Text>
+                <Text style={[{ width: 100, textAlign: 'right', color: theme.colors.income }]}>{`$${income}`}</Text>
+                <Text style={[{ width: 100, textAlign: 'right', color: theme.colors.spending }]}>{`$${spending}`}</Text>
+                <Text style={[{ width: 100, textAlign: 'right', color: total < 0 ? theme.colors.spending : theme.colors.income }]}>{`$${Math.abs(total)}`}</Text>
             </View>
         </View>
     )
@@ -29,15 +32,15 @@ const Transaction: React.FC<TransactionDateType> = ({ category, transactionType,
     return (
         <View style={[styles.transaction, { paddingRight: 5 }]}>
             <View style={{ flexDirection: 'row', gap: 10, paddingLeft: 5 }}>
-                <Text style={[{ color: theme.colors.text, width: 75 }]}>{transactionType}</Text>
-                <Text style={[{ color: theme.colors.text, width: 75 }]}>{name}</Text>
+                <Text style={[{ color: theme.colors.text, width: 100 }]}>{transactionType}</Text>
+                <Text style={[{ color: theme.colors.text, width: 100 }]}>{name}</Text>
             </View>
             <Text style={[{ color: theme.colors[category] }]}>{`$${amount}`}</Text>
         </View>
     )
 }
 
-export const DailyCard: React.FC<{ transactions: TransactionDateType[] }> = ({ transactions }) => {
+export const DailyCard: React.FC<{ transactions: TransactionDateType[], date: Date }> = ({ transactions, date }) => {
     const { theme } = useTheme();
     const totals = transactions.reduce((acc, transaction) => {
         if (transaction.category === 'income') acc.income += transaction.amount;
@@ -48,7 +51,7 @@ export const DailyCard: React.FC<{ transactions: TransactionDateType[] }> = ({ t
 
     return (
         <View style={[{ backgroundColor: theme.colors.muted }, styles.container]}>
-            <CardHeader date={new Date()} investments={totals.investments} income={totals.income} spending={totals.spending} />
+            <CardHeader date={date} investments={totals.investments} income={totals.income} spending={totals.spending} />
             <View style={{ paddingTop: 10, gap: 10 }}>
                 {transactions.map((transaction, idx) => (
                     <Transaction
@@ -68,20 +71,23 @@ export const DailyCard: React.FC<{ transactions: TransactionDateType[] }> = ({ t
 const styles = StyleSheet.create({
     container: {
         padding: 10,
-        borderRadius: 10
+        borderRadius: 10,
+        marginTop: 5,
+        marginBottom: 5
     },
     header: {
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingLeft: 5,
         paddingRight: 5,
-        paddingBottom: 10,
+        paddingBottom: 5,
+        marginBottom: 5,
         borderBottomWidth: 1,
         borderBottomColor: 'grey'
     },
     headerValues: {
+        flex: 1,
         flexDirection: 'row',
-        gap: 12
     },
     transaction: {
         flexDirection: 'row',

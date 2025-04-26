@@ -16,9 +16,6 @@ export const BottomTab = () => {
     return (
         <Tab.Navigator screenOptions={{
             headerShown: false,
-            //headerTitleAlign: 'center',
-            //headerStyle: { backgroundColor: theme.colors.tabBarBackground },
-            //headerTitleStyle: { color: theme.colors.text },
             tabBarStyle: { backgroundColor: theme.colors.tabBarBackground },
             tabBarActiveTintColor: theme.colors.tabBarActive,
             tabBarInactiveTintColor: theme.colors.tabBarInactive,
