@@ -6,7 +6,7 @@ import { TopMenu } from "../../../../components/TopMenu";
 import { DailyCard } from "../../../../components/DailyCard";
 import { TransactionDateType } from "../../../..";
 import { GestureHandlerRootView, ScrollView } from "react-native-gesture-handler";
-import { MonthTotal } from "../../../../components/MonthTotal";
+import { MonthSummary } from "../../../../components/MonthTotal";
 
 const data: TransactionDateType[] = [
     {
@@ -172,7 +172,7 @@ export const Logs = () => {
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
             <TopMenu>
                 <MonthSwitcher month={month} prevMonth={prevMonth} nextMonth={nextMonth} year={year} />
-                <MonthTotal amounts={{ investing, income, spending }} />
+                <MonthSummary amounts={{ investing, income, spending }} />
             </TopMenu>
             <GestureHandlerRootView style={{ flex: 1 }}>
                 <ScrollView style={{ padding: 10 }}>

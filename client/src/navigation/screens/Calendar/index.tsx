@@ -3,7 +3,7 @@ import { useTheme } from "../../../theming/ThemeProvider"
 import { MonthSwitcher } from "../../../components/MonthSwitcher";
 import { useState } from "react";
 import { TopMenu } from "../../../components/TopMenu";
-import { MonthTotal } from "../../../components/MonthTotal";
+import { MonthSummary } from "../../../components/MonthTotal";
 
 export const Calendar = () => {
     const { theme } = useTheme();
@@ -24,7 +24,7 @@ export const Calendar = () => {
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
             <TopMenu>
                 <MonthSwitcher month={month} prevMonth={prevMonth} nextMonth={nextMonth} year={year} />
-                <MonthTotal amounts={{ investing, income, spending }} />
+                <MonthSummary amounts={{ investing, income, spending }} />
             </TopMenu>
             <Text style={{ color: theme.colors.text }}>Calendar</Text>
         </View>

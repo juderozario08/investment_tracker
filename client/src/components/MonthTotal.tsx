@@ -1,7 +1,7 @@
-import { View, Text } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
 import { useTheme } from "../theming/ThemeProvider";
 
-export const MonthTotal: React.FC<{
+export const MonthSummary: React.FC<{
     amounts: {
         investing: number;
         income: number;
@@ -15,25 +15,35 @@ export const MonthTotal: React.FC<{
             justifyContent: 'space-between',
             paddingLeft: 40,
             paddingRight: 40,
-            paddingTop: 10,
-            paddingBottom: 10,
+            paddingTop: 5,
+            paddingBottom: 5,
             marginTop: 15,
             borderTopWidth: 1,
             borderBottomWidth: 1,
             borderColor: 'rgba(128, 128, 128, 0.5)',
         }}>
-            <View>
-                <Text style={[{ color: theme.colors.text, paddingBottom: 10, textAlign: 'center' }]}>Investing</Text>
-                <Text style={[{ color: theme.colors.investment, textAlign: 'center' }]}>${amounts.investing}</Text>
+            <View style={styles.categoryTotalView}>
+                <Text style={[{ color: theme.colors.text }]}>Investing</Text>
+                <Text style={[{ color: theme.colors.investment }]}>${amounts.investing}</Text>
             </View>
-            <View>
-                <Text style={[{ color: theme.colors.text, paddingBottom: 10 }]}>Income</Text>
-                <Text style={[{ color: theme.colors.income, textAlign: 'center' }]}>${amounts.income}</Text>
+            <View style={styles.categoryTotalView}>
+                <Text style={[{ color: theme.colors.text }]}>Income</Text>
+                <Text style={[{ color: theme.colors.income }]}>${amounts.income}</Text>
             </View>
-            <View>
-                <Text style={[{ color: theme.colors.text, paddingBottom: 10 }]}>Spending</Text>
-                <Text style={[{ color: theme.colors.spending, textAlign: 'center' }]}>${amounts.spending}</Text>
+            <View style={styles.categoryTotalView}>
+                <Text style={[{ color: theme.colors.text }]}>Spending</Text>
+                <Text style={[{ color: theme.colors.spending }]}>${amounts.spending}</Text>
             </View>
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    categoryTotalView: {
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingBottom: 2,
+        paddingTop: 2
+    }
+})

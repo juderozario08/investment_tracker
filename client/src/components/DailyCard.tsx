@@ -1,7 +1,11 @@
-import { StyleSheet, View, Text } from "react-native"
+import { StyleSheet, View, Text, TouchableOpacity, Modal } from "react-native"
 import { useTheme } from "../theming/ThemeProvider"
 import { Days } from "../lib/constants";
 import { TransactionDateType } from "..";
+import { useState } from "react";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+import { Theme } from "../theming/types";
+import { ArrowLeft, X } from "react-native-feather";
 
 const CardHeader: React.FC<{
     date: Date;
@@ -27,16 +31,74 @@ const CardHeader: React.FC<{
     )
 }
 
-const Transaction: React.FC<TransactionDateType> = ({ category, transactionType, name, amount }) => {
-    const { theme } = useTheme();
+const CustomModal: React.FC<{
+    isVisible: boolean;
+    setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+    theme: Theme;
+    details: TransactionDateType;
+}> = ({ isVisible, setIsVisible, theme, details }) => {
     return (
-        <View style={[styles.transaction, { paddingRight: 5 }]}>
-            <View style={{ flexDirection: 'row', gap: 10, paddingLeft: 5 }}>
-                <Text style={[{ color: theme.colors.text, width: 100 }]}>{transactionType}</Text>
-                <Text style={[{ color: theme.colors.text, width: 100 }]}>{name}</Text>
+        <Modal
+            animationType="slide"
+            transparent={true}
+            visible={isVisible}
+            onRequestClose={() => {
+                setIsVisible(!isVisible);
+            }}>
+            <View style={[styles.centeredView, { backgroundColor: 'rgba(0,0,0,0.5)' }]}>
+                <View style={[styles.modalView, { backgroundColor: theme.colors.muted, shadowColor: theme.colors.accent }]}>
+                    <View style={{ position: 'absolute', left: 10, top: 10 }}>
+                        <TouchableOpacity
+                            onPress={() => setIsVisible(!isVisible)}>
+                            <ArrowLeft color={'grey'} width={19} />
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.modalFields}>
+                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>Category: </Text>
+                        <Text style={{ color: theme.colors[details.category], marginTop: 10, width: 100 }}>{details.category[0].toUpperCase() + details.category.slice(1)}</Text>
+                    </View>
+                    <View style={styles.modalFields}>
+                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>Tag: </Text>
+                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>{details.transactionType}</Text>
+                    </View>
+                    <View style={styles.modalFields}>
+                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>Name: </Text>
+                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>{details.name}</Text>
+                    </View>
+                    <View style={styles.modalFields}>
+                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>Amount: </Text>
+                        <Text style={{ color: theme.colors[details.category], marginTop: 10, width: 100 }}>${details.amount}</Text>
+                    </View>
+                    <View style={styles.modalFields}>
+                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>Description: </Text>
+                        <Text style={{ color: theme.colors.text, marginTop: 10 }}>{details.description}</Text>
+                    </View>
+                    <View style={styles.modalFields}>
+                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>Note: </Text>
+                        <Text style={{ color: theme.colors.text, marginTop: 10 }}>{details.note}</Text>
+                    </View>
+                </View>
             </View>
-            <Text style={[{ color: theme.colors[category] }]}>{`$${amount}`}</Text>
-        </View>
+        </Modal>
+    )
+}
+
+const Transaction: React.FC<{ transaction: TransactionDateType }> = ({ transaction }) => {
+    const { theme } = useTheme();
+    const [isVisible, setIsVisible] = useState<boolean>(false);
+    return (
+        <SafeAreaProvider>
+            <SafeAreaView>
+                <CustomModal isVisible={isVisible} setIsVisible={setIsVisible} theme={theme} details={transaction} />
+                <TouchableOpacity style={[styles.transaction, { paddingRight: 5 }]} onPress={() => setIsVisible(true)}>
+                    <View style={{ flexDirection: 'row', gap: 10, paddingLeft: 5 }}>
+                        <Text style={[{ color: theme.colors.text, width: 100 }]}>{transaction.transactionType}</Text>
+                        <Text style={[{ color: theme.colors.text, width: 100 }]}>{transaction.name}</Text>
+                    </View>
+                    <Text style={[{ color: theme.colors[transaction.category] }]}>{`$${transaction.amount}`}</Text>
+                </TouchableOpacity>
+            </SafeAreaView>
+        </SafeAreaProvider>
     )
 }
 
@@ -54,14 +116,7 @@ export const DailyCard: React.FC<{ transactions: TransactionDateType[], date: Da
             <CardHeader date={date} investments={totals.investments} income={totals.income} spending={totals.spending} />
             <View style={{ paddingTop: 10, gap: 10 }}>
                 {transactions.map((transaction, idx) => (
-                    <Transaction
-                        key={idx}
-                        category={transaction.category}
-                        transactionType={transaction.transactionType}
-                        name={transaction.name}
-                        amount={transaction.amount}
-                        date={transaction.date}
-                    />
+                    <Transaction key={idx} transaction={transaction} />
                 ))}
             </View>
         </View>
@@ -91,5 +146,27 @@ const styles = StyleSheet.create({
     transaction: {
         flexDirection: 'row',
         justifyContent: 'space-between'
+    },
+    centeredView: {
+        flex: 1,
+        justifyContent: 'center',
+        alignContent: 'center',
+        padding: 20
+    },
+    modalView: {
+        marginTop: 20,
+        marginBottom: 20,
+        marginRight: 5,
+        marginLeft: 5,
+        borderRadius: 10,
+        padding: 35,
+        shadowRadius: 4,
+        elevation: 10,
+    },
+    modalFields: {
+        flexDirection: 'row',
+        borderBottomWidth: 1,
+        borderColor: 'rgba(128, 128, 128, 0.7)',
+        paddingBottom: 5
     }
 })

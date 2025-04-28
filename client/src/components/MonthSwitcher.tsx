@@ -18,7 +18,7 @@ export const MonthSwitcher: React.FC<MonthSwitcherProps> = ({ month, prevMonth, 
             <TouchableOpacity onPress={prevMonth}>
                 <ChevronLeft color={theme.colors.text} />
             </TouchableOpacity>
-            <Text style={[{ color: theme.colors.text, marginTop: 4 }, styles.text]}>{`${Months[month]} ${year}`}</Text>
+            <Text style={[{ color: theme.colors.text, marginTop: 2 }, styles.text]}>{`${Months[month]} ${year}`}</Text>
             <TouchableOpacity onPress={nextMonth}>
                 <ChevronRight color={theme.colors.text} />
             </TouchableOpacity>
