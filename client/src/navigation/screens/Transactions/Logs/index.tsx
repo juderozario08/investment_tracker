@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 import { TopMenu } from "../../../../components/TopMenu";
 import { DailyCard } from "../../../../components/DailyCard";
 import { TransactionDateType } from "../../../..";
-import { ScrollView } from "react-native-gesture-handler";
+import { GestureHandlerRootView, ScrollView } from "react-native-gesture-handler";
 import { MonthTotal } from "../../../../components/MonthTotal";
 
 const data: TransactionDateType[] = [
@@ -174,15 +174,17 @@ export const Logs = () => {
                 <MonthSwitcher month={month} prevMonth={prevMonth} nextMonth={nextMonth} year={year} />
                 <MonthTotal amounts={{ investing, income, spending }} />
             </TopMenu>
-            <ScrollView style={[styles.logContainer]}>
-                {
-                    sortedDateArray.map((val, idx) => {
-                        return val.getMonth() === month && val.getFullYear() === year ? (
-                            <DailyCard key={idx} transactions={groupedByDate.get(val) || []} date={val} />
-                        ) : null
-                    })
-                }
-            </ScrollView>
+            <GestureHandlerRootView style={{ flex: 1 }}>
+                <ScrollView style={{ padding: 10 }}>
+                    {
+                        sortedDateArray.map((val, idx) => {
+                            return val.getMonth() === month && val.getFullYear() === year ? (
+                                <DailyCard key={idx} transactions={groupedByDate.get(val) || []} date={val} />
+                            ) : null
+                        })
+                    }
+                </ScrollView>
+            </GestureHandlerRootView>
         </View>
     )
 }
@@ -191,7 +193,4 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
-    logContainer: {
-        padding: 10
-    }
 })

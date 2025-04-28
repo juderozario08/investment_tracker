@@ -13,15 +13,15 @@ const CardHeader: React.FC<{
     const total = income - spending;
     return (
         <View style={[styles.header]}>
-            <View style={{ flex: 1, flexDirection: 'row', gap: 10, alignItems: 'center' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                 <Text style={{ color: 'rgba(255, 70, 28, 0.7)', fontSize: 20, width: 30 }}>{date.getDate()}</Text>
                 <Text style={{ color: theme.colors.text, fontSize: 13, fontWeight: '600' }}>{Days[date.getDay()]}</Text>
             </View>
             <View style={[styles.headerValues]}>
-                <Text style={[{ width: 100, textAlign: 'right', color: theme.colors.investment }]}>{`$${investments}`}</Text>
-                <Text style={[{ width: 100, textAlign: 'right', color: theme.colors.income }]}>{`$${income}`}</Text>
-                <Text style={[{ width: 100, textAlign: 'right', color: theme.colors.spending }]}>{`$${spending}`}</Text>
-                <Text style={[{ width: 100, textAlign: 'right', color: total < 0 ? theme.colors.spending : theme.colors.income }]}>{`$${Math.abs(total)}`}</Text>
+                <Text style={[{ width: 55, textAlign: 'right', color: theme.colors.investment }]}>{`$${investments}`}</Text>
+                <Text style={[{ width: 55, textAlign: 'right', color: theme.colors.income }]}>{`$${income}`}</Text>
+                <Text style={[{ width: 55, textAlign: 'right', color: theme.colors.spending }]}>{`$${spending}`}</Text>
+                <Text style={[{ width: 55, textAlign: 'right', color: total < 0 ? theme.colors.spending : theme.colors.income }]}>{`$${Math.abs(total)}`}</Text>
             </View>
         </View>
     )
@@ -86,7 +86,6 @@ const styles = StyleSheet.create({
         borderBottomColor: 'grey'
     },
     headerValues: {
-        flex: 1,
         flexDirection: 'row',
     },
     transaction: {

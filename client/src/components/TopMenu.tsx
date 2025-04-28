@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 export const TopMenu: React.FC<{ children: ReactNode }> = ({ children }) => {
     const { theme } = useTheme();
     return (
-        <View style={[{ backgroundColor: theme.colors.muted, paddingTop: 27 }]}>
+        <View style={[{ backgroundColor: theme.colors.muted, paddingTop: 30 }]}>
             {children}
         </View>
     )
