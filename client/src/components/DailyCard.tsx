@@ -5,7 +5,8 @@ import { TransactionDateType } from "..";
 import { useState } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Theme } from "../theming/types";
-import { ArrowLeft, X } from "react-native-feather";
+import { ArrowLeft } from "react-native-feather";
+import { TextInput } from "react-native-gesture-handler";
 
 const CardHeader: React.FC<{
     date: Date;
@@ -37,6 +38,12 @@ const CustomModal: React.FC<{
     theme: Theme;
     details: TransactionDateType;
 }> = ({ isVisible, setIsVisible, theme, details }) => {
+    const [category, setCategory] = useState<string>(details.category);
+    const [description, setDescription] = useState<string>(details.description ?? '');
+    const [tag, setTag] = useState<string>(details.transactionType);
+    const [name, setName] = useState<string>(details.name);
+    const [amount, setAmount] = useState<number>(details.amount);
+    const [note, setNote] = useState<string>(details.note ?? '');
     return (
         <Modal
             animationType="slide"
@@ -46,36 +53,44 @@ const CustomModal: React.FC<{
                 setIsVisible(!isVisible);
             }}>
             <View style={[styles.centeredView, { backgroundColor: 'rgba(0,0,0,0.5)' }]}>
-                <View style={[styles.modalView, { backgroundColor: theme.colors.muted, shadowColor: theme.colors.accent }]}>
+                <View style={[styles.modalView, { height: '100%', backgroundColor: theme.colors.muted }]}>
                     <View style={{ position: 'absolute', left: 10, top: 10 }}>
                         <TouchableOpacity
                             onPress={() => setIsVisible(!isVisible)}>
-                            <ArrowLeft color={'grey'} width={19} />
+                            <ArrowLeft color={'grey'} width={20} />
                         </TouchableOpacity>
                     </View>
                     <View style={styles.modalFields}>
-                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>Category: </Text>
-                        <Text style={{ color: theme.colors[details.category], marginTop: 10, width: 100 }}>{details.category[0].toUpperCase() + details.category.slice(1)}</Text>
+                        <Text style={[styles.modalText, { color: theme.colors.text }]}>Category: </Text>
+                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>{details.category[0].toUpperCase() + details.category.slice(1)}</Text>
                     </View>
                     <View style={styles.modalFields}>
-                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>Tag: </Text>
+                        <Text style={[styles.modalText, { color: theme.colors.text }]}>Tag: </Text>
                         <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>{details.transactionType}</Text>
                     </View>
                     <View style={styles.modalFields}>
-                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>Name: </Text>
+                        <Text style={[styles.modalText, { color: theme.colors.text }]}>Name: </Text>
                         <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>{details.name}</Text>
                     </View>
                     <View style={styles.modalFields}>
-                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>Amount: </Text>
-                        <Text style={{ color: theme.colors[details.category], marginTop: 10, width: 100 }}>${details.amount}</Text>
+                        <Text style={[styles.modalText, { color: theme.colors.text }]}>Amount: </Text>
+                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>${details.amount}</Text>
                     </View>
                     <View style={styles.modalFields}>
-                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>Description: </Text>
-                        <Text style={{ color: theme.colors.text, marginTop: 10 }}>{details.description}</Text>
+                        <Text style={[styles.modalText, { color: theme.colors.text }]}>Description: </Text>
+                        <TextInput
+                            style={{ marginTop: 10, color: theme.colors.text }}
+                            onChangeText={text => setDescription(text)}
+                            defaultValue={description}
+                        />
                     </View>
                     <View style={styles.modalFields}>
-                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>Note: </Text>
-                        <Text style={{ color: theme.colors.text, marginTop: 10 }}>{details.note}</Text>
+                        <Text style={[styles.modalText, { color: theme.colors.text }]}>Note: </Text>
+                        <TextInput
+                            style={{ marginTop: 10, color: theme.colors.text }}
+                            onChangeText={text => setNote(text)}
+                            defaultValue={note}
+                        />
                     </View>
                 </View>
             </View>
@@ -168,5 +183,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderColor: 'rgba(128, 128, 128, 0.7)',
         paddingBottom: 5
-    }
+    },
+    modalText: { marginTop: 10, width: 100 }
 })
