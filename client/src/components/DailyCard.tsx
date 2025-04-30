@@ -1,12 +1,15 @@
 import { StyleSheet, View, Text, TouchableOpacity, Modal } from "react-native"
 import { useTheme } from "../theming/ThemeProvider"
-import { Days } from "../lib/constants";
+import { Days, TransactionCategoryOptions, TransactionIncomeTagOptions, TransactionInvestTagOptions, TransactionSpendingTagOptions } from "../lib/constants";
 import { TransactionDateType } from "..";
 import { useState } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Theme } from "../theming/types";
 import { ArrowLeft } from "react-native-feather";
 import { TextInput } from "react-native-gesture-handler";
+import { Dropdown } from "react-native-element-dropdown";
+
+/*TODO: ADD VALIDATION LATER FOR EACH FIELD. CLIENT SIDE */
 
 const CardHeader: React.FC<{
     date: Date;
@@ -40,10 +43,19 @@ const CustomModal: React.FC<{
 }> = ({ isVisible, setIsVisible, theme, details }) => {
     const [category, setCategory] = useState<string>(details.category);
     const [description, setDescription] = useState<string>(details.description ?? '');
-    const [tag, setTag] = useState<string>(details.transactionType);
+    const [tag, setTag] = useState<string | null>(details.transactionType);
     const [name, setName] = useState<string>(details.name);
     const [amount, setAmount] = useState<number>(details.amount);
     const [note, setNote] = useState<string>(details.note ?? '');
+
+    const getTagList = (cat: string) => {
+        if (cat === 'spending') return TransactionSpendingTagOptions
+        else if (cat === 'income') return TransactionIncomeTagOptions
+        else return TransactionInvestTagOptions
+    }
+
+    const [tagList, setTagList] = useState<{ label: string; value: string; }[]>(getTagList(category));
+
     return (
         <Modal
             animationType="slide"
@@ -54,28 +66,91 @@ const CustomModal: React.FC<{
             }}>
             <View style={[styles.centeredView, { backgroundColor: 'rgba(0,0,0,0.5)' }]}>
                 <View style={[styles.modalView, { height: '100%', backgroundColor: theme.colors.muted }]}>
+
+                    {/* Close Modal Button */}
                     <View style={{ position: 'absolute', left: 10, top: 10 }}>
                         <TouchableOpacity
                             onPress={() => setIsVisible(!isVisible)}>
                             <ArrowLeft color={'grey'} width={20} />
                         </TouchableOpacity>
                     </View>
+
+                    {/* Category Section */}
                     <View style={styles.modalFields}>
                         <Text style={[styles.modalText, { color: theme.colors.text }]}>Category: </Text>
-                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>{details.category[0].toUpperCase() + details.category.slice(1)}</Text>
+                        <Dropdown
+                            style={[styles.dropdown]}
+                            selectedTextStyle={{ color: theme.colors.text, fontSize: 14, backgroundColor: theme.colors.muted }}
+                            data={TransactionCategoryOptions}
+                            containerStyle={{ backgroundColor: theme.colors.card, borderRadius: 5 }}
+                            itemTextStyle={{ color: theme.colors.text }}
+                            labelField="label"
+                            valueField="value"
+                            value={category}
+                            onChange={cat => {
+                                setCategory(cat.value)
+                                setTagList(getTagList(cat.value))
+                                setTag(cat.value === details.category ? details.transactionType : null)
+                            }}
+                            renderItem={(item, selected) => (
+                                <View style={{
+                                    backgroundColor: selected ? theme.colors.muted : theme.colors.background,
+                                    borderColor: 'gray',
+                                    borderWidth: 1,
+                                    padding: 8,
+                                }}>
+                                    <Text style={{ color: theme.colors.text }}>{item.label}</Text>
+                                </View>
+                            )} />
                     </View>
+
+                    {/* Tag Section */}
                     <View style={styles.modalFields}>
                         <Text style={[styles.modalText, { color: theme.colors.text }]}>Tag: </Text>
-                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>{details.transactionType}</Text>
+                        <Dropdown
+                            style={[styles.dropdown]}
+                            selectedTextStyle={{ color: theme.colors.text, fontSize: 14, backgroundColor: theme.colors.muted }}
+                            data={tagList}
+                            containerStyle={{ backgroundColor: theme.colors.card, borderRadius: 5 }}
+                            itemTextStyle={{ color: theme.colors.text }}
+                            labelField="label"
+                            valueField="value"
+                            placeholder="Select Tag"
+                            value={tag}
+                            placeholderStyle={{ color: theme.colors.textSubtle, fontSize: 14 }}
+                            onChange={t => setTag(t.value)}
+                            renderItem={(item, selected) => (
+                                <View style={{
+                                    backgroundColor: selected ? theme.colors.muted : theme.colors.background,
+                                    borderColor: 'gray',
+                                    borderWidth: 1,
+                                    padding: 8,
+                                }}>
+                                    <Text style={{ color: theme.colors.text }}>{item.label}</Text>
+                                </View>
+                            )} />
                     </View>
+
+                    {/* Name Section */}
                     <View style={styles.modalFields}>
                         <Text style={[styles.modalText, { color: theme.colors.text }]}>Name: </Text>
-                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>{details.name}</Text>
+                        <TextInput
+                            value={name}
+                            style={{ color: theme.colors.text, marginTop: 10, width: 100 }}
+                            onChangeText={text => setName(text)} />
                     </View>
+
+                    {/* Amount Section */}
                     <View style={styles.modalFields}>
                         <Text style={[styles.modalText, { color: theme.colors.text }]}>Amount: </Text>
-                        <Text style={{ color: theme.colors.text, marginTop: 10, width: 100 }}>${details.amount}</Text>
+                        <TextInput
+                            keyboardType="numeric"
+                            value={'$' + amount.toString()}
+                            style={{ color: theme.colors.text, marginTop: 10, width: 100 }}
+                            onChangeText={text => setAmount(parseFloat(text.substring(1)) || 0)} />
                     </View>
+
+                    {/* Description Section */}
                     <View style={styles.modalFields}>
                         <Text style={[styles.modalText, { color: theme.colors.text }]}>Description: </Text>
                         <TextInput
@@ -84,6 +159,8 @@ const CustomModal: React.FC<{
                             defaultValue={description}
                         />
                     </View>
+
+                    {/* Note Section */}
                     <View style={styles.modalFields}>
                         <Text style={[styles.modalText, { color: theme.colors.text }]}>Note: </Text>
                         <TextInput
@@ -184,5 +261,16 @@ const styles = StyleSheet.create({
         borderColor: 'rgba(128, 128, 128, 0.7)',
         paddingBottom: 5
     },
-    modalText: { marginTop: 10, width: 100 }
+    modalText: {
+        marginTop: 10,
+        width: 100
+    },
+    dropdown: {
+        marginTop: 8,
+        height: 'auto',
+        width: 150,
+        borderColor: 'transparent',
+        borderWidth: 0.5,
+        paddingRight: 10,
+    },
 })

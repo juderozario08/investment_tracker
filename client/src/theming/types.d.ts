@@ -1,6 +1,7 @@
 export interface ThemeColors {
     background: string,
     text: string,
+    textSubtle: string,
     primary: string,
     secondary: string,
     accent: string,

@@ -7,3 +7,8 @@ export interface TransactionDateType {
     note?: string,
     description?: string
 }
+
+export interface DropdownMenuType {
+    label: string;
+    value: string;
+}

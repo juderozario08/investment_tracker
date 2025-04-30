@@ -1,3 +1,5 @@
+import { DropdownMenuType } from "..";
+
 export const Months: string[] = [
     'Jan',
     'Feb',
@@ -24,43 +26,34 @@ export const Days: string[] = [
 ]
 
 export const TransactionCategoryOptions: {
-    name: string;
+    label: string;
     value: string;
 }[] = [
-        { name: 'Income', value: 'income' },
-        { name: 'Spending', value: 'spending' },
-        { name: 'Investment', value: 'investment' }
+        { label: 'Income', value: 'income' },
+        { label: 'Spending', value: 'spending' },
+        { label: 'Investment', value: 'investment' }
     ]
 
-export const TransactionSpendingTagOptions: {
-    name: string;
-    value: string;
-}[] = [
-        { name: 'Food', value: 'Food' },
-        { name: 'Household', value: 'Household' },
-        { name: 'Transport', value: 'Transport' },
-        { name: 'Bills and Utilities', value: 'Bills and Utilities' },
-        { name: 'Entertainment', value: 'Entertainment' },
-        { name: 'Hobby', value: 'Hobby' },
-        { name: 'Gift', value: 'Gift' },
-        { name: 'Hobby', value: 'Hobby' },
-        { name: 'Other', value: 'Other' },
-    ]
+export const TransactionSpendingTagOptions: DropdownMenuType[] = [
+    { label: 'Food', value: 'Food' },
+    { label: 'Household', value: 'Household' },
+    { label: 'Transport', value: 'Transport' },
+    { label: 'Bills and Utilities', value: 'Bills and Utilities' },
+    { label: 'Entertainment', value: 'Entertainment' },
+    { label: 'Hobby', value: 'Hobby' },
+    { label: 'Gift', value: 'Gift' },
+    { label: 'Hobby', value: 'Hobby' },
+    { label: 'Other', value: 'Other' },
+]
 
-export const TransactionIncomeTagOptions: {
-    name: string;
-    value: string;
-}[] = [
-        { name: 'Salary', value: 'Salary' },
-        { name: 'Allowance', value: 'Allowance' },
-        { name: 'Refunds', value: 'Refunds' },
-        { name: 'Gift', value: 'Gift' },
-        { name: 'Other', value: 'Other' },
-    ]
+export const TransactionIncomeTagOptions: DropdownMenuType[] = [
+    { label: 'Salary', value: 'Salary' },
+    { label: 'Allowance', value: 'Allowance' },
+    { label: 'Refunds', value: 'Refunds' },
+    { label: 'Gift', value: 'Gift' },
+    { label: 'Other', value: 'Other' },
+]
 
-export const TransactionInvestTagOptions: {
-    name: string;
-    value: string;
-}[] = [
-        { name: '', value: '' }
-    ]
+export const TransactionInvestTagOptions: DropdownMenuType[] = [
+    { label: 'VFV', value: 'VFV' },
+]
