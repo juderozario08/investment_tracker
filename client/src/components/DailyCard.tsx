@@ -1,7 +1,7 @@
 import { StyleSheet, View, Text, TouchableOpacity, Modal } from "react-native"
 import { useTheme } from "../theming/ThemeProvider"
 import { Days, TransactionCategoryOptions, TransactionIncomeTagOptions, TransactionInvestTagOptions, TransactionSpendingTagOptions } from "../lib/constants";
-import { TransactionDateType } from "..";
+import { TransactionDateType } from "../types";
 import { useState } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Theme } from "../theming/types";
@@ -10,30 +10,6 @@ import { TextInput } from "react-native-gesture-handler";
 import { Dropdown } from "react-native-element-dropdown";
 
 /*TODO: ADD VALIDATION LATER FOR EACH FIELD. CLIENT SIDE */
-
-const CardHeader: React.FC<{
-    date: Date;
-    investments: number;
-    income: number;
-    spending: number;
-}> = ({ date, investments, income, spending }) => {
-    const { theme } = useTheme();
-    const total = income - spending;
-    return (
-        <View style={[styles.header]}>
-            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Text style={{ color: 'rgba(255, 70, 28, 0.7)', fontSize: 20, width: 30 }}>{date.getDate()}</Text>
-                <Text style={{ color: theme.colors.text, fontSize: 13, fontWeight: '600' }}>{Days[date.getDay()]}</Text>
-            </View>
-            <View style={[styles.headerValues]}>
-                <Text style={[{ width: 55, textAlign: 'right', color: theme.colors.investment }]}>{`$${investments}`}</Text>
-                <Text style={[{ width: 55, textAlign: 'right', color: theme.colors.income }]}>{`$${income}`}</Text>
-                <Text style={[{ width: 55, textAlign: 'right', color: theme.colors.spending }]}>{`$${spending}`}</Text>
-                <Text style={[{ width: 55, textAlign: 'right', color: total < 0 ? theme.colors.spending : theme.colors.income }]}>{`$${Math.abs(total)}`}</Text>
-            </View>
-        </View>
-    )
-}
 
 const CustomModal: React.FC<{
     isVisible: boolean;
@@ -154,19 +130,31 @@ const CustomModal: React.FC<{
                     <View style={styles.modalFields}>
                         <Text style={[styles.modalText, { color: theme.colors.text }]}>Description: </Text>
                         <TextInput
-                            style={{ marginTop: 10, color: theme.colors.text }}
+                            style={{ marginTop: 10, color: theme.colors.text, width: 150 }}
                             onChangeText={text => setDescription(text)}
                             defaultValue={description}
+                            placeholder="Type here..."
                         />
                     </View>
 
                     {/* Note Section */}
-                    <View style={styles.modalFields}>
+                    <View>
                         <Text style={[styles.modalText, { color: theme.colors.text }]}>Note: </Text>
                         <TextInput
-                            style={{ marginTop: 10, color: theme.colors.text }}
+                            style={{
+                                marginTop: 10,
+                                color: theme.colors.text,
+                                width: '100%',
+                                backgroundColor: theme.colors.background,
+                                borderRadius: 5,
+                                padding: 5,
+                                height: '40%'
+                            }}
+                            multiline={true}
+                            numberOfLines={5}
                             onChangeText={text => setNote(text)}
                             defaultValue={note}
+                            placeholder="Type here..."
                         />
                     </View>
                 </View>
@@ -202,10 +190,25 @@ export const DailyCard: React.FC<{ transactions: TransactionDateType[], date: Da
         if (transaction.category === 'investment') acc.investments += transaction.amount;
         return acc;
     }, { income: 0, spending: 0, investments: 0 });
-
+    const total = totals.income - totals.spending;
     return (
         <View style={[{ backgroundColor: theme.colors.muted }, styles.container]}>
-            <CardHeader date={date} investments={totals.investments} income={totals.income} spending={totals.spending} />
+
+            {/* Card Header */}
+            <View style={[styles.header]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                    <Text style={{ color: 'rgba(255, 70, 28, 0.8)', fontSize: 20, width: 30 }}>{date.getDate()}</Text>
+                    <Text style={{ color: theme.colors.text, fontSize: 13, fontWeight: 600 }}>{Days[date.getDay()]}</Text>
+                </View>
+                <View style={[styles.headerValues]}>
+                    <Text style={[{ width: 55, textAlign: 'right', color: theme.colors.investment }]}>{`$${totals.investments}`}</Text>
+                    <Text style={[{ width: 55, textAlign: 'right', color: theme.colors.income }]}>{`$${totals.income}`}</Text>
+                    <Text style={[{ width: 55, textAlign: 'right', color: theme.colors.spending }]}>{`$${totals.spending}`}</Text>
+                    <Text style={[{ width: 55, textAlign: 'right', color: total < 0 ? theme.colors.spending : theme.colors.income }]}>{`$${Math.abs(total)}`}</Text>
+                </View>
+            </View>
+
+            {/* Transactions */}
             <View style={{ paddingTop: 10, gap: 10 }}>
                 {transactions.map((transaction, idx) => (
                     <Transaction key={idx} transaction={transaction} />

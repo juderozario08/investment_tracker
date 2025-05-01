@@ -4,7 +4,7 @@ import { MonthSwitcher } from "../../../../components/MonthSwitcher";
 import { useEffect, useState } from "react";
 import { TopMenu } from "../../../../components/TopMenu";
 import { DailyCard } from "../../../../components/DailyCard";
-import { TransactionDateType } from "../../../..";
+import { TransactionDateType } from "../../../../types";
 import { GestureHandlerRootView, ScrollView } from "react-native-gesture-handler";
 import { MonthSummary } from "../../../../components/MonthTotal";
 
@@ -14,28 +14,28 @@ const data: TransactionDateType[] = [
         transactionType: 'Food',
         name: 'Eats',
         amount: 10,
-        date: new Date('2025-04-25')
+        date: new Date()
     },
     {
         category: 'income',
         transactionType: 'Salary',
         name: 'PHRI',
         amount: 1000,
-        date: new Date('2025-04-25')
+        date: new Date()
     },
     {
         category: 'spending',
         transactionType: 'Household',
         name: 'Metro',
         amount: 50,
-        date: new Date('2025-04-25')
+        date: new Date()
     },
     {
         category: 'investment',
         transactionType: 'ETF',
         name: 'VFV',
         amount: 100,
-        date: new Date('2025-04-25')
+        date: new Date()
     },
     {
         category: 'spending',

@@ -1,5 +1,10 @@
+export interface DropdownMenuType {
+    label: string;
+    value: string;
+}
+
 export interface TransactionDateType {
-    category: 'investment' | 'income' | 'spending',
+    category: 'income' | 'spending' | 'investment'
     transactionType: string,
     name: string,
     amount: number,
@@ -8,7 +13,3 @@ export interface TransactionDateType {
     description?: string
 }
 
-export interface DropdownMenuType {
-    label: string;
-    value: string;
-}

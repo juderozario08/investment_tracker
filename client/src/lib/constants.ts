@@ -1,4 +1,4 @@
-import { DropdownMenuType } from "..";
+import { DropdownMenuType } from "../types";
 
 export const Months: string[] = [
     'Jan',
@@ -55,5 +55,8 @@ export const TransactionIncomeTagOptions: DropdownMenuType[] = [
 ]
 
 export const TransactionInvestTagOptions: DropdownMenuType[] = [
-    { label: 'VFV', value: 'VFV' },
+    { label: 'ETF', value: 'etf' },
+    { label: 'Stock', value: 'stock' },
+    { label: 'Crypto', value: 'crypto' },
+    { label: 'Stock', value: 'stock' },
 ]

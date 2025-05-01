@@ -9,6 +9,7 @@ export const MonthSummary: React.FC<{
     }
 }> = ({ amounts }) => {
     const { theme } = useTheme();
+    const total = amounts.income - amounts.spending;
     return (
         <View style={{
             flexDirection: 'row',
@@ -34,6 +35,10 @@ export const MonthSummary: React.FC<{
                 <Text style={[{ color: theme.colors.text }]}>Spending</Text>
                 <Text style={[{ color: theme.colors.spending }]}>${amounts.spending}</Text>
             </View>
+            <View style={styles.categoryTotalView}>
+                <Text style={[{ color: theme.colors.text }]}>Total</Text>
+                <Text style={[{ color: total > 0 ? theme.colors.income : theme.colors.spending }]}>${Math.abs(total)}</Text>
+            </View>
         </View>
     )
 }
@@ -43,6 +48,7 @@ const styles = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'space-between',
         alignItems: 'center',
+        gap: 8,
         paddingBottom: 2,
         paddingTop: 2
     }
