@@ -204,10 +204,10 @@ export const DailyCard: React.FC<{ transactions: TransactionDateType[], date: Da
                     <Text style={{ color: theme.colors.text, fontSize: 13, fontWeight: 600 }}>{Days[date.getDay()]}</Text>
                 </View>
                 <View style={[styles.headerValues]}>
-                    <Text style={[{ width: 55, textAlign: 'right', color: theme.colors.investment }]}>{`$${totals.investments}`}</Text>
-                    <Text style={[{ width: 55, textAlign: 'right', color: theme.colors.income }]}>{`$${totals.income}`}</Text>
-                    <Text style={[{ width: 55, textAlign: 'right', color: theme.colors.spending }]}>{`$${totals.spending}`}</Text>
-                    <Text style={[{ width: 55, textAlign: 'right', color: total < 0 ? theme.colors.spending : theme.colors.income }]}>{`$${Math.abs(total)}`}</Text>
+                    <Text style={[styles.headerValueItems, { color: theme.colors.investment }]}>{`$${totals.investments}`}</Text>
+                    <Text style={[styles.headerValueItems, { color: theme.colors.income }]}>{`$${totals.income}`}</Text>
+                    <Text style={[styles.headerValueItems, { color: theme.colors.spending }]}>{`$${totals.spending}`}</Text>
+                    <Text style={[styles.headerValueItems, { color: total < 0 ? theme.colors.spending : theme.colors.income }]}>{`$${Math.abs(total)}`}</Text>
                 </View>
             </View>
 
@@ -227,6 +227,10 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         marginTop: 5,
         marginBottom: 5
+    },
+    headerValueItems: {
+        width: 55,
+        textAlign: 'right'
     },
     header: {
         flexDirection: 'row',
