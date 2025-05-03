@@ -11,14 +11,13 @@ import { Dropdown } from "react-native-element-dropdown";
 
 /*TODO: ADD VALIDATION LATER FOR EACH FIELD. CLIENT SIDE */
 
-const CustomModal: React.FC<{
+const TransactionModal: React.FC<{
     isVisible: boolean;
     setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
     theme: Theme;
     details: TransactionDateType;
 }> = ({ isVisible, setIsVisible, theme, details }) => {
     const [category, setCategory] = useState<string>(details.category);
-    const [description, setDescription] = useState<string>(details.description ?? '');
     const [tag, setTag] = useState<string | null>(details.transactionType);
     const [name, setName] = useState<string>(details.name);
     const [amount, setAmount] = useState<number>(details.amount);
@@ -40,8 +39,8 @@ const CustomModal: React.FC<{
             onRequestClose={() => {
                 setIsVisible(!isVisible);
             }}>
-            <View style={[styles.centeredView, { backgroundColor: 'rgba(0,0,0,0.5)' }]}>
-                <View style={[styles.modalView, { height: '100%', backgroundColor: theme.colors.muted }]}>
+            <View style={[styles.centeredView]}>
+                <View style={[styles.modalView, { backgroundColor: theme.colors.muted }]}>
 
                     {/* Close Modal Button */}
                     <View style={{ position: 'absolute', left: 10, top: 10 }}>
@@ -91,6 +90,9 @@ const CustomModal: React.FC<{
                             itemTextStyle={{ color: theme.colors.text }}
                             labelField="label"
                             valueField="value"
+                            search
+                            searchPlaceholder="Search"
+                            inputSearchStyle={{ color: theme.colors.text, height: 40 }}
                             placeholder="Select Tag"
                             value={tag}
                             placeholderStyle={{ color: theme.colors.textSubtle, fontSize: 14 }}
@@ -126,17 +128,6 @@ const CustomModal: React.FC<{
                             onChangeText={text => setAmount(parseFloat(text.substring(1)) || 0)} />
                     </View>
 
-                    {/* Description Section */}
-                    <View style={styles.modalFields}>
-                        <Text style={[styles.modalText, { color: theme.colors.text }]}>Description: </Text>
-                        <TextInput
-                            style={{ marginTop: 10, color: theme.colors.text, width: 150 }}
-                            onChangeText={text => setDescription(text)}
-                            defaultValue={description}
-                            placeholder="Type here..."
-                        />
-                    </View>
-
                     {/* Note Section */}
                     <View>
                         <Text style={[styles.modalText, { color: theme.colors.text }]}>Note: </Text>
@@ -148,7 +139,7 @@ const CustomModal: React.FC<{
                                 backgroundColor: theme.colors.background,
                                 borderRadius: 5,
                                 padding: 5,
-                                height: '40%'
+                                height: 135
                             }}
                             multiline={true}
                             numberOfLines={5}
@@ -157,6 +148,18 @@ const CustomModal: React.FC<{
                             placeholder="Type here..."
                         />
                     </View>
+
+                    {/* Submit Button */}
+                    <TouchableOpacity style={{
+                        backgroundColor: theme.colors.primary,
+                        borderRadius: 10,
+                        paddingVertical: 5,
+                        paddingHorizontal: 10,
+                        marginHorizontal: 'auto',
+                        marginTop: 20
+                    }}>
+                        <Text style={{ color: theme.colors.text, textAlign: 'center', fontSize: 16 }}>Submit</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </Modal>
@@ -169,7 +172,7 @@ const Transaction: React.FC<{ transaction: TransactionDateType }> = ({ transacti
     return (
         <SafeAreaProvider>
             <SafeAreaView>
-                <CustomModal isVisible={isVisible} setIsVisible={setIsVisible} theme={theme} details={transaction} />
+                <TransactionModal isVisible={isVisible} setIsVisible={setIsVisible} theme={theme} details={transaction} />
                 <TouchableOpacity style={[styles.transaction, { paddingRight: 5 }]} onPress={() => setIsVisible(true)}>
                     <View style={{ flexDirection: 'row', gap: 10, paddingLeft: 5 }}>
                         <Text style={[{ color: theme.colors.text, width: 100 }]}>{transaction.transactionType}</Text>
@@ -245,18 +248,21 @@ const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
         justifyContent: 'center',
-        alignContent: 'center',
-        padding: 20
+        alignItems: 'center',
+        backgroundColor: 'rgba(0,0,0,0.5)',
     },
     modalView: {
-        marginTop: 20,
-        marginBottom: 20,
-        marginRight: 5,
-        marginLeft: 5,
+        justifyContent: 'center',
+        alignSelf: 'center',
+        marginVertical: 10,
+        marginHorizontal: 5,
         borderRadius: 10,
-        padding: 35,
+        paddingHorizontal: 35,
+        paddingTop: 35,
+        paddingBottom: 25,
         shadowRadius: 4,
         elevation: 10,
+        maxHeight: '90%',
     },
     modalFields: {
         flexDirection: 'row',

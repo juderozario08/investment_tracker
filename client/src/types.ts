@@ -10,6 +10,5 @@ export interface TransactionDateType {
     amount: number,
     date: Date,
     note?: string,
-    description?: string
 }
 
