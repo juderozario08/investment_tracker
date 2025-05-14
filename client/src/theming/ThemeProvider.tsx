@@ -1,6 +1,8 @@
 import React, { createContext, useState, useContext, ReactNode } from 'react';
 import { themes } from './index';
 import { Theme } from './types';
+import { useColorScheme } from 'react-native';
+import { MD3DarkTheme, MD3LightTheme, PaperProvider } from 'react-native-paper';
 
 type ThemeName = keyof typeof themes;
 
@@ -13,12 +15,14 @@ interface ThemeContextType {
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider = ({ children }: { children: ReactNode }) => {
-    const [themeName, setThemeName] = useState<ThemeName>('dark');
+    const [themeName, setThemeName] = useState<ThemeName>(useColorScheme() ?? 'dark');
     const theme = themes[themeName];
 
     return (
         <ThemeContext.Provider value={{ theme, themeName, setThemeName }}>
-            {children}
+            <PaperProvider theme={themeName === 'dark' ? MD3DarkTheme : MD3LightTheme}>
+                {children}
+            </PaperProvider>
         </ThemeContext.Provider>
     );
 };

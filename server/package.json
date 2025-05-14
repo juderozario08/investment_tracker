@@ -1,21 +1,29 @@
 {
-  "name": "investment_tracker",
-  "module": "index.ts",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest",
-    "@types/cors": "^2.8.17",
-    "@types/express": "^5.0.1",
-    "nodemon": "^3.1.9"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.4.7",
-    "express": "^5.1.0",
-    "mongodb": "^6.15.0",
-    "mongoose": "^8.13.2"
-  }
+    "name": "tracker_server",
+    "module": "index.ts",
+    "type": "module",
+    "scripts": {
+        "start": "nodemon index.ts"
+    },
+    "devDependencies": {
+        "@types/bun": "latest",
+        "@types/cors": "^2.8.17",
+        "@types/express": "^5.0.1",
+        "@types/mysql": "^2.15.27",
+        "nodemon": "^3.1.10",
+        "shared": "*"
+    },
+    "peerDependencies": {
+        "typescript": "^5.0.0"
+    },
+    "dependencies": {
+        "@types/socket.io": "^3.0.2",
+        "@types/socket.io-client": "^3.0.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.5.0",
+        "express": "^5.1.0",
+        "mysql": "^2.18.1",
+        "socket.io": "^4.8.1",
+        "socket.io-client": "^4.8.1"
+    }
 }

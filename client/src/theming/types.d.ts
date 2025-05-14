@@ -1,26 +1,28 @@
+import { ColorValue } from "react-native";
+
 export interface ThemeColors {
-    background: string,
-    text: string,
-    textSubtle: string,
-    primary: string,
-    secondary: string,
-    accent: string,
-    muted: string,
-    border: string,
-    card: string,
-    tabBarBackground: string,
-    tabBarActive: string,
-    tabBarInactive: string,
-    headerBackground: string,
-    headerText: string,
-    income: string,
-    investment: string,
-    spending: string
+    background: ColorValue;
+    text: ColorValue;
+    textSubtle: ColorValue;
+    primary: ColorValue;
+    secondary: ColorValue;
+    accent: ColorValue;
+    muted: ColorValue;
+    border: ColorValue;
+    card: ColorValue;
+    tabBarBackground: ColorValue;
+    tabBarActive: ColorValue;
+    tabBarInactive: ColorValue;
+    headerBackground: ColorValue;
+    headerText: ColorValue;
+    income: ColorValue;
+    investment: ColorValue;
+    spending: ColorValue;
 }
 
 export interface Theme {
-    name: string,
-    colors: ThemeColors
+    name: string;
+    colors: ThemeColors;
 }
 
 export interface Themes {

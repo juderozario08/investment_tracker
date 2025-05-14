@@ -7,18 +7,32 @@
         "icon": "./assets/icon.png",
         "userInterfaceStyle": "automatic",
         "newArchEnabled": true,
-        "scheme": "client",
+        "splash": {
+            "image": "./assets/splash-icon.png",
+            "resizeMode": "contain",
+            "backgroundColor": "#000"
+        },
         "ios": {
-            "supportsTablet": true
+            "supportsTablet": true,
+            "bundleIdentifier": "com.jude.rozario.client",
+            "infoPlist": {
+                "ITSAppUsesNonExemptEncryption": false
+            }
         },
         "android": {
             "adaptiveIcon": {
                 "foregroundImage": "./assets/adaptive-icon.png",
-                "backgroundColor": "#ffffff"
-            }
+                "backgroundColor": "#000"
+            },
+            "edgeToEdgeEnabled": true
         },
         "web": {
             "favicon": "./assets/favicon.png"
+        },
+        "extra": {
+            "eas": {
+                "projectId": "7d8107c8-3fb4-406c-9cbb-6b5d077369a0"
+            }
         }
     }
 }

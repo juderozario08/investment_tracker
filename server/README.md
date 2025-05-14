@@ -1,4 +1,4 @@
-# investment_tracker
+# tracker_server
 
 To install dependencies:
 

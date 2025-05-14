@@ -2,7 +2,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import { useTheme } from "../theming/ThemeProvider"
 import { ChevronLeft, ChevronRight } from "react-native-feather";
 import React from "react";
-import { Months } from "../lib/constants";
+import { Months } from "../library/constants";
 
 interface MonthSwitcherProps {
     month: number;
