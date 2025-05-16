@@ -27,6 +27,6 @@ export const validateName = (name: string) => {
     return name.length >= 2;
 }
 
-export const validateAmount = (amount: number) => {
-    return amount > 0;
+export const validateAmount = (amount: string) => {
+    return Number(amount) > 0;
 }

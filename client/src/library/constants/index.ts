@@ -1,4 +1,4 @@
-import type { DropdownMenuType } from "../types";
+import type { DropdownMenuType, TransactionDataType } from "../types";
 
 export const Months: string[] = [
     "Jan",
@@ -37,6 +37,7 @@ export const TransactionSpendingTagOptions: DropdownMenuType[] = [
 
 export const TransactionIncomeTagOptions: DropdownMenuType[] = [
     { label: "Salary", value: "Salary" },
+    { label: "Freelance", value: "Freelance" },
     { label: "Allowance", value: "Allowance" },
     { label: "Refunds", value: "Refunds" },
     { label: "Gift", value: "Gift" },
@@ -49,3 +50,12 @@ export const TransactionInvestTagOptions: DropdownMenuType[] = [
     { label: "Crypto", value: "crypto" },
     { label: "Stock", value: "stock" },
 ];
+
+export const DefaultTransactionValues: TransactionDataType = {
+    category: "spending",
+    tag: "",
+    name: "",
+    amount: "0",
+    date: new Date(),
+    note: ''
+}

@@ -17,8 +17,8 @@ export const BottomTab = () => {
         <Tab.Navigator screenOptions={{
             headerShown: false,
             tabBarStyle: { backgroundColor: theme.colors.tabBarBackground },
-            tabBarActiveTintColor: theme.colors.tabBarActive,
-            tabBarInactiveTintColor: theme.colors.tabBarInactive,
+            tabBarActiveTintColor: String(theme.colors.tabBarActive),
+            tabBarInactiveTintColor: String(theme.colors.tabBarInactive),
         }} initialRouteName='Transactions'>
             <Tab.Screen name='Transactions' component={Transactions} options={{
                 tabBarIcon: ({ focused }) =>

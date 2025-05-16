@@ -5,9 +5,9 @@ export interface DropdownMenuType {
 
 export interface TransactionDataType {
     category: string;
-    transactionType: string;
+    tag: string;
     name: string;
-    amount: number;
+    amount: string;
     date: Date;
     note?: string;
 }
