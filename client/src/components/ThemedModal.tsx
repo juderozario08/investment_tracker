@@ -24,7 +24,7 @@ const ThemedModal: React.FC<{
                     <View style={{ position: 'absolute', right: 12, top: 12 }}>
                         <TouchableOpacity
                             onPress={() => setIsVisible(!isVisible)}>
-                            <X color={'grey'} width={20} style={{ padding: 20 }} />
+                            <X color={'grey'} width={20} style={{ paddingVertical: 10, paddingHorizontal: 15 }} />
                         </TouchableOpacity>
                     </View>
                     {children}
