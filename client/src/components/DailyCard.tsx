@@ -1,7 +1,6 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "../theming/ThemeProvider";
 import {
-    DATA,
     Days,
     DefaultTransactionValues,
 } from "../library/constants";
@@ -74,18 +73,18 @@ export const DailyCard: React.FC<{
             </View>
 
             {/* Transactions */}
-            <View style={{ paddingTop: 10, gap: 10 }}>
+            <View style={{ paddingTop: 10 }}>
                 {transactions.map((transaction, idx) => (
                     <SafeAreaProvider key={idx}>
                         <SafeAreaView>
                             <TouchableOpacity
-                                style={[styles.transaction, { paddingRight: 5 }]}
+                                style={[styles.transaction, { paddingRight: 5, paddingVertical: 8 }]}
                                 onPress={() => {
                                     setDetails(transaction);
                                     setIsVisible(true);
                                 }}
                             >
-                                <View style={{ flexDirection: "row", gap: 10, paddingLeft: 5 }}>
+                                <View style={{ flexDirection: "row", paddingLeft: 5 }}>
                                     <Text style={[{ color: theme.colors.text, width: 100 }]}>
                                         {transaction.tag}
                                     </Text>
@@ -109,9 +108,9 @@ export const DailyCard: React.FC<{
                     isVisibleState={[isVisible, setIsVisible]}
                     detailsState={[details, setDetails]}
                     onSubmit={() => {
-                        setData(prev => {
-                            prev[details.id] = details;
-                            return prev;
+                        setData(() => {
+                            data[details.id] = details;
+                            return data;
                         })
                         setIsVisible(false);
                     }} />
