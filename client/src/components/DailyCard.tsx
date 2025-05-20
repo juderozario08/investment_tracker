@@ -1,6 +1,7 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "../theming/ThemeProvider";
 import {
+    DATA,
     Days,
     DefaultTransactionValues,
 } from "../library/constants";
@@ -12,8 +13,10 @@ import { TransactionModal } from "./TransactionModal";
 export const DailyCard: React.FC<{
     transactions: TransactionDataType[];
     date: Date;
-}> = ({ transactions, date }) => {
+    dataState: [TransactionDataType[], React.Dispatch<React.SetStateAction<TransactionDataType[]>>];
+}> = ({ transactions, date, dataState }) => {
     const { theme } = useTheme();
+    const [data, setData] = dataState;
     const totals = transactions.reduce(
         (acc, transaction) => {
             if (transaction.category === "income") acc.income += Number(transaction.amount);
@@ -106,7 +109,10 @@ export const DailyCard: React.FC<{
                     isVisibleState={[isVisible, setIsVisible]}
                     detailsState={[details, setDetails]}
                     onSubmit={() => {
-                        console.log(details);
+                        setData(prev => {
+                            prev[details.id] = details;
+                            return prev;
+                        })
                         setIsVisible(false);
                     }} />
             </View>

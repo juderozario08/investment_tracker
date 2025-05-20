@@ -5,22 +5,21 @@ import React from "react";
 import { Months } from "../library/constants";
 
 interface MonthSwitcherProps {
-    month: number;
-    year: number;
+    dateState: { month: number; year: number };
     prevMonth: () => void;
     nextMonth: () => void;
 }
 
-export const MonthSwitcher: React.FC<MonthSwitcherProps> = ({ month, prevMonth, nextMonth, year }) => {
+export const MonthSwitcher: React.FC<MonthSwitcherProps> = ({ dateState, prevMonth, nextMonth }) => {
     const { theme } = useTheme();
     return (
         <View style={[styles.flex, { paddingLeft: 10, paddingRight: 10 }]}>
             <TouchableOpacity onPress={prevMonth}>
                 <ChevronLeft color={theme.colors.text} />
             </TouchableOpacity>
-            <Text style={[{ color: theme.colors.text, marginTop: 2 }, styles.text]}>{`${Months[month]} ${year}`}</Text>
+            <Text style={[{ color: theme.colors.text, marginTop: 2 }, styles.text]}>{`${Months[dateState.month]} ${dateState.year}`}</Text>
             {
-                new Date().getUTCMonth() === month && new Date().getUTCFullYear() === year ? null : (
+                new Date().getUTCMonth() === dateState.month && new Date().getUTCFullYear() === dateState.year ? null : (
                     <TouchableOpacity onPress={nextMonth}>
                         <ChevronRight color={theme.colors.text} />
                     </TouchableOpacity>

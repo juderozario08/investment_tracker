@@ -1,21 +1,11 @@
 import { SetStateAction, useEffect, useMemo, useState } from "react";
 import { Theme } from "../theming/types";
-import {
-    TransactionCategoryOptions,
-    TransactionIncomeTagOptions,
-    TransactionInvestTagOptions,
-    TransactionSpendingTagOptions,
-} from "../library/constants";
+import { TransactionCategoryOptions, TransactionIncomeTagOptions, TransactionInvestTagOptions, TransactionSpendingTagOptions } from "../library/constants";
 import ThemedModal from "./ThemedModal";
 import { View, StyleSheet, Text, TouchableOpacity, TextInput } from "react-native";
 import { SingleDatePicker } from "./SingleDatePicker";
 import { ThemedDropdown } from "./ThemedDropdown";
-import {
-    validateAmount,
-    validateCategory,
-    validateName,
-    validateTag,
-} from "../library/validation";
+import { validateAmount, validateCategory, validateName, validateTag, } from "../library/validation";
 import { TransactionDataType } from "../library/types";
 import { TimePicker } from "./TimePicker";
 
@@ -59,12 +49,12 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
         setErrors((prev) => ({ ...prev, [key]: isValid }));
     };
 
-    const getFormattedDate = (d: Date) => `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+    const getFormattedDate = (d: Date) => `${d.getUTCDate()}/${d.getUTCMonth() + 1}/${d.getUTCFullYear()}`;
     const getFormattedTime = (d: Date) => `${d.getHours().toString().padStart(2, "0")}:${d.getMinutes().toString().padStart(2, "0")}`;
 
     useEffect(() => {
         handleUpdate("tag", details.tag);
-    }, [details.category, tagList]);
+    }, [tagList]);
 
     return (
         <ThemedModal isVisible={isVisible} setIsVisible={setIsVisible} theme={theme}>

@@ -7,106 +7,16 @@ import { MonthSwitcher } from "../../../components/MonthSwitcher";
 import { useEffect, useRef, useState } from "react";
 import { TopMenu } from "../../../components/TopMenu";
 import { DailyCard } from "../../../components/DailyCard";
-import {
-    GestureHandlerRootView,
-    ScrollView,
-} from "react-native-gesture-handler";
 import { MonthSummary } from "../../../components/MonthTotal";
 import { PlusCircle } from "react-native-feather";
 import type { TransactionDataType } from "../../../library/types";
 import styles from "./styles"
 import { TransactionModal } from "../../../components/TransactionModal";
-import { DefaultTransactionValues } from "../../../library/constants";
-
-const data: TransactionDataType[] = [
-    {
-        category: "spending",
-        tag: "Food",
-        name: "Eats",
-        amount: "10",
-        date: new Date(),
-    },
-    {
-        category: "income",
-        tag: "Salary",
-        name: "PHRI",
-        amount: "1000",
-        date: new Date(),
-    },
-    {
-        category: "spending",
-        tag: "Household",
-        name: "Metro",
-        amount: "50",
-        date: new Date(),
-    },
-    {
-        category: "investment",
-        tag: "etf",
-        name: "VFV",
-        amount: "100",
-        date: new Date(),
-    },
-    {
-        category: "spending",
-        tag: "Entertainment",
-        name: "Netflix",
-        amount: "15.99",
-        date: new Date("2025-03-15"),
-    },
-    {
-        category: "income",
-        tag: "Freelance",
-        name: "Upwork",
-        amount: "250",
-        date: new Date("2025-04-05"),
-    },
-    {
-        category: "spending",
-        tag: "Transport",
-        name: "Presto",
-        amount: "30",
-        date: new Date("2025-04-10"),
-    },
-    {
-        category: "investment",
-        tag: "Crypto",
-        name: "Bitcoin",
-        amount: "200",
-        date: new Date("2025-02-20"),
-    },
-    {
-        category: "spending",
-        tag: "Food",
-        name: "Tim Hortons",
-        amount: "8.5",
-        date: new Date("2025-04-02"),
-    },
-    {
-        category: "income",
-        tag: "Gift",
-        name: "Parents",
-        amount: "100",
-        date: new Date("2025-01-01"),
-    },
-    {
-        category: "spending",
-        tag: "Utilities",
-        name: "Hydro",
-        amount: "60",
-        date: new Date("2025-03-22"),
-    },
-    {
-        category: "investment",
-        tag: "Stocks",
-        name: "TSLA",
-        amount: "150",
-        date: new Date("2025-04-18"),
-    },
-];
+import { DATA, DefaultTransactionValues } from "../../../library/constants";
+import { GestureScrollView } from "../../../components/Views/GestureScrollView";
 
 // Organizing all the data to group by date
-const groupByDate = (): Map<Date, TransactionDataType[]> => {
+const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType[]> => {
     const map = new Map<string, { key: Date; items: TransactionDataType[] }>();
     for (const tx of data) {
         const year = tx.date.getUTCFullYear();
@@ -129,10 +39,13 @@ const groupByDate = (): Map<Date, TransactionDataType[]> => {
 
 // This will be the Material top navigator
 export const Transactions = () => {
+
+    const [data, setData] = useState<TransactionDataType[]>(DATA);
+
     const { theme } = useTheme();
 
-    const [month, setMonth] = useState<number>(new Date().getMonth());
-    const [year, setYear] = useState<number>(new Date().getFullYear());
+    const [dateState, setDateState] = useState({ month: new Date().getMonth(), year: new Date().getFullYear() });
+
     const [investing, setInvestment] = useState<number>(0);
     const [spending, setSpending] = useState<number>(0);
     const [income, setIncome] = useState<number>(0);
@@ -144,19 +57,38 @@ export const Transactions = () => {
     const [details, setDetails] = useState<TransactionDataType>(DefaultTransactionValues);
 
     const prevMonth = () => {
-        const newMonth = month - 1;
-        if (newMonth < 0) {
-            setYear(year - 1);
-        }
-        setMonth(((newMonth % 12) + 12) % 12);
+        setDateState(({ month, year }) => {
+            let newMonth = month - 1;
+            let newYear = year;
+
+            if (newMonth < 0) {
+                newMonth = 11;
+                newYear -= 1;
+            }
+
+            return { month: newMonth, year: newYear };
+        });
     };
 
     const nextMonth = () => {
-        const newMonth = month + 1;
-        if (newMonth > 11) {
-            setYear(year + 1);
-        }
-        setMonth(((newMonth % 12) + 12) % 12);
+        const currentDate = new Date();
+
+        setDateState(({ month, year }) => {
+            let newMonth = month + 1;
+            let newYear = year;
+
+            if (newMonth > 11) {
+                newMonth = 0;
+                newYear += 1;
+            }
+
+            const newDate = new Date(newYear, newMonth);
+            if (newDate <= currentDate) {
+                return { month: newMonth, year: newYear };
+            }
+
+            return { month, year };
+        });
     };
 
     const setAmounts = () => {
@@ -164,7 +96,7 @@ export const Transactions = () => {
         let totalSpending = 0;
         let totalIncome = 0;
         for (const d of sortedDateArray) {
-            if (d.getMonth() === month && d.getFullYear() === year) {
+            if (d.getMonth() === dateState.month && d.getFullYear() === dateState.year) {
                 const transactions = groupedByDate.get(d);
                 if (transactions) {
                     for (const t of transactions) {
@@ -184,7 +116,7 @@ export const Transactions = () => {
 
     /* Setting date groups */
     useEffect(() => {
-        const grouped = groupByDate();
+        const grouped = groupByDate(data);
         setGroupedByDate(grouped);
 
         const sorted = Array.from(grouped.keys()).sort((a, b) => b.getTime() - a.getTime());
@@ -201,7 +133,7 @@ export const Transactions = () => {
         } else {
             setAmounts();
         }
-    }, [month, year, groupedByDate]);
+    }, [dateState.month, dateState.year, groupedByDate]);
 
     return (
         <View
@@ -210,28 +142,26 @@ export const Transactions = () => {
             {/* Tob Bar */}
             <TopMenu>
                 <MonthSwitcher
-                    month={month}
+                    dateState={dateState}
                     prevMonth={prevMonth}
                     nextMonth={nextMonth}
-                    year={year}
                 />
                 <MonthSummary amounts={{ investing, income, spending }} />
             </TopMenu>
 
             {/* Daily Transaction Cards Per Month */}
-            <GestureHandlerRootView>
-                <ScrollView style={{ padding: 10 }}>
-                    {sortedDateArray.map((val, idx) => {
-                        return val.getMonth() === month && val.getFullYear() === year ? (
-                            <DailyCard
-                                key={idx}
-                                transactions={groupedByDate.get(val) || []}
-                                date={val}
-                            />
-                        ) : null;
-                    })}
-                </ScrollView>
-            </GestureHandlerRootView>
+            <GestureScrollView onLeftSwipe={nextMonth} onRightSwipe={prevMonth}>
+                {sortedDateArray.map((val, idx) => {
+                    return val.getMonth() === dateState.month && val.getFullYear() === dateState.year ? (
+                        <DailyCard
+                            key={idx}
+                            dataState={[data, setData]}
+                            transactions={groupedByDate.get(val) || []}
+                            date={val}
+                        />
+                    ) : null;
+                })}
+            </GestureScrollView>
 
             {/* Add transaction button */}
             <TouchableOpacity
@@ -254,7 +184,10 @@ export const Transactions = () => {
                 isVisibleState={[isVisible, setIsVisible]}
                 detailsState={[details, setDetails]}
                 onSubmit={() => {
-                    console.log(details);
+                    setDetails(() => {
+                        setData(prev => [...prev, details]);
+                        return DefaultTransactionValues
+                    });
                     setIsVisible(false);
                 }} />
         </View>

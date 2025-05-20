@@ -12,18 +12,11 @@ export const Calendar = () => {
     const [investing, setInvestment] = useState<number>(0);
     const [spending, setSpending] = useState<number>(0);
     const [income, setIncome] = useState<number>(0);
-    const prevMonth = () => {
-        const newMonth = month - 1;
-        setMonth(((newMonth % 12) + 12) % 12);
-    };
-    const nextMonth = () => {
-        const newMonth = month + 1;
-        setMonth(((newMonth % 12) + 12) % 12);
-    };
+
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
             <TopMenu>
-                <MonthSwitcher month={month} prevMonth={prevMonth} nextMonth={nextMonth} year={year} />
+                {/* <MonthSwitcher month={month} prevMonth={prevMonth} nextMonth={nextMonth} year={year} /> */}
                 <MonthSummary amounts={{ investing, income, spending }} />
             </TopMenu>
             <Text style={{ color: theme.colors.text }}>Calendar</Text>
