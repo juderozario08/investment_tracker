@@ -12,8 +12,9 @@ import { PlusCircle } from "react-native-feather";
 import type { TransactionDataType } from "../../../library/types";
 import styles from "./styles"
 import { TransactionModal } from "../../../components/TransactionModal";
-import { DATA, DefaultTransactionValues } from "../../../library/constants";
+import { DefaultTransactionValues } from "../../../library/constants";
 import { GestureScrollView } from "../../../components/Views/GestureScrollView";
+import { useStorage } from "../../../library/hooks/storage";
 
 // Organizing all the data to group by date
 const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType[]> => {
@@ -40,7 +41,7 @@ const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType
 // This will be the Material top navigator
 export const Transactions = () => {
 
-    const [data, setData] = useState<TransactionDataType[]>(DATA);
+    const [data, setData] = useStorage<TransactionDataType[]>('transactions', [])
 
     const { theme } = useTheme();
 
@@ -185,8 +186,8 @@ export const Transactions = () => {
                 detailsState={[details, setDetails]}
                 onSubmit={() => {
                     setDetails(() => {
-                        setData(prev => [...prev, details]);
-                        return DefaultTransactionValues
+                        setData([...data, details]);
+                        return DefaultTransactionValues;
                     });
                     setIsVisible(false);
                 }} />

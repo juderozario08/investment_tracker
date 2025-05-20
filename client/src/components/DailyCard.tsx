@@ -12,7 +12,7 @@ import { TransactionModal } from "./TransactionModal";
 export const DailyCard: React.FC<{
     transactions: TransactionDataType[];
     date: Date;
-    dataState: [TransactionDataType[], React.Dispatch<React.SetStateAction<TransactionDataType[]>>];
+    dataState: [TransactionDataType[], (value: TransactionDataType[]) => void];
 }> = ({ transactions, date, dataState }) => {
     const { theme } = useTheme();
     const [data, setData] = dataState;
