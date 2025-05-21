@@ -156,7 +156,7 @@ export const DefaultTransactionValues: TransactionDataType = {
     category: "spending",
     tag: "",
     name: "",
-    amount: "0",
+    amount: "",
     date: new Date(),
     note: ''
 }
