@@ -1,4 +1,4 @@
-import { TimePickerModal } from "react-native-paper-dates"
+import DatePicker from "react-native-date-picker";
 
 export const TimePicker: React.FC<{
     visible: boolean;
@@ -7,21 +7,22 @@ export const TimePicker: React.FC<{
     setDate: (val: Date) => void;
 }> = ({ visible, setVisible, date, setDate }) => {
 
-    const timePickerOnConfirm = (params: {
-        hours: number;
-        minutes: number
-    }) => {
+    const timePickerOnConfirm = (d: Date) => {
         setVisible(false);
-        const d = date;
-        d.setHours(params.hours);
-        d.setMinutes(params.minutes);
+        const x = date;
+        x.setHours(date.getUTCHours());
+        x.setMinutes(date.getUTCMinutes());
         setDate(d);
     }
 
     return (
-        <TimePickerModal
-            visible={visible}
-            onDismiss={() => setVisible(false)}
-            onConfirm={timePickerOnConfirm} />
+        <DatePicker
+            mode="time"
+            modal
+            open={visible}
+            date={date}
+            onConfirm={timePickerOnConfirm}
+            onCancel={() => { setVisible(false) }}
+        />
     )
 }

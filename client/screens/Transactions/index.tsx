@@ -174,7 +174,6 @@ export const Transactions = () => {
                 />
             </TouchableOpacity>
             <TransactionModal
-                theme={theme}
                 isVisibleState={[isVisible, setIsVisible]}
                 detailsState={[details, setDetails]}
                 onSubmit={() => {
