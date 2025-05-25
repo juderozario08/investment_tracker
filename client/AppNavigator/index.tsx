@@ -1,32 +1,36 @@
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useTheme } from '../theming/ThemeProvider';
-import { Transactions } from './screens/Transactions';
-import { Calendar } from './screens/Calendar';
-import { Statistics } from './screens/Statistics';
-import { Annual } from './screens/Annual';
-import { Options } from './screens/Options';
-import { BarChart, BookOpen, Calendar as CalendarIco, MoreHorizontal, PieChart } from 'react-native-feather';
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useTheme } from "../theming";
+import { Transactions } from "../screens/Transactions";
+import { enableScreens } from "react-native-screens";
+import { BarChart, BookOpen, MoreHorizontal, PieChart, Calendar as CalendarIcon } from "react-native-feather";
+import { Calendar } from "../screens/Calendar";
+import { Annual } from "../screens/Annual";
+import { Statistics } from "../screens/Statistics";
+import { Options } from "../screens/Options";
+
+enableScreens();
 
 const Tab = createBottomTabNavigator();
 
-export const BottomTab = () => {
-    const { theme } = useTheme();
-    const getTabColor = (focused: boolean) =>
-        focused ? theme.colors.tabBarActive : theme.colors.tabBarInactive
+export const AppNavigator = () => {
+    const theme = useTheme();
+    const getTabColor = (focused: boolean) => {
+        return focused ? theme.colors.tabBarActive : theme.colors.tabBarInactive
+    }
     return (
         <Tab.Navigator screenOptions={{
             headerShown: false,
             tabBarStyle: { backgroundColor: theme.colors.tabBarBackground },
             tabBarActiveTintColor: String(theme.colors.tabBarActive),
-            tabBarInactiveTintColor: String(theme.colors.tabBarInactive),
-        }} initialRouteName='Transactions'>
+            tabBarInactiveTintColor: String(theme.colors.tabBarInactive)
+        }} initialRouteName="Transactions">
             <Tab.Screen name='Transactions' component={Transactions} options={{
                 tabBarIcon: ({ focused }) =>
                     <BookOpen color={getTabColor(focused)} />
             }} />
             <Tab.Screen name='Calendar' component={Calendar} options={{
                 tabBarIcon: ({ focused }) =>
-                    <CalendarIco color={getTabColor(focused)} />
+                    <CalendarIcon color={getTabColor(focused)} />
             }} />
             <Tab.Screen name='Annual' component={Annual} options={{
                 tabBarIcon: ({ focused }) =>
@@ -43,4 +47,3 @@ export const BottomTab = () => {
         </Tab.Navigator>
     )
 }
-

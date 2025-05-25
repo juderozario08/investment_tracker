@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
-import { useTheme } from "../theming/ThemeProvider"
+import { useTheme } from "../theming"
 import { ChevronLeft, ChevronRight } from "react-native-feather";
 import React from "react";
 import { Months } from "../library/constants";
@@ -11,7 +11,7 @@ interface MonthSwitcherProps {
 }
 
 export const MonthSwitcher: React.FC<MonthSwitcherProps> = ({ dateState, prevMonth, nextMonth }) => {
-    const { theme } = useTheme();
+    const theme = useTheme();
     return (
         <View style={[styles.flex, { paddingLeft: 10, paddingRight: 10 }]}>
             <TouchableOpacity onPress={prevMonth}>

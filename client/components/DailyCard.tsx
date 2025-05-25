@@ -1,7 +1,6 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
-import { useTheme } from "../theming/ThemeProvider";
+import { useTheme } from "../theming";
 import {
-    DATA,
     Days,
     DefaultTransactionValues,
 } from "../library/constants";
@@ -15,7 +14,7 @@ export const DailyCard: React.FC<{
     date: Date;
     dataState: [TransactionDataType[], React.Dispatch<React.SetStateAction<TransactionDataType[]>>];
 }> = ({ transactions, date, dataState }) => {
-    const { theme } = useTheme();
+    const theme = useTheme();
     const [data, setData] = dataState;
     const totals = transactions.reduce(
         (acc, transaction) => {
@@ -85,7 +84,7 @@ export const DailyCard: React.FC<{
                                     setIsVisible(true);
                                 }}
                             >
-                                <View style={{ flexDirection: "row", gap: 10, paddingLeft: 5 }}>
+                                <View style={{ flexDirection: "row", paddingVertical: 5, paddingLeft: 5 }}>
                                     <Text style={[{ color: theme.colors.text, width: 100 }]}>
                                         {transaction.tag}
                                     </Text>

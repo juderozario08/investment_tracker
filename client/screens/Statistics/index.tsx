@@ -1,11 +1,11 @@
-import { useTheme } from "../../../theming/ThemeProvider"
 import { View, Text, StyleSheet } from "react-native"
+import { useTheme } from "../../theming"
 
-export const Annual = () => {
-    const { theme } = useTheme();
+export const Statistics = () => {
+    const theme = useTheme()
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <Text style={{ color: theme.colors.text }}>Annual Review</Text>
+            <Text style={{ color: theme.colors.text }}>Statistics goes here!</Text>
         </View>
     )
 }

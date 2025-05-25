@@ -1,19 +1,17 @@
-import {
-    TouchableOpacity,
-    View,
-} from "react-native";
-import { useTheme } from "../../../theming/ThemeProvider";
-import { MonthSwitcher } from "../../../components/MonthSwitcher";
-import { useEffect, useRef, useState } from "react";
-import { TopMenu } from "../../../components/TopMenu";
-import { DailyCard } from "../../../components/DailyCard";
-import { MonthSummary } from "../../../components/MonthTotal";
-import { PlusCircle } from "react-native-feather";
-import type { TransactionDataType } from "../../../library/types";
-import styles from "./styles"
-import { TransactionModal } from "../../../components/TransactionModal";
-import { DATA, DefaultTransactionValues } from "../../../library/constants";
-import { GestureScrollView } from "../../../components/Views/GestureScrollView";
+import { useEffect, useRef, useState } from 'react';
+import { TransactionDataType } from '../../library/types';
+import { styles } from './styles'
+import { TouchableOpacity } from 'react-native';
+import { useTheme } from '../../theming';
+import { DATA, DefaultTransactionValues } from '../../library/constants';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { TransactionModal } from '../../components/TransactionModal';
+import { PlusCircle } from 'react-native-feather';
+import { GestureScrollView } from '../../components/Views/GestureScrollView';
+import { DailyCard } from '../../components/DailyCard';
+import { MonthSummary } from '../../components/MonthTotal';
+import { TopMenu } from '../../components/TopMenu';
+import { MonthSwitcher } from '../../components/MonthSwitcher';
 
 // Organizing all the data to group by date
 const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType[]> => {
@@ -37,14 +35,12 @@ const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType
     return result;
 };
 
-// This will be the Material top navigator
 export const Transactions = () => {
+    const theme = useTheme();
 
     const [data, setData] = useState<TransactionDataType[]>(DATA);
 
-    const { theme } = useTheme();
-
-    const [dateState, setDateState] = useState({ month: new Date().getMonth(), year: new Date().getFullYear() });
+    const [dateState, setDateState] = useState({ month: new Date().getMonth(), year: new Date().getFullYear() })
 
     const [investing, setInvestment] = useState<number>(0);
     const [spending, setSpending] = useState<number>(0);
@@ -136,9 +132,7 @@ export const Transactions = () => {
     }, [dateState.month, dateState.year, groupedByDate]);
 
     return (
-        <View
-            style={[styles.container, { backgroundColor: theme.colors.background }]}
-        >
+        <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
             {/* Tob Bar */}
             <TopMenu>
                 <MonthSwitcher
@@ -190,6 +184,6 @@ export const Transactions = () => {
                     });
                     setIsVisible(false);
                 }} />
-        </View>
-    );
-};
+        </SafeAreaView>
+    )
+}

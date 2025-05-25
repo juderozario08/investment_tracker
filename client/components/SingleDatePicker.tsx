@@ -1,5 +1,7 @@
-import { DatePickerModal } from "react-native-paper-dates"
+import { DatePickerModal, en, registerTranslation } from "react-native-paper-dates"
 import { CalendarDate } from "react-native-paper-dates/lib/typescript/Date/Calendar";
+
+registerTranslation('en', en)
 
 export const SingleDatePicker: React.FC<{
     visible: boolean;
@@ -17,7 +19,7 @@ export const SingleDatePicker: React.FC<{
 
     return (
         <DatePickerModal
-            locale="en"
+            locale="en-GB"
             saveLabel="Save"
             mode="single"
             visible={visible}

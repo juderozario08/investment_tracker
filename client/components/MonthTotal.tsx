@@ -1,5 +1,5 @@
 import { View, Text, StyleSheet } from "react-native"
-import { useTheme } from "../theming/ThemeProvider";
+import { useTheme } from "../theming";
 
 export const MonthSummary: React.FC<{
     amounts: {
@@ -8,7 +8,7 @@ export const MonthSummary: React.FC<{
         spending: number;
     }
 }> = ({ amounts }) => {
-    const { theme } = useTheme();
+    const theme = useTheme();
     const total = amounts.income - amounts.spending;
     return (
         <View style={{

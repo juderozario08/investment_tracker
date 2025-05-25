@@ -21,7 +21,7 @@ const ThemedModal: React.FC<{
             <KeyboardAvoidingView style={[styles.centeredView]}>
                 <SafeAreaView style={[styles.modalView, { backgroundColor: theme.colors.muted }]}>
                     {/* Close Modal Button */}
-                    <View style={{ position: 'absolute', right: 12, top: 12 }}>
+                    <View style={{ position: 'absolute', right: 0, top: 0, padding: 15 }}>
                         <TouchableOpacity
                             onPress={() => setIsVisible(!isVisible)}>
                             <X color={'grey'} width={20} style={{ padding: 5 }} />

@@ -1,14 +1,14 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     container: {
-        flex: 1,
+        flex: 1
     },
     centeredView: {
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "rgba(0,0,0,0.5)",
+        backgroundColor: "rgba(0,0,0,0.5)"
     },
     modalView: {
         justifyContent: "center",
@@ -21,17 +21,17 @@ const styles = StyleSheet.create({
         paddingBottom: 25,
         shadowRadius: 4,
         elevation: 10,
-        maxHeight: "90%",
+        maxHeight: "90%"
     },
     modalFields: {
         flexDirection: "row",
         borderBottomWidth: 1,
         borderColor: "rgba(128, 128, 128, 0.7)",
-        paddingBottom: 5,
+        paddingBottom: 5
     },
     modalText: {
         marginTop: 10,
-        width: 100,
+        width: 100
     },
     dropdown: {
         marginTop: 8,
@@ -39,8 +39,6 @@ const styles = StyleSheet.create({
         width: 150,
         borderColor: "transparent",
         borderWidth: 0.5,
-        paddingRight: 10,
-    },
-});
-
-export default styles;
+        paddingRight: 10
+    }
+})
