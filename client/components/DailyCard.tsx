@@ -104,7 +104,6 @@ export const DailyCard: React.FC<{
                     </SafeAreaProvider>
                 ))}
                 <TransactionModal
-                    theme={theme}
                     isVisibleState={[isVisible, setIsVisible]}
                     detailsState={[details, setDetails]}
                     onSubmit={() => {

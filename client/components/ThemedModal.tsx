@@ -1,15 +1,15 @@
 import { KeyboardAvoidingView, Modal, StyleSheet, TouchableOpacity, View } from "react-native";
-import { Theme } from "../theming/types";
 import { X } from "react-native-feather";
 import { ReactNode } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useTheme } from "../theming";
 
 const ThemedModal: React.FC<{
     isVisible: boolean;
     setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-    theme: Theme;
     children: ReactNode;
-}> = ({ isVisible, setIsVisible, theme, children }) => {
+}> = ({ isVisible, setIsVisible, children }) => {
+    const theme = useTheme();
     return (
         <Modal
             animationType="slide"

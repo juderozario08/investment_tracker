@@ -8,20 +8,21 @@ import { ThemedDropdown } from "./ThemedDropdown";
 import { validateAmount, validateCategory, validateName, validateTag, } from "../library/validation";
 import { TransactionDataType } from "../library/types";
 import { TimePicker } from "./TimePicker";
+import { useTheme } from "../theming";
 
 interface TransactionModalProps {
-    theme: Theme;
     isVisibleState: [boolean, React.Dispatch<SetStateAction<boolean>>];
     detailsState: [TransactionDataType, React.Dispatch<SetStateAction<TransactionDataType>>];
     onSubmit: () => void;
 }
 
 export const TransactionModal: React.FC<TransactionModalProps> = ({
-    theme,
     isVisibleState,
     detailsState,
     onSubmit,
 }) => {
+    const theme = useTheme();
+
     const [isVisible, setIsVisible] = isVisibleState;
     const [details, setDetails] = detailsState;
 
@@ -57,7 +58,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
     }, [tagList]);
 
     return (
-        <ThemedModal isVisible={isVisible} setIsVisible={setIsVisible} theme={theme}>
+        <ThemedModal isVisible={isVisible} setIsVisible={setIsVisible}>
             {/* Date & Time Section */}
             <View style={styles.modalFields}>
                 <Text style={[styles.modalText, { color: theme.colors.text }]}>Date:</Text>

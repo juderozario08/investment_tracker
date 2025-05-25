@@ -1,7 +1,4 @@
-import { DatePickerModal, en, registerTranslation } from "react-native-paper-dates"
-import { CalendarDate } from "react-native-paper-dates/lib/typescript/Date/Calendar";
-
-registerTranslation('en', en)
+import DatePicker from "react-native-date-picker";
 
 export const SingleDatePicker: React.FC<{
     visible: boolean;
@@ -10,25 +7,19 @@ export const SingleDatePicker: React.FC<{
     date: Date;
 }> = ({ visible, date, setOpen, setDate }) => {
 
-    const datePickerOnConfirm = (params: { date: CalendarDate }) => {
-        setOpen(false);
-        if (params.date) {
-            setDate(params.date);
-        }
-    }
-
     return (
-        <DatePickerModal
-            locale="en-GB"
-            saveLabel="Save"
-            mode="single"
-            visible={visible}
-            onDismiss={() => setOpen(false)}
+        <DatePicker
+            mode="date"
+            modal
+            open={visible}
             date={date}
-            onConfirm={datePickerOnConfirm}
-            validRange={{ endDate: new Date(new Date().getFullYear(), new Date().getMonth() + 1, 0) }}
-            label="Select Date"
-            presentationStyle="pageSheet"
+            onConfirm={(date) => {
+                setOpen(false)
+                setDate(date)
+            }}
+            onCancel={() => {
+                setOpen(false)
+            }}
         />
     )
 }
