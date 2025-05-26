@@ -1,9 +1,6 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "../theming";
-import {
-    Days,
-    DefaultTransactionValues,
-} from "../library/constants";
+import { Days, DefaultTransactionValues } from "../library/constants";
 import type { TransactionDataType } from "../library/types";
 import { useState } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
@@ -18,11 +15,15 @@ export const DailyCard: React.FC<{
     const [data, setData] = dataState;
     const totals = transactions.reduce(
         (acc, transaction) => {
-            if (transaction.category === "income") acc.income += Number(transaction.amount);
-            if (transaction.category === "spending")
+            if (transaction.category === "income") {
+                acc.income += Number(transaction.amount);
+            }
+            if (transaction.category === "spending") {
                 acc.spending += Number(transaction.amount);
-            if (transaction.category === "investment")
+            }
+            if (transaction.category === "investment") {
                 acc.investments += Number(transaction.amount);
+            }
             return acc;
         },
         { income: 0, spending: 0, investments: 0 },
@@ -37,38 +38,22 @@ export const DailyCard: React.FC<{
             {/* Card Header */}
             <View style={[styles.header]}>
                 <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text
-                        style={{ color: "rgba(255, 70, 28, 0.8)", fontSize: 20, width: 30 }}
-                    >
-                        {date.getDate()}
-                    </Text>
-                    <Text
-                        style={{ color: theme.colors.text, fontSize: 13, fontWeight: 600 }}
-                    >
-                        {Days[date.getDay()]}
-                    </Text>
+                    <Text style={{ color: "rgba(255, 70, 28, 0.8)", fontSize: 20, width: 30 }}>{date.getDate()}</Text>
+                    <Text style={{ color: theme.colors.text, fontSize: 13, fontWeight: 600 }}>{Days[date.getDay()]}</Text>
                 </View>
                 <View style={[styles.headerValues]}>
-                    <Text
-                        style={[
-                            styles.headerValueItems,
-                            { color: theme.colors.investment },
-                        ]}
-                    >{`$${totals.investments}`}</Text>
-                    <Text
-                        style={[styles.headerValueItems, { color: theme.colors.income }]}
-                    >{`$${totals.income}`}</Text>
-                    <Text
-                        style={[styles.headerValueItems, { color: theme.colors.spending }]}
-                    >{`$${totals.spending}`}</Text>
-                    <Text
-                        style={[
-                            styles.headerValueItems,
-                            {
-                                color: total < 0 ? theme.colors.spending : theme.colors.income,
-                            },
-                        ]}
-                    >{`$${Math.abs(total)}`}</Text>
+                    <Text style={[styles.headerValueItems, { color: theme.colors.investment }]}>
+                        {`$${totals.investments}`}
+                    </Text>
+                    <Text style={[styles.headerValueItems, { color: theme.colors.income }]}>
+                        {`$${totals.income}`}
+                    </Text>
+                    <Text style={[styles.headerValueItems, { color: theme.colors.spending }]}>
+                        {`$${totals.spending}`}
+                    </Text>
+                    <Text style={[styles.headerValueItems, { color: total < 0 ? theme.colors.spending : theme.colors.income }]}>
+                        {`$${Math.abs(total)}`}
+                    </Text>
                 </View>
             </View>
 
@@ -126,8 +111,8 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     headerValueItems: {
-        width: 55,
         textAlign: "right",
+        paddingLeft: 5
     },
     header: {
         flexDirection: "row",
