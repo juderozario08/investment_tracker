@@ -27,7 +27,7 @@ export const TransactionSpendingTagOptions: DropdownMenuType[] = [
     { label: "Food", value: "Food" },
     { label: "Household", value: "Household" },
     { label: "Transport", value: "Transport" },
-    { label: "Bills and Utilities", value: "Bills and Utilities" },
+    { label: "Bills & Utilities", value: "Bills & Utilities" },
     { label: "Entertainment", value: "Entertainment" },
     { label: "Hobby", value: "Hobby" },
     { label: "Gift", value: "Gift" },
@@ -136,7 +136,7 @@ export const DATA: TransactionDataType[] = [
     {
         id: 10,
         category: "spending",
-        tag: "Utilities",
+        tag: "Bills & Utilities",
         name: "Hydro",
         amount: "60",
         date: new Date("2025-03-22"),
