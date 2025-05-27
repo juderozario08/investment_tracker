@@ -39,7 +39,7 @@ const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType
 export const Transactions = () => {
     const theme = useTheme();
 
-    const { data, setData, addTransaction, clearTransaction } = useDataContext();
+    const { data, addTransaction } = useDataContext();
 
     const [dateState, setDateState] = useState({
         month: new Date().getMonth(),

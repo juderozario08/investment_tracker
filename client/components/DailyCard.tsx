@@ -6,12 +6,13 @@ import { useState } from "react";
 import { TransactionModal } from "./TransactionModal";
 import { Theme } from "../theming/types";
 import { useDataContext } from "../context/DataContext";
-import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
-import { SharedValue } from "react-native-reanimated/lib/typescript/Animated";
+import { useAnimatedStyle } from "react-native-reanimated";
+import { SharedValue } from "react-native-reanimated";
 import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Reanimated from "react-native-reanimated";
 import { Trash } from "react-native-feather";
+import { FadingPressable } from "./FadingPressable";
 
 const TransactionItem: React.FC<{
     setDetails: React.Dispatch<React.SetStateAction<TransactionDataType>>,
@@ -20,11 +21,6 @@ const TransactionItem: React.FC<{
     removeTransaction: (id: string) => void,
     theme: Theme
 }> = ({ setDetails, transaction, setIsVisible, theme, removeTransaction }) => {
-
-    const opacity = useSharedValue(1);
-    const opacityAnimatedStyle = useAnimatedStyle(() => ({
-        opacity: opacity.value
-    }))
 
     const renderRightActions = (_: SharedValue<number>, drag: SharedValue<number>) => {
         const styleAnimation = useAnimatedStyle(() => {
@@ -48,39 +44,29 @@ const TransactionItem: React.FC<{
     };
 
     return (
-        <ReanimatedSwipeable
-            renderRightActions={renderRightActions}
-            friction={2}>
-            <Animated.View style={opacityAnimatedStyle}>
-                <Pressable
-                    style={styles.transaction}
-                    onPressIn={() => {
-                        opacity.value = withTiming(0.4, { duration: 100 });
-                    }}
-                    onPressOut={() => {
-                        opacity.value = withTiming(1, { duration: 100 });
-                    }}
-                    onPress={() => {
-                        setDetails(transaction);
-                        setIsVisible(true);
-                    }}>
-                    <View style={{ flexDirection: "row" }}>
-                        <Text style={[{ color: theme.colors.text, width: 100 }]}>
-                            {transaction.tag}
-                        </Text>
-                        <Text style={[{ color: theme.colors.text, width: 100 }]}>
-                            {transaction.name}
-                        </Text>
-                    </View>
-                    <Text
-                        style={[{
-                            color: transaction.category === 'spending' ?
-                                theme.colors.spending : transaction.category === 'income' ?
-                                    theme.colors.income : theme.colors.investment
-                        }]}
-                    >{`$${transaction.amount}`}</Text>
-                </Pressable>
-            </Animated.View>
+        <ReanimatedSwipeable renderRightActions={renderRightActions} friction={2}>
+            <FadingPressable
+                style={[styles.transaction]}
+                onPress={() => {
+                    setDetails(transaction);
+                    setIsVisible(true);
+                }}>
+                <View style={{ flexDirection: "row" }}>
+                    <Text style={[{ color: theme.colors.text, width: 100 }]}>
+                        {transaction.tag}
+                    </Text>
+                    <Text style={[{ color: theme.colors.text, width: 100 }]}>
+                        {transaction.name}
+                    </Text>
+                </View>
+                <Text
+                    style={[{
+                        color: transaction.category === 'spending' ?
+                            theme.colors.spending : transaction.category === 'income' ?
+                                theme.colors.income : theme.colors.investment
+                    }]}
+                >{`$${transaction.amount}`}</Text>
+            </FadingPressable>
         </ReanimatedSwipeable>
     )
 }
