@@ -1,21 +1,56 @@
 import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import { useTheme } from "../theming";
-import {
-    Days,
-    DefaultTransactionValues,
-} from "../library/constants";
+import { Days, DefaultTransactionValues, getDefaultTransactionValue } from "../library/constants";
 import type { TransactionDataType } from "../library/types";
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { TransactionModal } from "./TransactionModal";
+import { Theme } from "../theming/types";
+import { useDataContext } from "../context/DataContext";
+
+const TransactionItem: React.FC<{
+    setDetails: React.Dispatch<React.SetStateAction<TransactionDataType>>,
+    setIsVisible: React.Dispatch<React.SetStateAction<boolean>>,
+    transaction: TransactionDataType,
+    theme: Theme
+}> = ({ setDetails, transaction, setIsVisible, theme }) => {
+    return (
+        <SafeAreaProvider>
+            <SafeAreaView>
+                <TouchableOpacity
+                    style={[styles.transaction, { paddingRight: 5 }]}
+                    onPress={() => {
+                        setDetails(transaction);
+                        setIsVisible(true);
+                    }}
+                >
+                    <View style={{ flexDirection: "row", paddingVertical: 5, paddingLeft: 5 }}>
+                        <Text style={[{ color: theme.colors.text, width: 100 }]}>
+                            {transaction.tag}
+                        </Text>
+                        <Text style={[{ color: theme.colors.text, width: 100 }]}>
+                            {transaction.name}
+                        </Text>
+                    </View>
+                    <Text
+                        style={[{
+                            color: transaction.category === 'spending' ?
+                                theme.colors.spending : transaction.category === 'income' ?
+                                    theme.colors.income : theme.colors.investment
+                        }]}
+                    >{`$${transaction.amount}`}</Text>
+                </TouchableOpacity>
+            </SafeAreaView>
+        </SafeAreaProvider>
+    )
+}
 
 export const DailyCard: React.FC<{
     transactions: TransactionDataType[];
     date: Date;
-    dataState: [TransactionDataType[], React.Dispatch<React.SetStateAction<TransactionDataType[]>>];
-}> = ({ transactions, date, dataState }) => {
+}> = ({ transactions, date }) => {
     const theme = useTheme();
-    const [data, setData] = dataState;
+    const { editTransaction, removeTransaction } = useDataContext();
     const totals = transactions.reduce(
         (acc, transaction) => {
             if (transaction.category === "income") acc.income += Number(transaction.amount);
@@ -30,7 +65,7 @@ export const DailyCard: React.FC<{
     const total = totals.income - totals.spending;
 
     const [isVisible, setIsVisible] = useState<boolean>(false);
-    const [details, setDetails] = useState<TransactionDataType>(DefaultTransactionValues);
+    const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue());
 
     return (
         <View style={[{ backgroundColor: theme.colors.muted }, styles.container]}>
@@ -75,42 +110,18 @@ export const DailyCard: React.FC<{
             {/* Transactions */}
             <View style={{ paddingTop: 10, gap: 10 }}>
                 {transactions.map((transaction, idx) => (
-                    <SafeAreaProvider key={idx}>
-                        <SafeAreaView>
-                            <TouchableOpacity
-                                style={[styles.transaction, { paddingRight: 5 }]}
-                                onPress={() => {
-                                    setDetails(transaction);
-                                    setIsVisible(true);
-                                }}
-                            >
-                                <View style={{ flexDirection: "row", paddingVertical: 5, paddingLeft: 5 }}>
-                                    <Text style={[{ color: theme.colors.text, width: 100 }]}>
-                                        {transaction.tag}
-                                    </Text>
-                                    <Text style={[{ color: theme.colors.text, width: 100 }]}>
-                                        {transaction.name}
-                                    </Text>
-                                </View>
-                                <Text
-                                    style={[{
-                                        color: transaction.category === 'spending' ?
-                                            theme.colors.spending : transaction.category === 'income' ?
-                                                theme.colors.income : theme.colors.investment
-                                    }]}
-                                >{`$${transaction.amount}`}</Text>
-                            </TouchableOpacity>
-                        </SafeAreaView>
-                    </SafeAreaProvider>
+                    <TransactionItem key={idx}
+                        setDetails={setDetails}
+                        setIsVisible={setIsVisible}
+                        transaction={transaction}
+                        theme={theme}
+                    />
                 ))}
                 <TransactionModal
                     isVisibleState={[isVisible, setIsVisible]}
                     detailsState={[details, setDetails]}
                     onSubmit={() => {
-                        setData(prev => {
-                            prev[details.id] = details;
-                            return prev;
-                        })
+                        editTransaction(details);
                         setIsVisible(false);
                     }} />
             </View>

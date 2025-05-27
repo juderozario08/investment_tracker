@@ -1,12 +1,15 @@
 import { StatusBar } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { AppNavigator } from "./AppNavigator";
+import { DataProvider } from "./context/DataContext";
 
 const App = () => {
     return (
         <NavigationContainer>
-            <AppNavigator />
-            <StatusBar />
+            <DataProvider>
+                <AppNavigator />
+                <StatusBar />
+            </DataProvider>
         </NavigationContainer>
     )
 }
