@@ -3,7 +3,6 @@ import { TransactionDataType } from '../../library/types';
 import { styles } from './styles'
 import { TouchableOpacity } from 'react-native';
 import { useTheme } from '../../theming';
-import { DATA, DefaultTransactionValues } from '../../library/constants';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TransactionModal } from '../../components/TransactionModal';
 import { PlusCircle } from 'react-native-feather';
@@ -12,6 +11,8 @@ import { DailyCard } from '../../components/DailyCard';
 import { MonthSummary } from '../../components/MonthTotal';
 import { TopMenu } from '../../components/TopMenu';
 import { MonthSwitcher } from '../../components/MonthSwitcher';
+import { useDataContext } from '../../context/DataContext';
+import { getDefaultTransactionValue } from '../../library/constants';
 
 // Organizing all the data to group by date
 const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType[]> => {
@@ -38,9 +39,12 @@ const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType
 export const Transactions = () => {
     const theme = useTheme();
 
-    const [data, setData] = useState<TransactionDataType[]>(DATA);
+    const { data, setData, addTransaction, clearTransaction } = useDataContext();
 
-    const [dateState, setDateState] = useState({ month: new Date().getMonth(), year: new Date().getFullYear() })
+    const [dateState, setDateState] = useState({
+        month: new Date().getMonth(),
+        year: new Date().getFullYear()
+    })
 
     const [investing, setInvestment] = useState<number>(0);
     const [spending, setSpending] = useState<number>(0);
@@ -50,7 +54,7 @@ export const Transactions = () => {
     const [groupedByDate, setGroupedByDate] = useState(new Map<Date, TransactionDataType[]>());
     const [sortedDateArray, setSortedDateArray] = useState<Date[]>([]);
 
-    const [details, setDetails] = useState<TransactionDataType>(DefaultTransactionValues);
+    const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue());
 
     const prevMonth = () => {
         setDateState(({ month, year }) => {
@@ -149,7 +153,6 @@ export const Transactions = () => {
                     return val.getMonth() === dateState.month && val.getFullYear() === dateState.year ? (
                         <DailyCard
                             key={idx}
-                            dataState={[data, setData]}
                             transactions={groupedByDate.get(val) || []}
                             date={val}
                         />
@@ -177,10 +180,8 @@ export const Transactions = () => {
                 isVisibleState={[isVisible, setIsVisible]}
                 detailsState={[details, setDetails]}
                 onSubmit={() => {
-                    setDetails(() => {
-                        setData(prev => [...prev, details]);
-                        return DefaultTransactionValues
-                    });
+                    addTransaction(details);
+                    setDetails(getDefaultTransactionValue());
                     setIsVisible(false);
                 }} />
         </SafeAreaView>

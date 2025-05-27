@@ -1,18 +1,96 @@
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, Pressable } from "react-native";
 import { useTheme } from "../theming";
-import { Days, DefaultTransactionValues } from "../library/constants";
+import { Days, getDefaultTransactionValue } from "../library/constants";
 import type { TransactionDataType } from "../library/types";
 import { useState } from "react";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { TransactionModal } from "./TransactionModal";
+import { Theme } from "../theming/types";
+import { useDataContext } from "../context/DataContext";
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import { SharedValue } from "react-native-reanimated/lib/typescript/Animated";
+import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Reanimated from "react-native-reanimated";
+import { Trash } from "react-native-feather";
+
+const TransactionItem: React.FC<{
+    setDetails: React.Dispatch<React.SetStateAction<TransactionDataType>>,
+    setIsVisible: React.Dispatch<React.SetStateAction<boolean>>,
+    transaction: TransactionDataType,
+    removeTransaction: (id: string) => void,
+    theme: Theme
+}> = ({ setDetails, transaction, setIsVisible, theme, removeTransaction }) => {
+
+    const opacity = useSharedValue(1);
+    const opacityAnimatedStyle = useAnimatedStyle(() => ({
+        opacity: opacity.value
+    }))
+
+    const renderRightActions = (_: SharedValue<number>, drag: SharedValue<number>) => {
+        const styleAnimation = useAnimatedStyle(() => {
+            return { transform: [{ translateX: drag.value + 25 }] }
+        })
+        return (
+            <Reanimated.View style={styleAnimation}>
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: 'red',
+                        paddingHorizontal: 2,
+                        height: '100%',
+                        justifyContent: 'center',
+                        borderRadius: 5,
+                    }}
+                    onPress={() => removeTransaction(transaction.id)}>
+                    <Trash stroke={'white'} />
+                </TouchableOpacity>
+            </Reanimated.View>
+        )
+    };
+
+    return (
+        <ReanimatedSwipeable
+            renderRightActions={renderRightActions}
+            friction={2}>
+            <Animated.View style={opacityAnimatedStyle}>
+                <Pressable
+                    style={styles.transaction}
+                    onPressIn={() => {
+                        opacity.value = withTiming(0.4, { duration: 100 });
+                    }}
+                    onPressOut={() => {
+                        opacity.value = withTiming(1, { duration: 100 });
+                    }}
+                    onPress={() => {
+                        setDetails(transaction);
+                        setIsVisible(true);
+                    }}>
+                    <View style={{ flexDirection: "row" }}>
+                        <Text style={[{ color: theme.colors.text, width: 100 }]}>
+                            {transaction.tag}
+                        </Text>
+                        <Text style={[{ color: theme.colors.text, width: 100 }]}>
+                            {transaction.name}
+                        </Text>
+                    </View>
+                    <Text
+                        style={[{
+                            color: transaction.category === 'spending' ?
+                                theme.colors.spending : transaction.category === 'income' ?
+                                    theme.colors.income : theme.colors.investment
+                        }]}
+                    >{`$${transaction.amount}`}</Text>
+                </Pressable>
+            </Animated.View>
+        </ReanimatedSwipeable>
+    )
+}
 
 export const DailyCard: React.FC<{
     transactions: TransactionDataType[];
     date: Date;
-    dataState: [TransactionDataType[], React.Dispatch<React.SetStateAction<TransactionDataType[]>>];
-}> = ({ transactions, date, dataState }) => {
+}> = ({ transactions, date }) => {
     const theme = useTheme();
-    const [data, setData] = dataState;
+    const { editTransaction, removeTransaction } = useDataContext();
     const totals = transactions.reduce(
         (acc, transaction) => {
             if (transaction.category === "income") {
@@ -31,7 +109,7 @@ export const DailyCard: React.FC<{
     const total = totals.income - totals.spending;
 
     const [isVisible, setIsVisible] = useState<boolean>(false);
-    const [details, setDetails] = useState<TransactionDataType>(DefaultTransactionValues);
+    const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue());
 
     return (
         <View style={[{ backgroundColor: theme.colors.muted }, styles.container]}>
@@ -43,13 +121,13 @@ export const DailyCard: React.FC<{
                 </View>
                 <View style={[styles.headerValues]}>
                     <Text style={[styles.headerValueItems, { color: theme.colors.investment }]}>
-                        {`$${totals.investments}`}
+                        ${totals.investments}
                     </Text>
                     <Text style={[styles.headerValueItems, { color: theme.colors.income }]}>
-                        {`$${totals.income}`}
+                        ${totals.income}
                     </Text>
                     <Text style={[styles.headerValueItems, { color: theme.colors.spending }]}>
-                        {`$${totals.spending}`}
+                        ${totals.spending}
                     </Text>
                     <Text style={[styles.headerValueItems, { color: total < 0 ? theme.colors.spending : theme.colors.income }]}>
                         {`$${Math.abs(total)}`}
@@ -58,47 +136,25 @@ export const DailyCard: React.FC<{
             </View>
 
             {/* Transactions */}
-            <View style={{ paddingTop: 10, gap: 10 }}>
+            <GestureHandlerRootView style={{ paddingTop: 10 }}>
                 {transactions.map((transaction, idx) => (
-                    <SafeAreaProvider key={idx}>
-                        <SafeAreaView>
-                            <TouchableOpacity
-                                style={[styles.transaction, { paddingRight: 5 }]}
-                                onPress={() => {
-                                    setDetails(transaction);
-                                    setIsVisible(true);
-                                }}
-                            >
-                                <View style={{ flexDirection: "row", paddingVertical: 5, paddingLeft: 5 }}>
-                                    <Text style={[{ color: theme.colors.text, width: 100 }]}>
-                                        {transaction.tag}
-                                    </Text>
-                                    <Text style={[{ color: theme.colors.text, width: 100 }]}>
-                                        {transaction.name}
-                                    </Text>
-                                </View>
-                                <Text
-                                    style={[{
-                                        color: transaction.category === 'spending' ?
-                                            theme.colors.spending : transaction.category === 'income' ?
-                                                theme.colors.income : theme.colors.investment
-                                    }]}
-                                >{`$${transaction.amount}`}</Text>
-                            </TouchableOpacity>
-                        </SafeAreaView>
-                    </SafeAreaProvider>
+                    <TransactionItem
+                        key={idx}
+                        setDetails={setDetails}
+                        setIsVisible={setIsVisible}
+                        transaction={transaction}
+                        theme={theme}
+                        removeTransaction={removeTransaction}
+                    />
                 ))}
                 <TransactionModal
                     isVisibleState={[isVisible, setIsVisible]}
                     detailsState={[details, setDetails]}
                     onSubmit={() => {
-                        setData(prev => {
-                            prev[details.id] = details;
-                            return prev;
-                        })
+                        editTransaction(details);
                         setIsVisible(false);
                     }} />
-            </View>
+            </GestureHandlerRootView>
         </View >
     );
 };
@@ -112,7 +168,7 @@ const styles = StyleSheet.create({
     },
     headerValueItems: {
         textAlign: "right",
-        paddingLeft: 5
+        paddingLeft: 8,
     },
     header: {
         flexDirection: "row",
@@ -130,6 +186,9 @@ const styles = StyleSheet.create({
     transaction: {
         flexDirection: "row",
         justifyContent: "space-between",
+        alignItems: 'center',
+        height: 30,
+        paddingHorizontal: 10
     },
     modalFields: {
         flexDirection: "row",

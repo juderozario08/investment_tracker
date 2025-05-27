@@ -4,7 +4,7 @@ export interface DropdownMenuType {
 }
 
 export interface TransactionDataType {
-    id: number;
+    id: string;
     category: string;
     tag: string;
     name: string;
