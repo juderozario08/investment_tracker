@@ -3,7 +3,6 @@ import { useTheme } from "../theming";
 import { Days, DefaultTransactionValues, getDefaultTransactionValue } from "../library/constants";
 import type { TransactionDataType } from "../library/types";
 import { SetStateAction, useState } from "react";
-import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { TransactionModal } from "./TransactionModal";
 import { Theme } from "../theming/types";
 import { useDataContext } from "../context/DataContext";
@@ -15,33 +14,29 @@ const TransactionItem: React.FC<{
     theme: Theme
 }> = ({ setDetails, transaction, setIsVisible, theme }) => {
     return (
-        <SafeAreaProvider>
-            <SafeAreaView>
-                <TouchableOpacity
-                    style={[styles.transaction, { paddingRight: 5 }]}
-                    onPress={() => {
-                        setDetails(transaction);
-                        setIsVisible(true);
-                    }}
-                >
-                    <View style={{ flexDirection: "row", paddingVertical: 5, paddingLeft: 5 }}>
-                        <Text style={[{ color: theme.colors.text, width: 100 }]}>
-                            {transaction.tag}
-                        </Text>
-                        <Text style={[{ color: theme.colors.text, width: 100 }]}>
-                            {transaction.name}
-                        </Text>
-                    </View>
-                    <Text
-                        style={[{
-                            color: transaction.category === 'spending' ?
-                                theme.colors.spending : transaction.category === 'income' ?
-                                    theme.colors.income : theme.colors.investment
-                        }]}
-                    >{`$${transaction.amount}`}</Text>
-                </TouchableOpacity>
-            </SafeAreaView>
-        </SafeAreaProvider>
+        <TouchableOpacity
+            style={[styles.transaction]}
+            onPress={() => {
+                setDetails(transaction);
+                setIsVisible(true);
+            }}
+        >
+            <View style={{ flexDirection: "row" }}>
+                <Text style={[{ color: theme.colors.text, width: 100 }]}>
+                    {transaction.tag}
+                </Text>
+                <Text style={[{ color: theme.colors.text, width: 100 }]}>
+                    {transaction.name}
+                </Text>
+            </View>
+            <Text
+                style={[{
+                    color: transaction.category === 'spending' ?
+                        theme.colors.spending : transaction.category === 'income' ?
+                            theme.colors.income : theme.colors.investment
+                }]}
+            >{`$${transaction.amount}`}</Text>
+        </TouchableOpacity>
     )
 }
 
@@ -84,26 +79,18 @@ export const DailyCard: React.FC<{
                     </Text>
                 </View>
                 <View style={[styles.headerValues]}>
-                    <Text
-                        style={[
-                            styles.headerValueItems,
-                            { color: theme.colors.investment },
-                        ]}
-                    >{`$${totals.investments}`}</Text>
-                    <Text
-                        style={[styles.headerValueItems, { color: theme.colors.income }]}
-                    >{`$${totals.income}`}</Text>
-                    <Text
-                        style={[styles.headerValueItems, { color: theme.colors.spending }]}
-                    >{`$${totals.spending}`}</Text>
-                    <Text
-                        style={[
-                            styles.headerValueItems,
-                            {
-                                color: total < 0 ? theme.colors.spending : theme.colors.income,
-                            },
-                        ]}
-                    >{`$${Math.abs(total)}`}</Text>
+                    <Text style={[styles.headerValueItems, { color: theme.colors.investment }]}>
+                        ${totals.investments}
+                    </Text>
+                    <Text style={[styles.headerValueItems, { color: theme.colors.income }]}>
+                        ${totals.income}
+                    </Text>
+                    <Text style={[styles.headerValueItems, { color: theme.colors.spending }]}>
+                        ${totals.spending}
+                    </Text>
+                    <Text style={[styles.headerValueItems, { color: total < 0 ? theme.colors.spending : theme.colors.income }]}>
+                        {`$${Math.abs(total)}`}
+                    </Text>
                 </View>
             </View>
 
@@ -137,8 +124,8 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     headerValueItems: {
-        width: 55,
         textAlign: "right",
+        paddingLeft: 5
     },
     header: {
         flexDirection: "row",
@@ -156,6 +143,9 @@ const styles = StyleSheet.create({
     transaction: {
         flexDirection: "row",
         justifyContent: "space-between",
+        paddingVertical: 5,
+        paddingHorizontal: 5,
+        paddingRight: 5
     },
     modalFields: {
         flexDirection: "row",

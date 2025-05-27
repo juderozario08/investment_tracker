@@ -1,7 +1,6 @@
 import { KeyboardAvoidingView, Modal, StyleSheet, TouchableOpacity, View } from "react-native";
 import { X } from "react-native-feather";
 import { ReactNode } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import { useTheme } from "../theming";
 
 const ThemedModal: React.FC<{
@@ -19,7 +18,7 @@ const ThemedModal: React.FC<{
                 setIsVisible(!isVisible);
             }}>
             <KeyboardAvoidingView style={[styles.centeredView]}>
-                <SafeAreaView style={[styles.modalView, { backgroundColor: theme.colors.muted }]}>
+                <View style={[styles.modalView, { backgroundColor: theme.colors.muted }]}>
                     {/* Close Modal Button */}
                     <View style={{ position: 'absolute', right: 0, top: 0, padding: 15 }}>
                         <TouchableOpacity
@@ -28,7 +27,7 @@ const ThemedModal: React.FC<{
                         </TouchableOpacity>
                     </View>
                     {children}
-                </SafeAreaView>
+                </View>
             </KeyboardAvoidingView>
         </Modal>
     )
