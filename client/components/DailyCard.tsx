@@ -1,42 +1,87 @@
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, Pressable } from "react-native";
 import { useTheme } from "../theming";
-import { Days, DefaultTransactionValues, getDefaultTransactionValue } from "../library/constants";
+import { Days, getDefaultTransactionValue } from "../library/constants";
 import type { TransactionDataType } from "../library/types";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 import { TransactionModal } from "./TransactionModal";
 import { Theme } from "../theming/types";
 import { useDataContext } from "../context/DataContext";
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import { SharedValue } from "react-native-reanimated/lib/typescript/Animated";
+import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Reanimated from "react-native-reanimated";
+import { Trash } from "react-native-feather";
 
 const TransactionItem: React.FC<{
     setDetails: React.Dispatch<React.SetStateAction<TransactionDataType>>,
     setIsVisible: React.Dispatch<React.SetStateAction<boolean>>,
     transaction: TransactionDataType,
+    removeTransaction: (id: string) => void,
     theme: Theme
-}> = ({ setDetails, transaction, setIsVisible, theme }) => {
+}> = ({ setDetails, transaction, setIsVisible, theme, removeTransaction }) => {
+
+    const opacity = useSharedValue(1);
+    const opacityAnimatedStyle = useAnimatedStyle(() => ({
+        opacity: opacity.value
+    }))
+
+    const renderRightActions = (_: SharedValue<number>, drag: SharedValue<number>) => {
+        const styleAnimation = useAnimatedStyle(() => {
+            return { transform: [{ translateX: drag.value + 25 }] }
+        })
+        return (
+            <Reanimated.View style={styleAnimation}>
+                <TouchableOpacity
+                    style={{
+                        backgroundColor: 'red',
+                        paddingHorizontal: 2,
+                        height: '100%',
+                        justifyContent: 'center',
+                        borderRadius: 5,
+                    }}
+                    onPress={() => removeTransaction(transaction.id)}>
+                    <Trash stroke={'white'} />
+                </TouchableOpacity>
+            </Reanimated.View>
+        )
+    };
+
     return (
-        <TouchableOpacity
-            style={[styles.transaction]}
-            onPress={() => {
-                setDetails(transaction);
-                setIsVisible(true);
-            }}
-        >
-            <View style={{ flexDirection: "row" }}>
-                <Text style={[{ color: theme.colors.text, width: 100 }]}>
-                    {transaction.tag}
-                </Text>
-                <Text style={[{ color: theme.colors.text, width: 100 }]}>
-                    {transaction.name}
-                </Text>
-            </View>
-            <Text
-                style={[{
-                    color: transaction.category === 'spending' ?
-                        theme.colors.spending : transaction.category === 'income' ?
-                            theme.colors.income : theme.colors.investment
-                }]}
-            >{`$${transaction.amount}`}</Text>
-        </TouchableOpacity>
+        <ReanimatedSwipeable
+            renderRightActions={renderRightActions}
+            friction={2}>
+            <Animated.View style={opacityAnimatedStyle}>
+                <Pressable
+                    style={styles.transaction}
+                    onPressIn={() => {
+                        opacity.value = withTiming(0.4, { duration: 100 });
+                    }}
+                    onPressOut={() => {
+                        opacity.value = withTiming(1, { duration: 100 });
+                    }}
+                    onPress={() => {
+                        setDetails(transaction);
+                        setIsVisible(true);
+                    }}>
+                    <View style={{ flexDirection: "row" }}>
+                        <Text style={[{ color: theme.colors.text, width: 100 }]}>
+                            {transaction.tag}
+                        </Text>
+                        <Text style={[{ color: theme.colors.text, width: 100 }]}>
+                            {transaction.name}
+                        </Text>
+                    </View>
+                    <Text
+                        style={[{
+                            color: transaction.category === 'spending' ?
+                                theme.colors.spending : transaction.category === 'income' ?
+                                    theme.colors.income : theme.colors.investment
+                        }]}
+                    >{`$${transaction.amount}`}</Text>
+                </Pressable>
+            </Animated.View>
+        </ReanimatedSwipeable>
     )
 }
 
@@ -91,13 +136,15 @@ export const DailyCard: React.FC<{
             </View>
 
             {/* Transactions */}
-            <View style={{ paddingTop: 10, gap: 10 }}>
+            <GestureHandlerRootView style={{ paddingTop: 10 }}>
                 {transactions.map((transaction, idx) => (
-                    <TransactionItem key={idx}
+                    <TransactionItem
+                        key={idx}
                         setDetails={setDetails}
                         setIsVisible={setIsVisible}
                         transaction={transaction}
                         theme={theme}
+                        removeTransaction={removeTransaction}
                     />
                 ))}
                 <TransactionModal
@@ -107,7 +154,7 @@ export const DailyCard: React.FC<{
                         editTransaction(details);
                         setIsVisible(false);
                     }} />
-            </View>
+            </GestureHandlerRootView>
         </View >
     );
 };
@@ -121,7 +168,7 @@ const styles = StyleSheet.create({
     },
     headerValueItems: {
         textAlign: "right",
-        paddingLeft: 5,
+        paddingLeft: 8,
     },
     header: {
         flexDirection: "row",
@@ -139,9 +186,9 @@ const styles = StyleSheet.create({
     transaction: {
         flexDirection: "row",
         justifyContent: "space-between",
-        paddingVertical: 5,
-        paddingHorizontal: 5,
-        paddingRight: 5
+        alignItems: 'center',
+        height: 30,
+        paddingHorizontal: 10
     },
     modalFields: {
         flexDirection: "row",
