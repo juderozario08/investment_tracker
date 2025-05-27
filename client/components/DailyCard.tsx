@@ -121,8 +121,7 @@ const styles = StyleSheet.create({
     },
     headerValueItems: {
         textAlign: "right",
-        paddingLeft: 5
-        paddingLeft: 5
+        paddingLeft: 5,
     },
     header: {
         flexDirection: "row",
