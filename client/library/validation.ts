@@ -1,4 +1,4 @@
-import { TransactionInvestTagOptions, TransactionSpendingTagOptions, TransactionIncomeTagOptions } from "../constants";
+import { TransactionInvestTagOptions, TransactionSpendingTagOptions, TransactionIncomeTagOptions } from "./constants";
 
 export const validateCategory = (category: string) => {
     return category === 'spending' || category === 'income' || category === 'investment'
