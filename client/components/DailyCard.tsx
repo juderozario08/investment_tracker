@@ -6,10 +6,10 @@ import { useState } from "react";
 import { TransactionModal } from "./TransactionModal";
 import { Theme } from "../theming/types";
 import { useDataContext } from "../context/DataContext";
-import { useAnimatedStyle } from "react-native-reanimated";
+import { runOnJS, useAnimatedStyle } from "react-native-reanimated";
 import { SharedValue } from "react-native-reanimated";
 import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
 import Reanimated from "react-native-reanimated";
 import { Trash } from "react-native-feather";
 import { FadingPressable } from "./FadingPressable";
@@ -23,24 +23,26 @@ const TransactionItem: React.FC<{
 }> = ({ setDetails, transaction, setIsVisible, theme, removeTransaction }) => {
 
     const renderRightActions = (_: SharedValue<number>, drag: SharedValue<number>) => {
-        const styleAnimation = useAnimatedStyle(() => {
-            return { transform: [{ translateX: drag.value + 25 }] }
+        'worklet';
+        const animatedStyles = useAnimatedStyle(() => {
+            return { transform: [{ translateX: drag.value + 40 }] }
         })
         return (
-            <Reanimated.View style={styleAnimation}>
-                <TouchableOpacity
+            <Reanimated.View style={animatedStyles}>
+                <FadingPressable
                     style={{
                         backgroundColor: 'red',
-                        paddingHorizontal: 2,
+                        paddingHorizontal: 10,
                         height: '100%',
                         justifyContent: 'center',
                         borderRadius: 5,
                     }}
-                    onPress={() => removeTransaction(transaction.id)}>
-                    <Trash stroke={'white'} />
-                </TouchableOpacity>
+                    onPress={() => runOnJS(removeTransaction)(transaction.id)}
+                >
+                    <Trash stroke="white" />
+                </FadingPressable>
             </Reanimated.View>
-        )
+        );
     };
 
     return (
