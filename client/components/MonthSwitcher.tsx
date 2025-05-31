@@ -3,23 +3,19 @@ import { useTheme } from "../theming"
 import { ChevronLeft, ChevronRight } from "react-native-feather";
 import React from "react";
 import { Months } from "../library/constants";
+import { useDateContext } from "../context/DateContext";
 
-interface MonthSwitcherProps {
-    dateState: { month: number; year: number };
-    prevMonth: () => void;
-    nextMonth: () => void;
-}
-
-export const MonthSwitcher: React.FC<MonthSwitcherProps> = ({ dateState, prevMonth, nextMonth }) => {
+export const MonthSwitcher = () => {
     const theme = useTheme();
+    const { date, nextMonth, prevMonth } = useDateContext();
     return (
         <View style={[styles.flex, { paddingLeft: 10, paddingRight: 10 }]}>
             <TouchableOpacity onPress={prevMonth}>
                 <ChevronLeft color={theme.colors.text} />
             </TouchableOpacity>
-            <Text style={[{ color: theme.colors.text, marginTop: 2 }, styles.text]}>{`${Months[dateState.month]} ${dateState.year}`}</Text>
+            <Text style={[{ color: theme.colors.text, marginTop: 2 }, styles.text]}>{`${Months[date.getMonth()]} ${date.getFullYear()}`}</Text>
             {
-                new Date().getUTCMonth() === dateState.month && new Date().getUTCFullYear() === dateState.year ? null : (
+                new Date().getUTCMonth() === date.getMonth() && new Date().getUTCFullYear() === date.getFullYear() ? null : (
                     <TouchableOpacity onPress={nextMonth}>
                         <ChevronRight color={theme.colors.text} />
                     </TouchableOpacity>

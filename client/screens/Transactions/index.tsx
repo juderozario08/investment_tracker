@@ -13,6 +13,7 @@ import { TopMenu } from '../../components/TopMenu';
 import { MonthSwitcher } from '../../components/MonthSwitcher';
 import { useDataContext } from '../../context/DataContext';
 import { getDefaultTransactionValue } from '../../library/constants';
+import { useDateContext } from '../../context/DateContext';
 
 // Organizing all the data to group by date
 const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType[]> => {
@@ -41,10 +42,7 @@ export const Transactions = () => {
 
     const { data, addTransaction } = useDataContext();
 
-    const [dateState, setDateState] = useState({
-        month: new Date().getMonth(),
-        year: new Date().getFullYear()
-    })
+    const { date, setDate, prevMonth, nextMonth } = useDateContext()
 
     const [investing, setInvestment] = useState<number>(0);
     const [spending, setSpending] = useState<number>(0);
@@ -56,47 +54,12 @@ export const Transactions = () => {
 
     const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue());
 
-    const prevMonth = () => {
-        setDateState(({ month, year }) => {
-            let newMonth = month - 1;
-            let newYear = year;
-
-            if (newMonth < 0) {
-                newMonth = 11;
-                newYear -= 1;
-            }
-
-            return { month: newMonth, year: newYear };
-        });
-    };
-
-    const nextMonth = () => {
-        const currentDate = new Date();
-
-        setDateState(({ month, year }) => {
-            let newMonth = month + 1;
-            let newYear = year;
-
-            if (newMonth > 11) {
-                newMonth = 0;
-                newYear += 1;
-            }
-
-            const newDate = new Date(newYear, newMonth);
-            if (newDate <= currentDate) {
-                return { month: newMonth, year: newYear };
-            }
-
-            return { month, year };
-        });
-    };
-
     const setAmounts = () => {
         let totalInvestment = 0;
         let totalSpending = 0;
         let totalIncome = 0;
         for (const d of sortedDateArray) {
-            if (d.getMonth() === dateState.month && d.getFullYear() === dateState.year) {
+            if (d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear()) {
                 const transactions = groupedByDate.get(d);
                 if (transactions) {
                     for (const t of transactions) {
@@ -133,24 +96,20 @@ export const Transactions = () => {
         } else {
             setAmounts();
         }
-    }, [dateState.month, dateState.year, groupedByDate]);
+    }, [date, groupedByDate]);
 
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
             {/* Tob Bar */}
             <TopMenu>
-                <MonthSwitcher
-                    dateState={dateState}
-                    prevMonth={prevMonth}
-                    nextMonth={nextMonth}
-                />
+                <MonthSwitcher />
                 <MonthSummary amounts={{ investing, income, spending }} />
             </TopMenu>
 
             {/* Daily Transaction Cards Per Month */}
             <GestureScrollView onLeftSwipe={nextMonth} onRightSwipe={prevMonth}>
                 {sortedDateArray.map((val, idx) => {
-                    return val.getMonth() === dateState.month && val.getFullYear() === dateState.year ? (
+                    return val.getMonth() === date.getMonth() && val.getFullYear() === date.getFullYear() ? (
                         <DailyCard
                             key={idx}
                             transactions={groupedByDate.get(val) || []}
