@@ -1,14 +1,14 @@
 import { SetStateAction, useEffect, useMemo, useState } from "react";
-import { Theme } from "../theming/types";
 import { TransactionCategoryOptions, TransactionIncomeTagOptions, TransactionInvestTagOptions, TransactionSpendingTagOptions } from "../library/constants";
 import ThemedModal from "./ThemedModal";
-import { View, StyleSheet, Text, TouchableOpacity, TextInput } from "react-native";
+import { View, StyleSheet, Text, TextInput } from "react-native";
 import { SingleDatePicker } from "./SingleDatePicker";
 import { ThemedDropdown } from "./ThemedDropdown";
 import { validateAmount, validateCategory, validateName, validateTag, } from "../library/validation";
 import { TransactionDataType } from "../library/types";
 import { TimePicker } from "./TimePicker";
 import { useTheme } from "../theming";
+import { FadingPressable } from "./FadingPressable";
 
 interface TransactionModalProps {
     isVisibleState: [boolean, React.Dispatch<SetStateAction<boolean>>];
@@ -62,12 +62,12 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
             {/* Date & Time Section */}
             <View style={styles.modalFields}>
                 <Text style={[styles.modalText, { color: theme.colors.text }]}>Date:</Text>
-                <TouchableOpacity style={{ marginTop: 10, marginRight: 5 }} onPress={() => setOpen(true)}>
+                <FadingPressable style={{ marginTop: 10, marginRight: 5 }} onPress={() => setOpen(true)}>
                     <Text style={{ color: theme.colors.text }}>{getFormattedDate(details.date)}</Text>
-                </TouchableOpacity>
-                <TouchableOpacity style={{ marginTop: 10, marginLeft: 5 }} onPress={() => setVisible(true)}>
+                </FadingPressable>
+                <FadingPressable style={{ marginTop: 10, marginLeft: 5 }} onPress={() => setVisible(true)}>
                     <Text style={{ color: theme.colors.text }}>{getFormattedTime(details.date)}</Text>
-                </TouchableOpacity>
+                </FadingPressable>
                 <SingleDatePicker
                     visible={open}
                     setOpen={setOpen}
@@ -175,7 +175,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
             {!errors.amount && details.amount && <Text style={{ color: "red" }}>Check amount</Text>}
 
             {/* Submit Button */}
-            <TouchableOpacity
+            <FadingPressable
                 style={{
                     backgroundColor: theme.colors.primary,
                     borderRadius: 10,
@@ -189,7 +189,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
                 <Text style={{ color: theme.colors.text, textAlign: "center", fontSize: 16 }}>
                     Submit
                 </Text>
-            </TouchableOpacity>
+            </FadingPressable>
         </ThemedModal>
     );
 };

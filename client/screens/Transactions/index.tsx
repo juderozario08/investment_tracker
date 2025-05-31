@@ -14,6 +14,7 @@ import { MonthSwitcher } from '../../components/MonthSwitcher';
 import { useDataContext } from '../../context/DataContext';
 import { getDefaultTransactionValue } from '../../library/constants';
 import { useDateContext } from '../../context/DateContext';
+import { FadingPressable } from '../../components/FadingPressable';
 
 // Organizing all the data to group by date
 const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType[]> => {
@@ -120,7 +121,7 @@ export const Transactions = () => {
             </GestureScrollView>
 
             {/* Add transaction button */}
-            <TouchableOpacity
+            <FadingPressable
                 style={{
                     position: "absolute",
                     right: 10,
@@ -134,7 +135,7 @@ export const Transactions = () => {
                     width={50}
                     height={50}
                 />
-            </TouchableOpacity>
+            </FadingPressable>
             <TransactionModal
                 isVisibleState={[isVisible, setIsVisible]}
                 detailsState={[details, setDetails]}

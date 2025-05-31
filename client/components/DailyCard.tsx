@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TouchableOpacity, Pressable } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { useTheme } from "../theming";
 import { Days, getDefaultTransactionValue } from "../library/constants";
 import type { TransactionDataType } from "../library/types";

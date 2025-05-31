@@ -1,7 +1,8 @@
-import { KeyboardAvoidingView, Modal, StyleSheet, TouchableOpacity, View } from "react-native";
+import { KeyboardAvoidingView, Modal, StyleSheet, View } from "react-native";
 import { X } from "react-native-feather";
 import { ReactNode } from "react";
 import { useTheme } from "../theming";
+import { FadingPressable } from "./FadingPressable";
 
 const ThemedModal: React.FC<{
     isVisible: boolean;
@@ -21,10 +22,10 @@ const ThemedModal: React.FC<{
                 <View style={[styles.modalView, { backgroundColor: theme.colors.muted }]}>
                     {/* Close Modal Button */}
                     <View style={{ position: 'absolute', right: 0, top: 0, padding: 15 }}>
-                        <TouchableOpacity
+                        <FadingPressable
                             onPress={() => setIsVisible(!isVisible)}>
                             <X color={'grey'} width={20} style={{ padding: 5 }} />
-                        </TouchableOpacity>
+                        </FadingPressable>
                     </View>
                     {children}
                 </View>
