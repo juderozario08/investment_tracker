@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { TransactionDataType } from '../../library/types';
 import { styles } from './styles'
-import { TouchableOpacity } from 'react-native';
 import { useTheme } from '../../theming';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TransactionModal } from '../../components/TransactionModal';
@@ -20,9 +19,9 @@ import { FadingPressable } from '../../components/FadingPressable';
 const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType[]> => {
     const map = new Map<string, { key: Date; items: TransactionDataType[] }>();
     for (const tx of data) {
-        const year = tx.date.getUTCFullYear();
-        const month = tx.date.getUTCMonth();
-        const day = tx.date.getUTCDate();
+        const year = tx.date.getFullYear();
+        const month = tx.date.getMonth();
+        const day = tx.date.getDate();
 
         const normalizedKey = `${year}-${month}-${day}`;
 
@@ -43,7 +42,7 @@ export const Transactions = () => {
 
     const { data, addTransaction } = useDataContext();
 
-    const { date, setDate, prevMonth, nextMonth } = useDateContext()
+    const { date, prevMonth, nextMonth } = useDateContext()
 
     const [investing, setInvestment] = useState<number>(0);
     const [spending, setSpending] = useState<number>(0);
@@ -60,7 +59,7 @@ export const Transactions = () => {
         let totalSpending = 0;
         let totalIncome = 0;
         for (const d of sortedDateArray) {
-            if (d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear()) {
+            if (d.getMonth() === date.getMonth() && d.getUTCFullYear() === date.getUTCFullYear()) {
                 const transactions = groupedByDate.get(d);
                 if (transactions) {
                     for (const t of transactions) {

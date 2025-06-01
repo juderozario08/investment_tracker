@@ -9,7 +9,7 @@ import { useDataContext } from "../context/DataContext";
 import { runOnJS, useAnimatedStyle } from "react-native-reanimated";
 import { SharedValue } from "react-native-reanimated";
 import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
-import { GestureHandlerRootView, RectButton } from "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Reanimated from "react-native-reanimated";
 import { Trash } from "react-native-feather";
 import { FadingPressable } from "./FadingPressable";

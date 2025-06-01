@@ -50,8 +50,8 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
         setErrors((prev) => ({ ...prev, [key]: isValid }));
     };
 
-    const getFormattedDate = (d: Date) => `${d.getUTCDate()}/${d.getUTCMonth() + 1}/${d.getUTCFullYear()}`;
-    const getFormattedTime = (d: Date) => `${d.getHours().toString().padStart(2, "0")}:${d.getMinutes().toString().padStart(2, "0")}`;
+    const getFormattedDate = (d: Date) => `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
+    const getFormattedTime = (d: Date) => `${d.getUTCHours().toString().padStart(2, "0")}:${d.getUTCMinutes().toString().padStart(2, "0")}`;
 
     useEffect(() => {
         handleUpdate("tag", details.tag);

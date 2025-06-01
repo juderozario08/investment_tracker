@@ -16,7 +16,7 @@ export const MonthSwitcher = () => {
             </FadingPressable>
             <Text style={[{ color: theme.colors.text, marginTop: 2 }, styles.text]}>{`${Months[date.getMonth()]} ${date.getFullYear()}`}</Text>
             {
-                new Date().getUTCMonth() === date.getMonth() && new Date().getUTCFullYear() === date.getFullYear() ? null : (
+                new Date().getMonth() === date.getMonth() && new Date().getFullYear() === date.getFullYear() ? null : (
                     <FadingPressable onPress={nextMonth}>
                         <ChevronRight color={theme.colors.text} />
                     </FadingPressable>
