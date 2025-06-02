@@ -9,10 +9,10 @@ import { useDataContext } from "../context/DataContext";
 import { runOnJS, useAnimatedStyle } from "react-native-reanimated";
 import { SharedValue } from "react-native-reanimated";
 import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
 import Reanimated from "react-native-reanimated";
 import { Trash } from "react-native-feather";
 import { FadingPressable } from "./FadingPressable";
+import { ScrollView } from "react-native-gesture-handler";
 
 const TransactionItem: React.FC<{
     setDetails: React.Dispatch<React.SetStateAction<TransactionDataType>>,
@@ -124,7 +124,7 @@ export const DailyCard: React.FC<{
             </View>
 
             {/* Transactions */}
-            <GestureHandlerRootView style={{ paddingTop: 10 }}>
+            <ScrollView style={{ paddingTop: 10 }}>
                 {transactions.map((transaction, idx) => (
                     <TransactionItem
                         key={idx}
@@ -142,7 +142,7 @@ export const DailyCard: React.FC<{
                         editTransaction(details);
                         setIsVisible(false);
                     }} />
-            </GestureHandlerRootView>
+            </ScrollView>
         </View >
     );
 };

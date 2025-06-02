@@ -23,7 +23,7 @@ export const AppNavigator = () => {
             tabBarStyle: { backgroundColor: theme.colors.tabBarBackground },
             tabBarActiveTintColor: String(theme.colors.tabBarActive),
             tabBarInactiveTintColor: String(theme.colors.tabBarInactive)
-        }} initialRouteName="Transactions">
+        }} initialRouteName="Calendar">
             <Tab.Screen name='Transactions' component={Transactions} options={{
                 tabBarIcon: ({ focused }) =>
                     <BookOpen color={getTabColor(focused)} />

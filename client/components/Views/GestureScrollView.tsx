@@ -1,4 +1,4 @@
-import { GestureHandlerRootView, ScrollView } from "react-native-gesture-handler";
+import { ScrollView } from "react-native-gesture-handler";
 import { ReactNode, useRef } from "react";
 import { PanResponder } from "react-native";
 
@@ -28,11 +28,9 @@ export const GestureScrollView: React.FC<{
     ).current;
 
     return (
-        <GestureHandlerRootView>
-            <ScrollView {...panResponder.panHandlers} style={{ padding: 10 }}>
-                {children}
-            </ScrollView>
-        </GestureHandlerRootView>
+        <ScrollView {...panResponder.panHandlers} style={{ padding: 10 }}>
+            {children}
+        </ScrollView>
 
     )
 }

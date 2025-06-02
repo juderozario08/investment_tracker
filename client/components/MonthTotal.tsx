@@ -1,15 +1,11 @@
 import { View, Text, StyleSheet } from "react-native"
 import { useTheme } from "../theming";
+import { useDataContext } from "../context/DataContext";
 
-export const MonthSummary: React.FC<{
-    amounts: {
-        investing: number;
-        income: number;
-        spending: number;
-    }
-}> = ({ amounts }) => {
+export const MonthSummary = () => {
     const theme = useTheme();
-    const total = amounts.income - amounts.spending;
+    const { monthlyAmounts } = useDataContext();
+    const total = monthlyAmounts.income - monthlyAmounts.spending;
     return (
         <View style={{
             flexDirection: 'row',
@@ -25,15 +21,15 @@ export const MonthSummary: React.FC<{
         }}>
             <View style={styles.categoryTotalView}>
                 <Text style={[{ color: theme.colors.text }]}>Investing</Text>
-                <Text style={[{ color: theme.colors.investment }]}>${amounts.investing}</Text>
+                <Text style={[{ color: theme.colors.investment }]}>${monthlyAmounts.investments}</Text>
             </View>
             <View style={styles.categoryTotalView}>
                 <Text style={[{ color: theme.colors.text }]}>Income</Text>
-                <Text style={[{ color: theme.colors.income }]}>${amounts.income}</Text>
+                <Text style={[{ color: theme.colors.income }]}>${monthlyAmounts.income}</Text>
             </View>
             <View style={styles.categoryTotalView}>
                 <Text style={[{ color: theme.colors.text }]}>Spending</Text>
-                <Text style={[{ color: theme.colors.spending }]}>${amounts.spending}</Text>
+                <Text style={[{ color: theme.colors.spending }]}>${monthlyAmounts.spending}</Text>
             </View>
             <View style={styles.categoryTotalView}>
                 <Text style={[{ color: theme.colors.text }]}>Total</Text>

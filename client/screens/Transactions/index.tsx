@@ -39,71 +39,18 @@ const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType
 
 export const Transactions = () => {
     const theme = useTheme();
-
-    const { data, addTransaction } = useDataContext();
-
+    const { addTransaction, groupedByDate, sortedDateArray } = useDataContext();
     const { date, prevMonth, nextMonth } = useDateContext()
 
-    const [investing, setInvestment] = useState<number>(0);
-    const [spending, setSpending] = useState<number>(0);
-    const [income, setIncome] = useState<number>(0);
     const [isVisible, setIsVisible] = useState<boolean>(false);
-
-    const [groupedByDate, setGroupedByDate] = useState(new Map<Date, TransactionDataType[]>());
-    const [sortedDateArray, setSortedDateArray] = useState<Date[]>([]);
-
     const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue());
-
-    const setAmounts = () => {
-        let totalInvestment = 0;
-        let totalSpending = 0;
-        let totalIncome = 0;
-        for (const d of sortedDateArray) {
-            if (d.getMonth() === date.getMonth() && d.getUTCFullYear() === date.getUTCFullYear()) {
-                const transactions = groupedByDate.get(d);
-                if (transactions) {
-                    for (const t of transactions) {
-                        if (t.category === "spending") totalSpending += Number(t.amount);
-                        else if (t.category === "investment") totalInvestment += Number(t.amount);
-                        else totalIncome += Number(t.amount);
-                    }
-                }
-            }
-        }
-        setSpending(totalSpending);
-        setInvestment(totalInvestment);
-        setIncome(totalIncome);
-    };
-
-    const hasInitialized = useRef<boolean>(false);
-
-    /* Setting date groups */
-    useEffect(() => {
-        const grouped = groupByDate(data);
-        setGroupedByDate(grouped);
-
-        const sorted = Array.from(grouped.keys()).sort((a, b) => b.getTime() - a.getTime());
-        setSortedDateArray(sorted);
-    }, [data]);
-
-    /* Setting total amounts each time months or data changes */
-    useEffect(() => {
-        if (!hasInitialized.current) {
-            if (groupedByDate.size > 0) {
-                setAmounts();
-                hasInitialized.current = true;
-            }
-        } else {
-            setAmounts();
-        }
-    }, [date, groupedByDate]);
 
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
             {/* Tob Bar */}
             <TopMenu>
                 <MonthSwitcher />
-                <MonthSummary amounts={{ investing, income, spending }} />
+                <MonthSummary />
             </TopMenu>
 
             {/* Daily Transaction Cards Per Month */}

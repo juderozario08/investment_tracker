@@ -13,6 +13,7 @@
     "@react-navigation/bottom-tabs": "^7.3.13",
     "@react-navigation/native": "^7.1.9",
     "date-fns": "^4.1.0",
+    "hermes-engine": "^0.11.0",
     "react": "19.0.0",
     "react-native": "0.79.2",
     "react-native-date-picker": "^5.0.12",
