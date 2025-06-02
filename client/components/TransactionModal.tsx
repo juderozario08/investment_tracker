@@ -6,9 +6,9 @@ import { SingleDatePicker } from "./SingleDatePicker";
 import { ThemedDropdown } from "./ThemedDropdown";
 import { validateAmount, validateCategory, validateName, validateTag, } from "../library/validation";
 import { TransactionDataType } from "../library/types";
-import { TimePicker } from "./TimePicker";
 import { useTheme } from "../theming";
 import { FadingPressable } from "./FadingPressable";
+import { Calendar } from "react-native-feather";
 
 interface TransactionModalProps {
     isVisibleState: [boolean, React.Dispatch<SetStateAction<boolean>>];
@@ -27,7 +27,6 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
     const [details, setDetails] = detailsState;
 
     const [open, setOpen] = useState(false);
-    const [visible, setVisible] = useState(false);
 
     const [errors, setErrors] = useState({
         category: true,
@@ -51,7 +50,6 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
     };
 
     const getFormattedDate = (d: Date) => `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
-    const getFormattedTime = (d: Date) => `${d.getUTCHours().toString().padStart(2, "0")}:${d.getUTCMinutes().toString().padStart(2, "0")}`;
 
     useEffect(() => {
         handleUpdate("tag", details.tag);
@@ -62,23 +60,17 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
             {/* Date & Time Section */}
             <View style={styles.modalFields}>
                 <Text style={[styles.modalText, { color: theme.colors.text }]}>Date:</Text>
-                <FadingPressable style={{ marginTop: 10, marginRight: 5 }} onPress={() => setOpen(true)}>
-                    <Text style={{ color: theme.colors.text }}>{getFormattedDate(details.date)}</Text>
-                </FadingPressable>
-                <FadingPressable style={{ marginTop: 10, marginLeft: 5 }} onPress={() => setVisible(true)}>
-                    <Text style={{ color: theme.colors.text }}>{getFormattedTime(details.date)}</Text>
-                </FadingPressable>
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                    <Text style={{ color: theme.colors.text, marginRight: 10, marginTop: 5 }}>{getFormattedDate(details.date)}</Text>
+                    <FadingPressable onPress={() => { setOpen(true) }}>
+                        <Calendar color={'gray'} />
+                    </FadingPressable>
+                </View>
                 <SingleDatePicker
                     visible={open}
                     setOpen={setOpen}
                     setDate={(val: Date) => handleUpdate("date", val)}
                     date={details.date}
-                />
-                <TimePicker
-                    visible={visible}
-                    setVisible={setVisible}
-                    date={details.date}
-                    setDate={(val: Date) => handleUpdate("date", val)}
                 />
             </View>
 
