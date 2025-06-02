@@ -13,7 +13,6 @@ export const GestureScrollView: React.FC<{
             onMoveShouldSetPanResponder: (evt, gesture) => {
                 // Prevent conflict: don't set PanResponder if horizontal swipe starts on a Swipeable
                 const target = evt.target as any;
-                console.log(target?._internalFiberInstanceHandleDEV?.type?.name);
                 const isFromSwipeable = target?._internalFiberInstanceHandleDEV?.type?.name === 'Swipeable';
                 return !isFromSwipeable && Math.abs(gesture.dx) > Math.abs(gesture.dy);
             },
