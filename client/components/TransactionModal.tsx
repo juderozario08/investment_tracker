@@ -60,12 +60,10 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
             {/* Date & Time Section */}
             <View style={styles.modalFields}>
                 <Text style={[styles.modalText, { color: theme.colors.text }]}>Date:</Text>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                <FadingPressable style={{ flexDirection: "row", alignItems: "center" }} onPress={() => { setOpen(true) }}>
                     <Text style={{ color: theme.colors.text, marginRight: 10, marginTop: 5 }}>{getFormattedDate(details.date)}</Text>
-                    <FadingPressable onPress={() => { setOpen(true) }}>
-                        <Calendar color={'gray'} />
-                    </FadingPressable>
-                </View>
+                    <Calendar color={'gray'} />
+                </FadingPressable>
                 <SingleDatePicker
                     visible={open}
                     setOpen={setOpen}

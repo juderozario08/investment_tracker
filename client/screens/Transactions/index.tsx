@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { TransactionDataType } from '../../library/types';
 import { styles } from './styles'
 import { useTheme } from '../../theming';
@@ -7,7 +7,7 @@ import { TransactionModal } from '../../components/TransactionModal';
 import { PlusCircle } from 'react-native-feather';
 import { GestureScrollView } from '../../components/Views/GestureScrollView';
 import { DailyCard } from '../../components/DailyCard';
-import { MonthSummary } from '../../components/MonthTotal';
+import { MonthTotal } from '../../components/MonthTotal';
 import { TopMenu } from '../../components/TopMenu';
 import { MonthSwitcher } from '../../components/MonthSwitcher';
 import { useDataContext } from '../../context/DataContext';
@@ -15,52 +15,30 @@ import { getDefaultTransactionValue } from '../../library/constants';
 import { useDateContext } from '../../context/DateContext';
 import { FadingPressable } from '../../components/FadingPressable';
 
-// Organizing all the data to group by date
-const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType[]> => {
-    const map = new Map<string, { key: Date; items: TransactionDataType[] }>();
-    for (const tx of data) {
-        const year = tx.date.getFullYear();
-        const month = tx.date.getMonth();
-        const day = tx.date.getDate();
-
-        const normalizedKey = `${year}-${month}-${day}`;
-
-        if (!map.has(normalizedKey)) {
-            map.set(normalizedKey, { key: new Date(year, month, day), items: [] });
-        }
-        map.get(normalizedKey)!.items.push(tx);
-    }
-    const result = new Map<Date, TransactionDataType[]>();
-    for (const { key, items } of map.values()) {
-        result.set(key, items);
-    }
-    return result;
-};
-
 export const Transactions = () => {
     const theme = useTheme();
-    const { addTransaction, groupedByDate, sortedDateArray } = useDataContext();
-    const { date, prevMonth, nextMonth } = useDateContext()
-
+    const { addTransaction, groupedByDate } = useDataContext();
+    const { date, prevMonth, nextMonth } = useDateContext();
     const [isVisible, setIsVisible] = useState<boolean>(false);
-    const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue());
+    const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue(date));
 
     return (
         <SafeAreaView style={[styles.container, { backgroundColor: theme.colors.background }]}>
             {/* Tob Bar */}
             <TopMenu>
                 <MonthSwitcher />
-                <MonthSummary />
+                <MonthTotal />
             </TopMenu>
 
             {/* Daily Transaction Cards Per Month */}
-            <GestureScrollView onLeftSwipe={nextMonth} onRightSwipe={prevMonth}>
-                {sortedDateArray.map((val, idx) => {
-                    return val.getMonth() === date.getMonth() && val.getFullYear() === date.getFullYear() ? (
+            <GestureScrollView onLeftSwipe={nextMonth} onRightSwipe={prevMonth} style={{ padding: 10 }}>
+                {Array.from(groupedByDate.keys()).sort((a, b) => new Date(b).getTime() - new Date(a).getTime()).map((val, idx) => {
+                    const d = new Date(val);
+                    return d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear() ? (
                         <DailyCard
                             key={idx}
                             transactions={groupedByDate.get(val) || []}
-                            date={val}
+                            date={d}
                         />
                     ) : null;
                 })}
@@ -87,7 +65,7 @@ export const Transactions = () => {
                 detailsState={[details, setDetails]}
                 onSubmit={() => {
                     addTransaction(details);
-                    setDetails(getDefaultTransactionValue());
+                    setDetails(getDefaultTransactionValue(date));
                     setIsVisible(false);
                 }} />
         </SafeAreaView>

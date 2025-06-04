@@ -1,6 +1,6 @@
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from "uuid";
-import type { DropdownMenuType, TransactionDataType } from "../types";
+import type { DropdownMenuType, TransactionDataType } from "./types";
 
 export const Months: string[] = [
     "Jan",
@@ -53,14 +53,15 @@ export const TransactionInvestTagOptions: DropdownMenuType[] = [
     { label: "Savings", value: "Savings" }
 ];
 
-export const getDefaultTransactionValue = (): TransactionDataType => {
+export const getDefaultTransactionValue = (date: Date): TransactionDataType => {
+    const d = new Date(date.getFullYear(), date.getMonth(), new Date().getDate());
     return {
         id: uuidv4(),
         category: "spending",
         tag: "",
         name: "",
         amount: "",
-        date: new Date(),
+        date: d,
         note: ''
     }
 }

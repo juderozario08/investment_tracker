@@ -20,47 +20,34 @@ type DataContextType = {
     setData: React.Dispatch<React.SetStateAction<TransactionDataType[]>>;
     monthlyAmounts: AmountsType;
     setMonthlyAmounts: React.Dispatch<React.SetStateAction<AmountsType>>;
-    groupedByDate: Map<Date, TransactionDataType[]>,
-    setGroupedByDate: React.Dispatch<React.SetStateAction<Map<Date, TransactionDataType[]>>>;
-    sortedDateArray: Date[];
-    setSortedDateArray: React.Dispatch<React.SetStateAction<Date[]>>;
+    groupedByDate: Map<string, TransactionDataType[]>,
+    setGroupedByDate: React.Dispatch<React.SetStateAction<Map<string, TransactionDataType[]>>>;
     addTransaction: (t: TransactionDataType) => void;
     removeTransaction: (id: string) => void;
     editTransaction: (t: TransactionDataType) => void;
     clearTransaction: () => void;
 };
 
-// Organizing all the data to group by date
-const groupByDate = (data: TransactionDataType[]): Map<Date, TransactionDataType[]> => {
-    const map = new Map<string, { key: Date; items: TransactionDataType[] }>();
-    for (const tx of data) {
-        const year = tx.date.getFullYear();
-        const month = tx.date.getMonth();
-        const day = tx.date.getDate();
-
-        const normalizedKey = `${year}-${month}-${day}`;
-
-        if (!map.has(normalizedKey)) {
-            map.set(normalizedKey, { key: new Date(year, month, day), items: [] });
-        }
-        map.get(normalizedKey)!.items.push(tx);
-    }
-    const result = new Map<Date, TransactionDataType[]>();
-    for (const { key, items } of map.values()) {
-        result.set(key, items);
-    }
-    return result;
-};
-
 const Context = createContext<DataContextType | undefined>(undefined);
 
 export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [data, setData] = useState<TransactionDataType[]>([]);
+    const [groupedByDate, setGroupedByDate] = useState(new Map<string, TransactionDataType[]>());
+
     const { date } = useDateContext();
 
-    useEffect(() => {
-        setData(loadTransactionsFromStorage());
-    }, []);
+    // Organizing all the data to group by date
+    const groupByDate = (): Map<string, TransactionDataType[]> => {
+        const result: Map<string, TransactionDataType[]> = new Map<string, TransactionDataType[]>();
+        for (const transaction of data) {
+            const key = transaction.date.toString();
+            if (!result.has(key)) {
+                result.set(key, []);
+            }
+            result.get(key)!.push(transaction);
+        }
+        return result;
+    };
 
     const addTransaction = (t: TransactionDataType) => {
         addTransactionToStorage(t);
@@ -82,18 +69,16 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         setData([]);
     }
 
-    const [groupedByDate, setGroupedByDate] = useState(new Map<Date, TransactionDataType[]>());
-    const [sortedDateArray, setSortedDateArray] = useState<Date[]>([]);
-
     const hasInitialized = useRef<boolean>(false);
+
+    useEffect(() => {
+        setData(loadTransactionsFromStorage());
+    }, []);
 
     /* Setting date groups */
     useEffect(() => {
-        const grouped = groupByDate(data);
+        const grouped = groupByDate();
         setGroupedByDate(grouped);
-
-        const sorted = Array.from(grouped.keys()).sort((a, b) => b.getTime() - a.getTime());
-        setSortedDateArray(sorted);
     }, [data]);
 
     const [monthlyAmounts, setMonthlyAmounts] = useState<AmountsType>({
@@ -106,8 +91,9 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         let totalInvestment = 0;
         let totalSpending = 0;
         let totalIncome = 0;
-        for (const d of sortedDateArray) {
-            if (d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear()) {
+        for (const d of groupedByDate.keys()) {
+            const tempDate = new Date(d);
+            if (tempDate.getMonth() === date.getMonth() && tempDate.getFullYear() === date.getFullYear()) {
                 const transactions = groupedByDate.get(d);
                 if (transactions) {
                     for (const t of transactions) {
@@ -118,6 +104,9 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 }
             }
         }
+        console.log({
+            totalIncome, totalInvestment, totalSpending
+        })
         setMonthlyAmounts({
             income: totalIncome,
             investments: totalInvestment,
@@ -148,8 +137,6 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             clearTransaction,
             groupedByDate,
             setGroupedByDate,
-            sortedDateArray,
-            setSortedDateArray,
             monthlyAmounts,
             setMonthlyAmounts
         }}>

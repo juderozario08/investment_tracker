@@ -10,7 +10,10 @@ type DateContextType = {
 const Context = createContext<DateContextType | undefined>(undefined);
 
 export const DateProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [date, setDate] = useState<Date>(new Date());
+    const [date, setDate] = useState<Date>((() => {
+        const d = new Date();
+        return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0);
+    })());
 
     const prevMonth = () => {
         setDate((d) => {
@@ -39,8 +42,14 @@ export const DateProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
             }
 
             const newDate = new Date(newYear, newMonth);
-            if (newDate <= currentDate) {
+            if (newDate.getFullYear() < currentDate.getFullYear() ||
+                (newDate.getFullYear() === currentDate.getFullYear() &&
+                    newDate.getMonth() < currentDate.getMonth())) {
                 return new Date(newYear, newMonth);
+            }
+            if (newDate.getMonth() === currentDate.getMonth() &&
+                newDate.getFullYear() === currentDate.getFullYear()) {
+                return currentDate;
             }
 
             return d;

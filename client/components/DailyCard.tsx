@@ -97,7 +97,7 @@ export const DailyCard: React.FC<{
     const total = totals.income - totals.spending;
 
     const [isVisible, setIsVisible] = useState<boolean>(false);
-    const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue());
+    const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue(date));
 
     return (
         <View style={[{ backgroundColor: theme.colors.muted }, styles.container]}>

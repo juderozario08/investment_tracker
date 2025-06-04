@@ -1,11 +1,18 @@
 import { View, Text, StyleSheet } from "react-native"
 import { useTheme } from "../theming";
 import { useDataContext } from "../context/DataContext";
+import { useEffect, useState } from "react";
 
-export const MonthSummary = () => {
+export const MonthTotal = () => {
     const theme = useTheme();
     const { monthlyAmounts } = useDataContext();
-    const total = monthlyAmounts.income - monthlyAmounts.spending;
+    const [total, setTotal] = useState<number>();
+
+    useEffect(() => {
+        console.log(monthlyAmounts);
+        setTotal(monthlyAmounts.income - monthlyAmounts.spending);
+    }, [monthlyAmounts]);
+
     return (
         <View style={{
             flexDirection: 'row',
