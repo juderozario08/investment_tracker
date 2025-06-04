@@ -8,12 +8,14 @@ import { FadingPressable } from "../../components/FadingPressable";
 import { useDataContext } from "../../context/DataContext";
 import { Theme } from "../../theming/types";
 import { TransactionDataType } from "../../library/types";
-import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
-import { Days } from "../../library/constants";
+import Reanimated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
+import { Days, getDefaultTransactionValue } from "../../library/constants";
 import { springConfig } from "../../library/animationConfigs";
 import { X } from "react-native-feather";
 import { ScrollView } from "react-native-gesture-handler";
 import { GestureScrollView } from "../../components/Views/GestureScrollView";
+import { TransactionModal } from "../../components/TransactionModal";
+import { TransactionItem } from "../../components/TransactionItem";
 
 type AmountsType = {
     investments: number;
@@ -29,7 +31,6 @@ export const Calendar = () => {
 
     const [dates, setDates] = useState<number[]>([]);
     const [selectedDate, setSelectedDate] = useState<Date>(date);
-    const [transactionsOfSelectedDate, setTransactionsOfSelectedDate] = useState<TransactionDataType[]>([]);
     const [amounts, setAmounts] = useState<AmountsType[]>([]);
     const [visible, setVisible] = useState<boolean>(false);
 
@@ -89,8 +90,7 @@ export const Calendar = () => {
                             date={date}
                             idx={idx}
                             amount={val}
-                            setSelectedDate={setSelectedDate}
-                            rows={dates.length === 31 ? 6 : 5} />
+                            setSelectedDate={setSelectedDate} />
                     ))}
                 </View>
             </GestureScrollView>
@@ -118,7 +118,7 @@ const TransactionsFromSelectedDate: React.FC<{
     }));
     useEffect(() => {
         if (visible) {
-            translateY.value = withTiming(-35, { duration: ANIMATION_DURATION });
+            translateY.value = withTiming(0, { duration: ANIMATION_DURATION });
         }
     }, [visible]);
 
@@ -131,7 +131,7 @@ const TransactionsFromSelectedDate: React.FC<{
     }, [selectedDate, groupedByDate])
 
     return (
-        <Animated.View style={[
+        <Reanimated.View style={[
             {
                 backgroundColor: theme.colors.muted,
                 display: visible ? "flex" : "none",
@@ -163,35 +163,45 @@ const TransactionsFromSelectedDate: React.FC<{
             {
                 transactions.length === 0 ?
                     (<Text style={{ color: theme.colors.text, textAlign: "center" }}>No Transactions were recorded this day!</Text>)
-                    : (<TransactionsView theme={theme} transactions={transactions} />)
+                    : (<TransactionsView theme={theme} transactions={transactions} selectedDate={selectedDate} />)
             }
-        </Animated.View>
+        </Reanimated.View>
     );
 };
 
 const TransactionsView: React.FC<{
     theme: Theme;
     transactions: TransactionDataType[];
-}> = ({ theme, transactions }) => {
-    const screenWidth = Dimensions.get("screen").width;
+    selectedDate: Date;
+}> = ({ theme, transactions, selectedDate }) => {
+    const { removeTransaction } = useDataContext();
+    const [isVisible, setIsVisible] = useState<boolean>(false);
+    const [details, setDetails] = useState<TransactionDataType>(
+        getDefaultTransactionValue(selectedDate)
+    );
     return (
-        <ScrollView>
-            {
-                transactions.map((val, idx) => (
-                    <View key={idx} style={{ flexDirection: "row", justifyContent: "space-between" }}>
-                        <View style={{ flexDirection: "row" }}>
-                            <Text style={{ color: theme.colors.text, width: screenWidth / 4 }}>{val.name}</Text>
-                            <Text style={{ color: theme.colors.text, width: screenWidth / 4 }}>{val.tag}</Text>
-                        </View>
-                        <Text style={{
-                            color: val.category === "spending"
-                                ? theme.colors.spending : val.category === "income"
-                                    ? theme.colors.income : theme.colors.investment
-                        }}>${val.amount}</Text>
-                    </View>
-                ))
-            }
-        </ScrollView>
+        <View>
+            <ScrollView style={{
+                backgroundColor: theme.colors.background,
+                borderRadius: 10,
+                padding: 10
+            }}>
+                {
+                    transactions.map((val, idx) => (
+                        <TransactionItem
+                            key={idx}
+                            setDetails={setDetails}
+                            setIsVisible={setIsVisible}
+                            transaction={val}
+                            removeTransaction={removeTransaction} theme={theme} />
+                    ))
+                }
+                <TransactionModal
+                    isVisibleState={[isVisible, setIsVisible]}
+                    detailsState={[details, setDetails]}
+                    onSubmit={() => { }} />
+            </ScrollView>
+        </View>
     )
 }
 
@@ -202,11 +212,10 @@ const DailyReportBox: React.FC<{
     idx: number;
     amount: AmountsType;
     setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;
-    rows: number;
-}> = ({ theme, setVisible, date, idx, amount, setSelectedDate, rows }) => {
+}> = ({ theme, setVisible, date, idx, amount, setSelectedDate }) => {
 
     const screenWidth = Dimensions.get("window").width;
-    const screenHeight = Dimensions.get("window").height - 257;
+    const screenHeight = Dimensions.get("window").height;
     const scale = useSharedValue<number>(0);
     const animatedStyle = useAnimatedStyle(() => {
         'worklet'
@@ -234,11 +243,11 @@ const DailyReportBox: React.FC<{
     }
 
     return (
-        <Animated.View style={[animatedStyle]}>
+        <Reanimated.View style={[animatedStyle]}>
             <FadingPressable
                 style={[{
                     width: screenWidth / 6,
-                    height: screenHeight / rows,
+                    height: screenHeight / 6,
                     borderColor: isCurrentDate(idx) ? theme.colors.accent : 'gray',
                     borderWidth: 1.5,
                     backgroundColor: theme.colors.background,
@@ -267,6 +276,6 @@ const DailyReportBox: React.FC<{
                     <Text style={{ color: theme.colors.spending, textAlign: "center" }}>${amount.spending}</Text>
                 </View>
             </FadingPressable>
-        </Animated.View>
+        </Reanimated.View>
     )
 }
