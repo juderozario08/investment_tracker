@@ -30,8 +30,6 @@ export const DateProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     };
 
     const nextMonth = () => {
-        const currentDate = new Date();
-
         setDate((d) => {
             let newMonth = d.getMonth() + 1;
             let newYear = d.getFullYear();
@@ -41,18 +39,7 @@ export const DateProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 newYear += 1;
             }
 
-            const newDate = new Date(newYear, newMonth);
-            if (newDate.getFullYear() < currentDate.getFullYear() ||
-                (newDate.getFullYear() === currentDate.getFullYear() &&
-                    newDate.getMonth() < currentDate.getMonth())) {
-                return new Date(newYear, newMonth);
-            }
-            if (newDate.getMonth() === currentDate.getMonth() &&
-                newDate.getFullYear() === currentDate.getFullYear()) {
-                return currentDate;
-            }
-
-            return d;
+            return new Date(newYear, newMonth);
         });
     };
 

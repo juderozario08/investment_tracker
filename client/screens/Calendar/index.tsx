@@ -1,10 +1,7 @@
 import { Dimensions, View } from "react-native"
 import { useTheme } from "../../theming"
-import { SafeAreaView } from "react-native-safe-area-context";
 import { TopMenu } from "../../components/TopMenu";
-import { MonthTotal } from "../../components/MonthTotal";
 import { useEffect, useState } from "react";
-import { MonthSwitcher } from "../../components/MonthSwitcher";
 import { useDateContext } from "../../context/DateContext";
 import { Text } from "react-native";
 import { FadingPressable } from "../../components/FadingPressable";
@@ -13,10 +10,10 @@ import { Theme } from "../../theming/types";
 import { TransactionDataType } from "../../library/types";
 import Animated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
 import { Days } from "../../library/constants";
-import { GestureView } from "../../components/Views/GestureView";
 import { springConfig } from "../../library/animationConfigs";
 import { X } from "react-native-feather";
 import { ScrollView } from "react-native-gesture-handler";
+import { GestureScrollView } from "../../components/Views/GestureScrollView";
 
 type AmountsType = {
     investments: number;
@@ -79,13 +76,10 @@ export const Calendar = () => {
     }, [dates, groupedByDate]);
 
     return (
-        <SafeAreaView style={{ flex: 1, marginBottom: -35, backgroundColor: theme.colors.background }}>
+        <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
             {/* Tob Bar */}
-            <TopMenu>
-                <MonthSwitcher />
-                <MonthTotal />
-            </TopMenu>
-            <GestureView onLeftSwipe={nextMonth} onRightSwipe={prevMonth}>
+            <TopMenu />
+            <GestureScrollView onLeftSwipe={nextMonth} onRightSwipe={prevMonth}>
                 <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
                     {amounts.map((val, idx) => (
                         <DailyReportBox
@@ -99,13 +93,13 @@ export const Calendar = () => {
                             rows={dates.length === 31 ? 6 : 5} />
                     ))}
                 </View>
-            </GestureView>
+            </GestureScrollView>
             <TransactionsFromSelectedDate
                 visible={visible}
                 setVisible={setVisible}
                 selectedDate={selectedDate}
                 theme={theme} />
-        </SafeAreaView>
+        </View>
     )
 }
 
@@ -179,7 +173,7 @@ const TransactionsView: React.FC<{
     theme: Theme;
     transactions: TransactionDataType[];
 }> = ({ theme, transactions }) => {
-    const screenWidth = Dimensions.get("window").width;
+    const screenWidth = Dimensions.get("screen").width;
     return (
         <ScrollView>
             {
