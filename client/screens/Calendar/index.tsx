@@ -77,11 +77,17 @@ export const Calendar = () => {
     }, [dates, groupedByDate]);
 
     return (
-        <View style={{ flex: 1, backgroundColor: theme.colors.background }}>
+        <View style={{
+            flex: 1,
+            backgroundColor: theme.colors.background,
+        }}>
             {/* Tob Bar */}
             <TopMenu />
             <GestureScrollView onLeftSwipe={nextMonth} onRightSwipe={prevMonth}>
-                <View style={{ flexDirection: "row", flexWrap: "wrap" }}>
+                <View style={{
+                    flexDirection: "row",
+                    flexWrap: "wrap",
+                }}>
                     {amounts.map((val, idx) => (
                         <DailyReportBox
                             key={idx}
@@ -123,7 +129,9 @@ const TransactionsFromSelectedDate: React.FC<{
 
     const { removeTransaction, editTransaction } = useDataContext();
     const [isVisible, setIsVisible] = useState<boolean>(false);
-    const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue(selectedDate))
+    const [details, setDetails] = useState<TransactionDataType>(
+        getDefaultTransactionValue(selectedDate)
+    );
 
     useEffect(() => {
         if (!visible) return;
@@ -177,10 +185,18 @@ const TransactionsFromSelectedDate: React.FC<{
             </View>
             {
                 transactions.length === 0 ?
-                    <Text style={{
-                        color: theme.colors.text,
-                        textAlign: "center"
-                    }}>No Transactions were recorded this day!</Text>
+                    <View style={{
+                        backgroundColor: theme.colors.background,
+                        borderRadius: 10,
+                        padding: 10,
+                        marginTop: 10
+                    }}>
+                        <Text style={{
+                            textAlign: "center",
+                            color: theme.colors.text,
+                            fontSize: 16,
+                        }}>No Transactions were recorded this day!</Text>
+                    </View>
                     : <View>
                         <View style={{ paddingBottom: 20 }}>
                             <Text style={{
@@ -194,7 +210,6 @@ const TransactionsFromSelectedDate: React.FC<{
                             backgroundColor: theme.colors.background,
                             borderRadius: 10,
                             padding: 10,
-                            flexDirection: "column",
                             gap: 10,
                         }}>
                             {
