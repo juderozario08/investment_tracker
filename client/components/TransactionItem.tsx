@@ -3,8 +3,8 @@ import { TransactionDataType } from "../library/types";
 import { Theme } from "../theming/types";
 import { FadingPressable } from "./FadingPressable";
 import { Trash } from "react-native-feather";
-import ReanimatedSwipeable from "react-native-gesture-handler/ReanimatedSwipeable";
 import { Text, View } from "react-native";
+import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 
 export const TransactionItem: React.FC<{
     setDetails: React.Dispatch<React.SetStateAction<TransactionDataType>>,
@@ -15,37 +15,23 @@ export const TransactionItem: React.FC<{
 }> = ({ setDetails, transaction, setIsVisible, theme, removeTransaction }) => {
 
     const renderRightActions = (_: SharedValue<number>, drag: SharedValue<number>) => {
-        'worklet';
-        const animatedStyles = useAnimatedStyle(() => {
-            return { transform: [{ translateX: drag.value + 40 }] }
-        })
+        'worklet'
         return (
-            <Reanimated.View style={animatedStyles}>
-                <FadingPressable
-                    style={{
-                        backgroundColor: 'red',
-                        paddingHorizontal: 10,
-                        height: '100%',
-                        justifyContent: 'center',
-                        borderRadius: 5,
-                    }}
-                    onPress={() => runOnJS(removeTransaction)(transaction.id)}
-                >
-                    <Trash stroke="white" />
-                </FadingPressable>
-            </Reanimated.View>
+            <RightActions
+                drag={drag}
+                onPress={() => runOnJS(removeTransaction)(transaction.id)}
+            />
         );
     };
 
     return (
-        <ReanimatedSwipeable renderRightActions={renderRightActions} friction={2}>
+        <Swipeable renderRightActions={renderRightActions} friction={2}>
             <FadingPressable
                 style={{
                     flexDirection: "row",
                     justifyContent: "space-between",
                     alignItems: 'center',
-                    height: 30,
-                    paddingHorizontal: 10
+                    margin: 10,
                 }}
                 onPress={() => {
                     setDetails(transaction);
@@ -67,7 +53,29 @@ export const TransactionItem: React.FC<{
                     }]}
                 >{`$${transaction.amount}`}</Text>
             </FadingPressable>
-        </ReanimatedSwipeable>
+        </Swipeable>
     )
 }
 
+
+const RightActions = ({ drag, onPress }: { drag: SharedValue<number>, onPress: () => void }) => {
+    const animatedStyles = useAnimatedStyle(() => ({
+        transform: [{ translateX: drag.value + 40 }],
+    }));
+
+    return (
+        <Reanimated.View style={animatedStyles}>
+            <FadingPressable
+                style={{
+                    backgroundColor: 'red',
+                    justifyContent: 'center',
+                    borderRadius: 5,
+                    paddingVertical: 3
+                }}
+                onPress={onPress}
+            >
+                <Trash stroke="white" style={{ paddingHorizontal: 20 }} height={22} />
+            </FadingPressable>
+        </Reanimated.View>
+    );
+};

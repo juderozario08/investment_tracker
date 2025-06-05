@@ -8,8 +8,8 @@ import { FadingPressable } from "../../components/FadingPressable";
 import { useDataContext } from "../../context/DataContext";
 import { Theme } from "../../theming/types";
 import { TransactionDataType } from "../../library/types";
-import Reanimated, { useAnimatedStyle, useSharedValue, withSpring, withTiming } from "react-native-reanimated";
-import { Days, getDefaultTransactionValue } from "../../library/constants";
+import Reanimated, { runOnJS, useAnimatedStyle, useSharedValue, withDelay, withSequence, withSpring, withTiming } from "react-native-reanimated";
+import { Days, Months, getDefaultTransactionValue } from "../../library/constants";
 import { springConfig } from "../../library/animationConfigs";
 import { X } from "react-native-feather";
 import { ScrollView } from "react-native-gesture-handler";
@@ -112,47 +112,62 @@ const TransactionsFromSelectedDate: React.FC<{
 
     {/* Slide Animation */ }
     const ANIMATION_DURATION = 300;
-    const translateY = useSharedValue<number | `${number}%`>(100);
+    const translateY = useSharedValue<number>(500);
     const animatedStyle = useAnimatedStyle(() => ({
         transform: [{ translateY: translateY.value }]
     }));
-    useEffect(() => {
-        if (visible) {
-            translateY.value = withTiming(0, { duration: ANIMATION_DURATION });
-        }
-    }, [visible]);
 
     {/* Transactions based on Date */ }
     const { groupedByDate } = useDataContext();
     const [transactions, setTransactions] = useState<TransactionDataType[]>([]);
 
+    const { removeTransaction, editTransaction } = useDataContext();
+    const [isVisible, setIsVisible] = useState<boolean>(false);
+    const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue(selectedDate))
+
     useEffect(() => {
-        setTransactions(groupedByDate.get(selectedDate.toString()) ?? []);
+        if (!visible) return;
+
+        const updatedTransactions = groupedByDate.get(selectedDate.toString()) ?? [];
+        const updateTransactions = () => {
+            setTransactions(updatedTransactions);
+        };
+
+        translateY.value = withSequence(
+            withTiming(500, { duration: ANIMATION_DURATION }, (isFinished) => {
+                if (isFinished) {
+                    runOnJS(updateTransactions)();
+                }
+            }),
+            withTiming(0, { duration: ANIMATION_DURATION })
+        );
     }, [selectedDate, groupedByDate])
 
     return (
-        <Reanimated.View style={[
-            {
-                backgroundColor: theme.colors.muted,
-                display: visible ? "flex" : "none",
-                position: "absolute",
-                width: "100%",
-                bottom: 0,
-                borderTopRightRadius: 12,
-                borderTopLeftRadius: 12,
-                padding: 16,
-                paddingBottom: 30,
-                zIndex: 1000,
-                elevation: 5,
-                shadowColor: "#000",
-                shadowOpacity: 0.2,
-                shadowRadius: 10,
-            },
-            animatedStyle
-        ]}>
-            <View style={{ flexDirection: "row-reverse", marginBottom: 15 }}>
+        <Reanimated.View
+            pointerEvents={visible ? 'auto' : 'none'}
+            style={[
+                {
+                    backgroundColor: theme.colors.muted,
+                    position: "absolute",
+                    width: "100%",
+                    bottom: 0,
+                    borderTopRightRadius: 12,
+                    borderTopLeftRadius: 12,
+                    padding: 16,
+                    paddingBottom: 30,
+                    zIndex: 1000,
+                    elevation: 5,
+                    shadowColor: "#fff",
+                    shadowOpacity: 0.5,
+                    shadowRadius: 20,
+                    maxHeight: "50%"
+                },
+                animatedStyle
+            ]}>
+            <View style={{ flexDirection: "row-reverse" }}>
                 <FadingPressable onPress={() => {
-                    translateY.value = withTiming(100, { duration: 200 });
+                    translateY.value = withTiming(500, { duration: 200 });
                     setTimeout(() => {
                         setVisible(false);
                     }, ANIMATION_DURATION);
@@ -162,48 +177,50 @@ const TransactionsFromSelectedDate: React.FC<{
             </View>
             {
                 transactions.length === 0 ?
-                    (<Text style={{ color: theme.colors.text, textAlign: "center" }}>No Transactions were recorded this day!</Text>)
-                    : (<TransactionsView theme={theme} transactions={transactions} selectedDate={selectedDate} />)
+                    <Text style={{
+                        color: theme.colors.text,
+                        textAlign: "center"
+                    }}>No Transactions were recorded this day!</Text>
+                    : <View>
+                        <View style={{ paddingBottom: 20 }}>
+                            <Text style={{
+                                textAlign: "center",
+                                color: theme.colors.text,
+                                fontSize: 16,
+                                fontWeight: "bold",
+                            }}>Transactions for {Months[selectedDate.getMonth()]} {selectedDate.getDate()}, {selectedDate.getFullYear()}</Text>
+                        </View>
+                        <ScrollView style={{
+                            backgroundColor: theme.colors.background,
+                            borderRadius: 10,
+                            padding: 10,
+                            flexDirection: "column",
+                            gap: 10,
+                        }}>
+                            {
+                                transactions.map((val, _) => (
+                                    <TransactionItem
+                                        key={val.id}
+                                        setDetails={setDetails}
+                                        setIsVisible={setIsVisible}
+                                        transaction={val}
+                                        removeTransaction={removeTransaction}
+                                        theme={theme} />
+                                ))
+                            }
+                            <TransactionModal
+                                isVisibleState={[isVisible, setIsVisible]}
+                                detailsState={[details, setDetails]}
+                                onSubmit={() => {
+                                    editTransaction(details);
+                                    setIsVisible(false);
+                                }} />
+                        </ScrollView>
+                    </View>
             }
         </Reanimated.View>
     );
 };
-
-const TransactionsView: React.FC<{
-    theme: Theme;
-    transactions: TransactionDataType[];
-    selectedDate: Date;
-}> = ({ theme, transactions, selectedDate }) => {
-    const { removeTransaction } = useDataContext();
-    const [isVisible, setIsVisible] = useState<boolean>(false);
-    const [details, setDetails] = useState<TransactionDataType>(
-        getDefaultTransactionValue(selectedDate)
-    );
-    return (
-        <View>
-            <ScrollView style={{
-                backgroundColor: theme.colors.background,
-                borderRadius: 10,
-                padding: 10
-            }}>
-                {
-                    transactions.map((val, idx) => (
-                        <TransactionItem
-                            key={idx}
-                            setDetails={setDetails}
-                            setIsVisible={setIsVisible}
-                            transaction={val}
-                            removeTransaction={removeTransaction} theme={theme} />
-                    ))
-                }
-                <TransactionModal
-                    isVisibleState={[isVisible, setIsVisible]}
-                    detailsState={[details, setDetails]}
-                    onSubmit={() => { }} />
-            </ScrollView>
-        </View>
-    )
-}
 
 const DailyReportBox: React.FC<{
     theme: Theme;
@@ -228,11 +245,7 @@ const DailyReportBox: React.FC<{
 
     useEffect(() => {
         scale.value = 0;
-        const delay = idx * 10;
-        const timeout = setTimeout(() => {
-            scale.value = withSpring(1, springConfig);
-        }, delay);
-        return () => clearTimeout(timeout);
+        scale.value = withDelay(idx * 10, withSpring(1, springConfig));
     }, [date]);
 
     const isCurrentDate = (idx: number): boolean => {
@@ -253,8 +266,14 @@ const DailyReportBox: React.FC<{
                     backgroundColor: theme.colors.background,
                 }]}
                 onPress={() => {
+                    setSelectedDate((prev) => {
+                        const newDate = new Date(date.getFullYear(), date.getMonth(), idx + 1, 0, 0, 0);
+                        if (prev.toString() === newDate.toString()) {
+                            return prev;
+                        }
+                        return newDate;
+                    });
                     setVisible(true);
-                    setSelectedDate(new Date(date.getFullYear(), date.getMonth(), idx + 1, 0, 0, 0));
                 }}
             >
                 <View style={{

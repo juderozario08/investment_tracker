@@ -104,9 +104,6 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
                 }
             }
         }
-        console.log({
-            totalIncome, totalInvestment, totalSpending
-        })
         setMonthlyAmounts({
             income: totalIncome,
             investments: totalInvestment,

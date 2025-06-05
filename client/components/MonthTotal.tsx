@@ -9,7 +9,6 @@ export const MonthTotal = () => {
     const [total, setTotal] = useState<number>();
 
     useEffect(() => {
-        console.log(monthlyAmounts);
         setTotal(monthlyAmounts.income - monthlyAmounts.spending);
     }, [monthlyAmounts]);
 
