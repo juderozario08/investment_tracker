@@ -37,9 +37,9 @@ export const DailyCard: React.FC<{
         scale.value = 0;
         translationY.value = 100;
         setTimeout(() => {
-            opacity.value = withTiming(1, { duration: 200 });
-            scale.value = withTiming(1, { duration: 200 });
-            translationY.value = withTiming(0, { duration: 200 });
+            opacity.value = withTiming(1, { duration: 300 });
+            scale.value = withTiming(1, { duration: 300 });
+            translationY.value = withTiming(0, { duration: 300 });
         }, 100 * delay)
     }, [globalDateContext.date])
 

@@ -118,7 +118,8 @@ const TransactionsFromSelectedDate: React.FC<{
 
     {/* Slide Animation */ }
     const ANIMATION_DURATION = 300;
-    const translateY = useSharedValue<number>(500);
+    const screenHeight = Dimensions.get("screen").height;
+    const translateY = useSharedValue<number>(screenHeight);
     const animatedStyle = useAnimatedStyle(() => ({
         transform: [{ translateY: translateY.value }]
     }));
@@ -133,6 +134,14 @@ const TransactionsFromSelectedDate: React.FC<{
         getDefaultTransactionValue(selectedDate)
     );
 
+    const { date } = useDateContext();
+
+    useEffect(() => {
+        if (visible) {
+            translateY.value = withTiming(screenHeight, { duration: ANIMATION_DURATION });
+        }
+    }, [date])
+
     useEffect(() => {
         if (!visible) return;
 
@@ -142,7 +151,7 @@ const TransactionsFromSelectedDate: React.FC<{
         };
 
         translateY.value = withSequence(
-            withTiming(500, { duration: ANIMATION_DURATION }, (isFinished) => {
+            withTiming(screenHeight, { duration: ANIMATION_DURATION }, (isFinished) => {
                 if (isFinished) {
                     runOnJS(updateTransactions)();
                 }
