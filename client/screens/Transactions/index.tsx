@@ -42,6 +42,7 @@ export const Transactions = () => {
                             key={idx}
                             transactions={groupedByDate.get(val) || []}
                             date={new Date(val)}
+                            delay={idx}
                         />
                     ))
                 ) : (

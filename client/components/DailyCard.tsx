@@ -2,17 +2,47 @@ import { StyleSheet, View, Text } from "react-native";
 import { useTheme } from "../theming";
 import { Days, getDefaultTransactionValue } from "../library/constants";
 import type { TransactionDataType } from "../library/types";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { TransactionModal } from "./TransactionModal";
 import { useDataContext } from "../context/DataContext";
 import { ScrollView } from "react-native-gesture-handler";
 import { TransactionItem } from "./TransactionItem";
+import { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import { useDateContext } from "../context/DateContext";
+import Reanimated from "react-native-reanimated"
 
 export const DailyCard: React.FC<{
     transactions: TransactionDataType[];
     date: Date;
-}> = ({ transactions, date }) => {
+    delay: number;
+}> = ({ transactions, date, delay }) => {
     const theme = useTheme();
+    const globalDateContext = useDateContext();
+
+    const opacity = useSharedValue<number>(0);
+    const scale = useSharedValue<number>(0);
+    const translationY = useSharedValue<number>(100);
+    const animatedStyle = useAnimatedStyle(() => {
+        return {
+            opacity: opacity.value,
+            transform: [
+                { translateY: translationY.value },
+                { scale: scale.value }
+            ]
+        }
+    })
+
+    useEffect(() => {
+        opacity.value = 0;
+        scale.value = 0;
+        translationY.value = 100;
+        setTimeout(() => {
+            opacity.value = withTiming(1, { duration: 200 });
+            scale.value = withTiming(1, { duration: 200 });
+            translationY.value = withTiming(0, { duration: 200 });
+        }, 100 * delay)
+    }, [globalDateContext.date])
+
     const { editTransaction, removeTransaction } = useDataContext();
     const totals = transactions.reduce(
         (acc, transaction) => {
@@ -35,50 +65,52 @@ export const DailyCard: React.FC<{
     const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue(date));
 
     return (
-        <View style={[{ backgroundColor: theme.colors.muted }, styles.container]}>
-            {/* Card Header */}
-            <View style={[styles.header]}>
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                    <Text style={{ color: "rgba(255, 70, 28, 0.8)", fontSize: 20, width: 30 }}>{date.getDate()}</Text>
-                    <Text style={{ color: theme.colors.text, fontSize: 13, fontWeight: 600 }}>{Days[date.getDay()]}</Text>
+        <Reanimated.View style={animatedStyle}>
+            <View style={[{ backgroundColor: theme.colors.muted }, styles.container]}>
+                {/* Card Header */}
+                <View style={[styles.header]}>
+                    <View style={{ flexDirection: "row", alignItems: "center" }}>
+                        <Text style={{ color: "rgba(255, 70, 28, 0.8)", fontSize: 20, width: 30 }}>{date.getDate()}</Text>
+                        <Text style={{ color: theme.colors.text, fontSize: 13, fontWeight: 600 }}>{Days[date.getDay()]}</Text>
+                    </View>
+                    <View style={[styles.headerValues]}>
+                        <Text style={[styles.headerValueItems, { color: theme.colors.investment }]}>
+                            ${totals.investments}
+                        </Text>
+                        <Text style={[styles.headerValueItems, { color: theme.colors.income }]}>
+                            ${totals.income}
+                        </Text>
+                        <Text style={[styles.headerValueItems, { color: theme.colors.spending }]}>
+                            ${totals.spending}
+                        </Text>
+                        <Text style={[styles.headerValueItems, { color: total < 0 ? theme.colors.spending : theme.colors.income }]}>
+                            {`$${Math.abs(total)}`}
+                        </Text>
+                    </View>
                 </View>
-                <View style={[styles.headerValues]}>
-                    <Text style={[styles.headerValueItems, { color: theme.colors.investment }]}>
-                        ${totals.investments}
-                    </Text>
-                    <Text style={[styles.headerValueItems, { color: theme.colors.income }]}>
-                        ${totals.income}
-                    </Text>
-                    <Text style={[styles.headerValueItems, { color: theme.colors.spending }]}>
-                        ${totals.spending}
-                    </Text>
-                    <Text style={[styles.headerValueItems, { color: total < 0 ? theme.colors.spending : theme.colors.income }]}>
-                        {`$${Math.abs(total)}`}
-                    </Text>
-                </View>
-            </View>
 
-            {/* Transactions */}
-            <ScrollView style={{ paddingTop: 10 }}>
-                {transactions.map((transaction, idx) => (
-                    <TransactionItem
-                        key={idx}
-                        setDetails={setDetails}
-                        setIsVisible={setIsVisible}
-                        transaction={transaction}
-                        theme={theme}
-                        removeTransaction={removeTransaction}
-                    />
-                ))}
-                <TransactionModal
-                    isVisibleState={[isVisible, setIsVisible]}
-                    detailsState={[details, setDetails]}
-                    onSubmit={() => {
-                        editTransaction(details);
-                        setIsVisible(false);
-                    }} />
-            </ScrollView>
-        </View >
+                {/* Transactions */}
+                <ScrollView style={{ paddingTop: 10 }}>
+                    {transactions.map((transaction, idx) => (
+                        <TransactionItem
+                            key={idx}
+                            setDetails={setDetails}
+                            setIsVisible={setIsVisible}
+                            transaction={transaction}
+                            theme={theme}
+                            removeTransaction={removeTransaction}
+                        />
+                    ))}
+                    <TransactionModal
+                        isVisibleState={[isVisible, setIsVisible]}
+                        detailsState={[details, setDetails]}
+                        onSubmit={() => {
+                            editTransaction(details);
+                            setIsVisible(false);
+                        }} />
+                </ScrollView>
+            </View>
+        </Reanimated.View>
     );
 };
 
