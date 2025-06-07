@@ -2,9 +2,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { useTheme } from "../theming";
 import { Transactions } from "../screens/Transactions";
 import { enableScreens } from "react-native-screens";
-import { BarChart, BookOpen, MoreHorizontal, PieChart, Calendar as CalendarIcon } from "react-native-feather";
+import { BookOpen, MoreHorizontal, PieChart, Calendar as CalendarIcon } from "react-native-feather";
 import { Calendar } from "../screens/Calendar";
-import { Annual } from "../screens/Annual";
 import { Statistics } from "../screens/Statistics";
 import { Options } from "../screens/Options";
 
@@ -31,10 +30,6 @@ export const AppNavigator = () => {
             <Tab.Screen name='Calendar' component={Calendar} options={{
                 tabBarIcon: ({ focused }) =>
                     <CalendarIcon color={getTabColor(focused)} />
-            }} />
-            <Tab.Screen name='Annual' component={Annual} options={{
-                tabBarIcon: ({ focused }) =>
-                    <BarChart color={getTabColor(focused)} />
             }} />
             <Tab.Screen name='Stats' component={Statistics} options={{
                 tabBarIcon: ({ focused }) =>
