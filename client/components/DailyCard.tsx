@@ -19,6 +19,7 @@ export const DailyCard: React.FC<{
     const theme = useTheme();
     const globalDateContext = useDateContext();
 
+    const ANIMATION_DELAY = 300;
     const opacity = useSharedValue<number>(0);
     const scale = useSharedValue<number>(0);
     const translationY = useSharedValue<number>(100);
@@ -37,9 +38,9 @@ export const DailyCard: React.FC<{
         scale.value = 0;
         translationY.value = 100;
 
-        opacity.value = withDelay(75 * delay, withTiming(1, { duration: 300 }));
-        scale.value = withDelay(75 * delay, withTiming(1, { duration: 300 }));
-        translationY.value = withDelay(75 * delay, withTiming(0, { duration: 300 }));
+        opacity.value = withDelay(75 * delay, withTiming(1, { duration: ANIMATION_DELAY }));
+        scale.value = withDelay(75 * delay, withTiming(1, { duration: ANIMATION_DELAY }));
+        translationY.value = withDelay(75 * delay, withTiming(0, { duration: ANIMATION_DELAY }));
     }, [globalDateContext.date])
 
     const { editTransaction, removeTransaction } = useDataContext();
