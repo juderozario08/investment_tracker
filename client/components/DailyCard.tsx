@@ -7,7 +7,7 @@ import { TransactionModal } from "./TransactionModal";
 import { useDataContext } from "../context/DataContext";
 import { ScrollView } from "react-native-gesture-handler";
 import { TransactionItem } from "./TransactionItem";
-import { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import { useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
 import { useDateContext } from "../context/DateContext";
 import Reanimated from "react-native-reanimated"
 
@@ -36,11 +36,10 @@ export const DailyCard: React.FC<{
         opacity.value = 0;
         scale.value = 0;
         translationY.value = 100;
-        setTimeout(() => {
-            opacity.value = withTiming(1, { duration: 300 });
-            scale.value = withTiming(1, { duration: 300 });
-            translationY.value = withTiming(0, { duration: 300 });
-        }, 100 * delay)
+
+        opacity.value = withDelay(75 * delay, withTiming(1, { duration: 300 }));
+        scale.value = withDelay(75 * delay, withTiming(1, { duration: 300 }));
+        translationY.value = withDelay(75 * delay, withTiming(0, { duration: 300 }));
     }, [globalDateContext.date])
 
     const { editTransaction, removeTransaction } = useDataContext();
