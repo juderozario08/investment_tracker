@@ -9,7 +9,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import { TransactionItem } from "./TransactionItem";
 import { useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
 import { useDateContext } from "../context/DateContext";
-import Reanimated from "react-native-reanimated"
+import Reanimated from "react-native-reanimated";
 
 export const DailyCard: React.FC<{
     transactions: TransactionDataType[];
