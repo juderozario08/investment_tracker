@@ -1,20 +1,14 @@
-import { View, Text, StyleSheet } from "react-native"
 import { useTheme } from "../../theming"
+import { SafeAreaView } from "react-native-safe-area-context";
 
 export const Statistics = () => {
-    const theme = useTheme()
+    const theme = useTheme();
     return (
-        <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <Text style={{ color: theme.colors.text }}>Statistics goes here!</Text>
-        </View>
+        <SafeAreaView
+            style={{
+                backgroundColor: theme.colors.background,
+                flex: 1,
+            }}>
+        </SafeAreaView>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        gap: 10,
-    },
-});

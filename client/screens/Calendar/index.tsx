@@ -16,6 +16,8 @@ import { ScrollView } from "react-native-gesture-handler";
 import { GestureScrollView } from "../../components/Views/GestureScrollView";
 import { TransactionModal } from "../../components/TransactionModal";
 import { TransactionItem } from "../../components/TransactionItem";
+import { MonthSwitcher } from "../../components/MonthSwitcher";
+import { MonthTotal } from "../../components/MonthTotal";
 
 type AmountsType = {
     investments: number;
@@ -82,7 +84,11 @@ export const Calendar = () => {
             backgroundColor: theme.colors.background,
         }}>
             {/* Tob Bar */}
-            <TopMenu />
+            <TopMenu>
+                <MonthSwitcher />
+                <MonthTotal />
+            </TopMenu>
+
             <GestureScrollView onLeftSwipe={nextMonth} onRightSwipe={prevMonth}>
                 <View style={{
                     flexDirection: "row",

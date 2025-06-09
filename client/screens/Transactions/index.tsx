@@ -12,6 +12,8 @@ import { getDefaultTransactionValue } from '../../library/constants';
 import { useDateContext } from '../../context/DateContext';
 import { FadingPressable } from '../../components/FadingPressable';
 import { Text, View } from 'react-native';
+import { MonthSwitcher } from '../../components/MonthSwitcher';
+import { MonthTotal } from '../../components/MonthTotal';
 
 export const Transactions = () => {
     const theme = useTheme();
@@ -33,7 +35,11 @@ export const Transactions = () => {
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
             {/* Tob Bar */}
-            <TopMenu />
+            <TopMenu>
+                <MonthSwitcher />
+                <MonthTotal />
+            </TopMenu>
+
             {/* Daily Transaction Cards Per Month */}
             <GestureScrollView onLeftSwipe={nextMonth} onRightSwipe={prevMonth} style={{ padding: 10 }}>
                 {filteredDates.length > 0 ? (
