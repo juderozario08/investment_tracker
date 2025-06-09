@@ -7,7 +7,7 @@ export const TopMenu: React.FC<{
 }> = ({ children }) => {
     const theme = useTheme();
     return (
-        <View style={[{ backgroundColor: theme.colors.muted, paddingTop: 50 }]}>
+        <View style={[{ backgroundColor: theme.colors.muted, paddingTop: 55 }]}>
             {children}
         </View>
     )

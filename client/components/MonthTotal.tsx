@@ -20,7 +20,6 @@ export const MonthTotal = () => {
             paddingRight: 40,
             paddingTop: 5,
             paddingBottom: 5,
-            marginTop: 15,
             borderTopWidth: 1,
             borderBottomWidth: 1,
             borderColor: 'rgba(128, 128, 128, 0.5)',

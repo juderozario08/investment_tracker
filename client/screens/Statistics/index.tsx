@@ -1,14 +1,20 @@
+import { Text, View } from "react-native";
 import { useTheme } from "../../theming"
-import { SafeAreaView } from "react-native-safe-area-context";
+import { TopMenu } from "../../components/TopMenu";
+import { MonthSwitcher } from "../../components/MonthSwitcher";
 
 export const Statistics = () => {
     const theme = useTheme();
     return (
-        <SafeAreaView
+        <View
             style={{
                 backgroundColor: theme.colors.background,
                 flex: 1,
             }}>
-        </SafeAreaView>
+            <TopMenu>
+                <MonthSwitcher />
+            </TopMenu>
+            <Text></Text>
+        </View>
     )
 }

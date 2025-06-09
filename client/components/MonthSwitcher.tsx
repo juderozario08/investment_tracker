@@ -10,7 +10,7 @@ export const MonthSwitcher = () => {
     const theme = useTheme();
     const { date, nextMonth, prevMonth } = useDateContext();
     return (
-        <View style={[styles.flex, { paddingHorizontal: 10 }]}>
+        <View style={[styles.flex, { paddingHorizontal: 10, paddingBottom: 15 }]}>
             <FadingPressable onPress={prevMonth}>
                 <ChevronLeft color={theme.colors.text} />
             </FadingPressable>
