@@ -3,17 +3,17 @@ import { TransactionDataType } from '../../library/types';
 import { styles } from './styles'
 import { useTheme } from '../../theming';
 import { TransactionModal } from '../../components/TransactionModal';
-import { PlusCircle } from 'react-native-feather';
-import { GestureScrollView } from '../../components/Views/GestureScrollView';
+import { Plus, PlusCircle } from 'react-native-feather';
 import { DailyCard } from '../../components/DailyCard';
 import { TopMenu } from '../../components/TopMenu';
 import { useDataContext } from '../../context/DataContext';
 import { getDefaultTransactionValue } from '../../library/constants';
 import { useDateContext } from '../../context/DateContext';
 import { FadingPressable } from '../../components/FadingPressable';
-import { Text, View } from 'react-native';
+import { FlatList, ListRenderItem, Text, View } from 'react-native';
 import { MonthSwitcher } from '../../components/MonthSwitcher';
 import { MonthTotal } from '../../components/MonthTotal';
+import { GestureView } from '../../components/Views/GestureView';
 
 export const Transactions = () => {
     const theme = useTheme();
@@ -32,48 +32,54 @@ export const Transactions = () => {
             }));
     }, [date, groupedByDate])
 
+    const renderItem: ListRenderItem<string> = ({ item, index }) => {
+        return (
+            <DailyCard
+                transactions={groupedByDate.get(item) || []}
+                date={new Date(item)}
+                delay={index}
+            />
+        )
+    }
+
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
             {/* Tob Bar */}
             <TopMenu>
-                <MonthSwitcher />
+                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                    <MonthSwitcher />
+                    {/* Add transaction button */}
+                    <FadingPressable
+                        onPress={() => setIsVisible(true)}
+                        style={{
+                            padding: 10,
+                        }}
+                    >
+                        <Plus
+                            color={theme.colors.textSubtle}
+                            width={30}
+                            height={30}
+                        />
+                    </FadingPressable>
+                </View>
                 <MonthTotal />
             </TopMenu>
 
             {/* Daily Transaction Cards Per Month */}
-            <GestureScrollView onLeftSwipe={nextMonth} onRightSwipe={prevMonth} style={{ padding: 10 }}>
-                {filteredDates.length > 0 ? (
-                    filteredDates.map((val, idx) => (
-                        <DailyCard
-                            key={idx}
-                            transactions={groupedByDate.get(val) || []}
-                            date={new Date(val)}
-                            delay={idx}
-                        />
-                    ))
-                ) : (
+            <GestureView onLeftSwipe={nextMonth} onRightSwipe={prevMonth} style={{ flex: 1, padding: 10 }}>
+                {filteredDates.length > 0 ?
+                    <FlatList
+                        data={filteredDates}
+                        renderItem={renderItem}
+                        style={{ flexGrow: 1, }}
+                        showsVerticalScrollIndicator={false}
+                    /> :
                     <Text style={{ padding: 16, textAlign: 'center', color: 'gray', paddingTop: "25%" }}>
                         No transactions found for this month.
                     </Text>
-                )}
-            </GestureScrollView>
+                }
+            </GestureView>
 
-            {/* Add transaction button */}
-            <FadingPressable
-                style={{
-                    position: "absolute",
-                    right: 10,
-                    bottom: 10,
-                }}
-                onPress={() => setIsVisible(true)}
-            >
-                <PlusCircle
-                    fill={theme.colors.secondary}
-                    color={theme.colors.background}
-                    width={50}
-                    height={50}
-                />
-            </FadingPressable>
             <TransactionModal
                 isVisibleState={[isVisible, setIsVisible]}
                 detailsState={[details, setDetails]}

@@ -9,26 +9,32 @@ import { FadingPressable } from "./FadingPressable";
 export const MonthSwitcher = () => {
     const theme = useTheme();
     const { date, nextMonth, prevMonth } = useDateContext();
+
     return (
-        <View style={[styles.flex, { paddingHorizontal: 10, paddingBottom: 15 }]}>
-            <FadingPressable onPress={prevMonth}>
+        <View style={[{
+            flexDirection: 'row',
+            alignItems: 'center',
+            padding: 10
+        }]}>
+            <FadingPressable onPress={prevMonth} style={styles.touchArea}>
                 <ChevronLeft color={theme.colors.text} />
             </FadingPressable>
-            <Text style={[{ color: theme.colors.text, marginTop: 2 }, styles.text]}>{`${Months[date.getMonth()]} ${date.getFullYear()}`}</Text>
-            <FadingPressable onPress={nextMonth}>
+            <Text style={{
+                color: theme.colors.text,
+                fontSize: 16,
+                paddingHorizontal: 3,
+            }}>
+                {`${Months[date.getMonth()]} ${date.getFullYear()}`}
+            </Text>
+            <FadingPressable onPress={nextMonth} style={styles.touchArea}>
                 <ChevronRight color={theme.colors.text} />
             </FadingPressable>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
-    text: {
-        fontSize: 16,
-        paddingLeft: 5,
-        paddingRight: 5
+    touchArea: {
+        paddingVertical: 6,
     },
-    flex: {
-        flexDirection: 'row',
-    }
-})
+});
