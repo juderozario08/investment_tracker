@@ -84,7 +84,10 @@ export const Daily = () => {
     }
 
     useEffect(() => {
-        calculateAllAmountsFromLogs();
+        // Ensures calculation is only done when there is at least one recorded transaction for the day
+        if (groupedByDate.has(currentDate.toString()) && groupedByDate.get(currentDate.toString())) {
+            calculateAllAmountsFromLogs();
+        }
     }, [groupedByDate]);
     return (
         <View style={[{
