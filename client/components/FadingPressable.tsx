@@ -11,8 +11,18 @@ export const FadingPressable: React.FC<PressableProps> = (props) => {
         <Animated.View style={opacityAnimatedStyle}>
             <Pressable
                 style={props.style}
-                onPressIn={() => opacity.value = withTiming(0.4, { duration: 100 })}
-                onPressOut={() => opacity.value = withTiming(1, { duration: 100 })}
+                onPressIn={(e) => {
+                    opacity.value = withTiming(0.4, { duration: 100 });
+                    if (props.onPressIn) {
+                        props.onPressIn(e);
+                    }
+                }}
+                onPressOut={(e) => {
+                    opacity.value = withTiming(1, { duration: 100 });
+                    if (props.onPressOut) {
+                        props.onPressOut(e);
+                    }
+                }}
                 onPress={props.onPress}
             >
                 {props.children}
