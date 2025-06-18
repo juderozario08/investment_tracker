@@ -9,6 +9,7 @@ import { TransactionDataType } from "../library/types";
 import { useTheme } from "../theming";
 import { FadingPressable } from "./FadingPressable";
 import { Calendar } from "react-native-feather";
+import { ThemedText } from "./ThemedText";
 
 interface TransactionModalProps {
     isVisibleState: [boolean, React.Dispatch<SetStateAction<boolean>>];
@@ -59,7 +60,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
         <ThemedModal isVisible={isVisible} setIsVisible={setIsVisible}>
             {/* Date & Time Section */}
             <View style={styles.modalFields}>
-                <Text style={[styles.modalText, { color: theme.colors.text }]}>Date:</Text>
+                <ThemedText style={styles.modalText}>Date:</ThemedText>
                 <FadingPressable style={{ flexDirection: "row", alignItems: "center" }} onPress={() => { setOpen(true) }}>
                     <Text style={{ color: theme.colors.text, marginRight: 10, marginTop: 5 }}>{getFormattedDate(details.date)}</Text>
                     <Calendar color={'gray'} />
@@ -74,7 +75,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
 
             {/* Category Dropdown */}
             <View style={styles.modalFields}>
-                <Text style={[styles.modalText, { color: theme.colors.text }]}>Category:</Text>
+                <ThemedText style={styles.modalText}>Category:</ThemedText>
                 <ThemedDropdown
                     theme={theme}
                     data={TransactionCategoryOptions}
@@ -89,7 +90,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
 
             {/* Tag Dropdown */}
             <View style={styles.modalFields}>
-                <Text style={[styles.modalText, { color: theme.colors.text }]}>Tag:</Text>
+                <ThemedText style={[styles.modalText]}>Tag:</ThemedText>
                 <ThemedDropdown
                     data={tagList}
                     search
@@ -107,7 +108,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
 
             {/* Name Input */}
             <View style={styles.modalFields}>
-                <Text style={[styles.modalText, { color: theme.colors.text }]}>Name:</Text>
+                <ThemedText style={styles.modalText}>Name:</ThemedText>
                 <TextInput
                     value={details.name}
                     style={{ color: theme.colors.text, width: 140, marginBottom: -7, paddingHorizontal: 0 }}
@@ -120,8 +121,8 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
 
             {/* Amount Input */}
             <View style={styles.modalFields}>
-                <Text style={[styles.modalText, { color: theme.colors.text }]}>Amount:</Text>
-                {details.amount && <Text style={{ color: theme.colors.text, marginTop: 10 }}>$</Text>}
+                <ThemedText style={styles.modalText}>Amount:</ThemedText>
+                {details.amount && <ThemedText style={{ marginTop: 10 }}>$</ThemedText>}
                 <TextInput
                     keyboardType="numeric"
                     value={details.amount}
@@ -137,7 +138,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
 
             {/* Note Input */}
             <View>
-                <Text style={[styles.modalText, { color: theme.colors.text }]}>Note:</Text>
+                <ThemedText style={styles.modalText}>Note:</ThemedText>
                 <TextInput
                     style={{
                         marginTop: 10,
@@ -176,9 +177,9 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
                 }}
                 onPress={onSubmit}
             >
-                <Text style={{ color: theme.colors.text, textAlign: "center", fontSize: 16 }}>
+                <ThemedText style={{ textAlign: "center", fontSize: 16 }}>
                     Submit
-                </Text>
+                </ThemedText>
             </FadingPressable>
         </ThemedModal>
     );

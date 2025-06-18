@@ -5,6 +5,7 @@ import { FadingPressable } from "./FadingPressable";
 import { Trash } from "react-native-feather";
 import { Text, View } from "react-native";
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
+import { ThemedText } from "./ThemedText";
 
 export const TransactionItem: React.FC<{
     setDetails: React.Dispatch<React.SetStateAction<TransactionDataType>>,
@@ -38,12 +39,12 @@ export const TransactionItem: React.FC<{
                     setIsVisible(true);
                 }}>
                 <View style={{ flexDirection: "row" }}>
-                    <Text style={[{ color: theme.colors.text, width: 100 }]}>
+                    <ThemedText style={{ width: 100 }}>
                         {transaction.tag}
-                    </Text>
-                    <Text style={[{ color: theme.colors.text, width: 100 }]}>
+                    </ThemedText>
+                    <ThemedText style={{ width: 100 }}>
                         {transaction.name}
-                    </Text>
+                    </ThemedText>
                 </View>
                 <Text
                     style={[{

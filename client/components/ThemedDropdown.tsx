@@ -1,6 +1,7 @@
 import { Dropdown } from "react-native-element-dropdown";
 import { StyleSheet, View, Text, TextStyle, StyleProp, DimensionValue } from "react-native";
 import { Theme } from "../theming/types";
+import { ThemedText } from "./ThemedText";
 
 export const ThemedDropdown: React.FC<{
     theme: Theme,
@@ -37,7 +38,7 @@ export const ThemedDropdown: React.FC<{
                     borderWidth: 1,
                     padding: 8,
                 }}>
-                    <Text style={{ color: theme.colors.text }}>{item.label}</Text>
+                    <ThemedText>{item.label}</ThemedText>
                 </View>
             ))} />
     )

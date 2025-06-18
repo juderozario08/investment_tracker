@@ -10,6 +10,7 @@ import { TransactionItem } from "./TransactionItem";
 import { useAnimatedStyle, useSharedValue, withDelay, withTiming } from "react-native-reanimated";
 import { useDateContext } from "../context/DateContext";
 import Reanimated from "react-native-reanimated";
+import { ThemedText } from "./ThemedText";
 
 export const DailyCard: React.FC<{
     transactions: TransactionDataType[];
@@ -71,7 +72,7 @@ export const DailyCard: React.FC<{
                 <View style={[styles.header]}>
                     <View style={{ flexDirection: "row", alignItems: "center" }}>
                         <Text style={{ color: "rgba(255, 70, 28, 0.8)", fontSize: 20, width: 30 }}>{date.getDate()}</Text>
-                        <Text style={{ color: theme.colors.text, fontSize: 13, fontWeight: 600 }}>{Days[date.getDay()]}</Text>
+                        <ThemedText style={{ fontSize: 13, fontWeight: 600 }}>{Days[date.getDay()]}</ThemedText>
                     </View>
                     <View style={[styles.headerValues]}>
                         <Text style={[styles.headerValueItems, { color: theme.colors.investment }]}>

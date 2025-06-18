@@ -2,11 +2,12 @@ import { View, Text, StyleSheet } from "react-native"
 import { useTheme } from "../theming";
 import { useDataContext } from "../context/DataContext";
 import { useEffect, useState } from "react";
+import { ThemedText } from "./ThemedText";
 
 export const MonthTotal = () => {
     const theme = useTheme();
     const { monthlyAmounts } = useDataContext();
-    const [total, setTotal] = useState<number>();
+    const [total, setTotal] = useState<number>(0);
 
     useEffect(() => {
         setTotal(monthlyAmounts.income - monthlyAmounts.spending);
@@ -25,19 +26,19 @@ export const MonthTotal = () => {
             borderColor: 'rgba(128, 128, 128, 0.5)',
         }}>
             <View style={styles.categoryTotalView}>
-                <Text style={[{ color: theme.colors.text }]}>Investing</Text>
+                <ThemedText>Investing</ThemedText>
                 <Text style={[{ color: theme.colors.investment }]}>${monthlyAmounts.investments}</Text>
             </View>
             <View style={styles.categoryTotalView}>
-                <Text style={[{ color: theme.colors.text }]}>Income</Text>
+                <ThemedText>Income</ThemedText>
                 <Text style={[{ color: theme.colors.income }]}>${monthlyAmounts.income}</Text>
             </View>
             <View style={styles.categoryTotalView}>
-                <Text style={[{ color: theme.colors.text }]}>Spending</Text>
+                <ThemedText>Spending</ThemedText>
                 <Text style={[{ color: theme.colors.spending }]}>${monthlyAmounts.spending}</Text>
             </View>
             <View style={styles.categoryTotalView}>
-                <Text style={[{ color: theme.colors.text }]}>Total</Text>
+                <ThemedText>Total</ThemedText>
                 <Text style={[{ color: total > 0 ? theme.colors.income : theme.colors.spending }]}>${Math.abs(total)}</Text>
             </View>
         </View>

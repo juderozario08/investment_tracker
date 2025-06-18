@@ -5,6 +5,7 @@ import React from "react";
 import { Months } from "../library/constants";
 import { useDateContext } from "../context/DateContext";
 import { FadingPressable } from "./FadingPressable";
+import { ThemedText } from "./ThemedText";
 
 export const MonthSwitcher = () => {
     const theme = useTheme();
@@ -19,13 +20,12 @@ export const MonthSwitcher = () => {
             <FadingPressable onPress={prevMonth} style={styles.touchArea}>
                 <ChevronLeft color={theme.colors.text} />
             </FadingPressable>
-            <Text style={{
-                color: theme.colors.text,
+            <ThemedText style={{
                 fontSize: 16,
                 paddingHorizontal: 3,
             }}>
                 {`${Months[date.getMonth()]} ${date.getFullYear()}`}
-            </Text>
+            </ThemedText>
             <FadingPressable onPress={nextMonth} style={styles.touchArea}>
                 <ChevronRight color={theme.colors.text} />
             </FadingPressable>
