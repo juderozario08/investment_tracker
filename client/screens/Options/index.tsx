@@ -1,11 +1,12 @@
-import { View, Text, StyleSheet } from "react-native"
+import { View, StyleSheet } from "react-native"
 import { useTheme } from "../../theming"
+import { ThemedText } from "../../components/ThemedText";
 
 export const Options = () => {
     const theme = useTheme();
     return (
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-            <Text style={{ color: theme.colors.text }}>Options!</Text>
+            <ThemedText>Options!</ThemedText>
         </View>
     )
 }

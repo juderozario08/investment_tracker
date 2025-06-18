@@ -1,5 +1,7 @@
-import { SafeAreaView, StyleSheet, View } from "react-native"
+import { SafeAreaView, StyleSheet, Text } from "react-native"
 import { useTheme } from "../../../theming"
+import { FadingPressable } from "../../../components/FadingPressable";
+import { ThemedText } from "../../../components/ThemedText";
 
 export const YTD = () => {
     const theme = useTheme();
@@ -7,6 +9,10 @@ export const YTD = () => {
         <SafeAreaView style={[{
             backgroundColor: theme.colors.background
         }, styles.container]}>
+            <FadingPressable onPress={() => {
+            }}>
+                <ThemedText>Hello Button</ThemedText>
+            </FadingPressable>
         </SafeAreaView>
     )
 }

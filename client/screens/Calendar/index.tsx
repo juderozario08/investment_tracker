@@ -18,6 +18,7 @@ import { TransactionModal } from "../../components/TransactionModal";
 import { TransactionItem } from "../../components/TransactionItem";
 import { MonthSwitcher } from "../../components/MonthSwitcher";
 import { MonthTotal } from "../../components/MonthTotal";
+import { ThemedText } from "../../components/ThemedText";
 
 type AmountsType = {
     investments: number;
@@ -206,20 +207,18 @@ const TransactionsFromSelectedDate: React.FC<{
                         padding: 10,
                         marginTop: 10
                     }}>
-                        <Text style={{
+                        <ThemedText style={{
                             textAlign: "center",
-                            color: theme.colors.text,
                             fontSize: 16,
-                        }}>No Transactions were recorded this day!</Text>
+                        }}>No Transactions were recorded this day!</ThemedText>
                     </View>
                     : <View>
                         <View style={{ paddingBottom: 20 }}>
-                            <Text style={{
+                            <ThemedText style={{
                                 textAlign: "center",
-                                color: theme.colors.text,
                                 fontSize: 16,
                                 fontWeight: "bold",
-                            }}>Transactions for {Months[selectedDate.getMonth()]} {selectedDate.getDate()}, {selectedDate.getFullYear()}</Text>
+                            }}>Transactions for {Months[selectedDate.getMonth()]} {selectedDate.getDate()}, {selectedDate.getFullYear()}</ThemedText>
                         </View>
                         <ScrollView style={{
                             backgroundColor: theme.colors.background,
@@ -314,8 +313,8 @@ const DailyReportBox: React.FC<{
                     backgroundColor: theme.colors.muted,
                     borderColor: isCurrentDate(idx) ? theme.colors.accent : 'transparent',
                 }}>
-                    <Text style={{ color: theme.colors.text }}>{idx + 1}</Text>
-                    <Text style={{ color: theme.colors.text, paddingLeft: 5 }}>{Days[new Date(date.getFullYear(), date.getMonth(), idx + 1).getDay()]}</Text>
+                    <ThemedText>{idx + 1}</ThemedText>
+                    <ThemedText style={{ paddingLeft: 5 }}>{Days[new Date(date.getFullYear(), date.getMonth(), idx + 1).getDay()]}</ThemedText>
                 </View>
                 <View style={{
                     marginVertical: "auto"
