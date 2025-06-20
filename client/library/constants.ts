@@ -19,13 +19,13 @@ export const Months: string[] = [
 
 export const Days: string[] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-export const TransactionCategoryOptions: DropdownMenuType[] = [
+export const TransactionCategoryOptions: DropdownMenuType<string>[] = [
     { label: "Income", value: "income" },
     { label: "Spending", value: "spending" },
     { label: "Investment", value: "investment" },
 ];
 
-export const TransactionSpendingTagOptions: DropdownMenuType[] = [
+export const TransactionSpendingTagOptions: DropdownMenuType<string>[] = [
     { label: "Food", value: "Food" },
     { label: "Household", value: "Household" },
     { label: "Transport", value: "Transport" },
@@ -37,7 +37,7 @@ export const TransactionSpendingTagOptions: DropdownMenuType[] = [
     { label: "Other", value: "Other" },
 ];
 
-export const TransactionIncomeTagOptions: DropdownMenuType[] = [
+export const TransactionIncomeTagOptions: DropdownMenuType<string>[] = [
     { label: "Salary", value: "Salary" },
     { label: "Freelance", value: "Freelance" },
     { label: "Allowance", value: "Allowance" },
@@ -46,7 +46,7 @@ export const TransactionIncomeTagOptions: DropdownMenuType[] = [
     { label: "Other", value: "Other" },
 ];
 
-export const TransactionInvestTagOptions: DropdownMenuType[] = [
+export const TransactionInvestTagOptions: DropdownMenuType<string>[] = [
     { label: "ETF", value: "ETF" },
     { label: "Stock", value: "Stock" },
     { label: "Crypto", value: "Crypto" },

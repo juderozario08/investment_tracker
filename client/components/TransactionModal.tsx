@@ -85,6 +85,9 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
                         handleValidation("category", validateCategory(value));
                         handleUpdate("category", value);
                     }}
+                    style={{
+                        width: 150
+                    }}
                 />
             </View>
 

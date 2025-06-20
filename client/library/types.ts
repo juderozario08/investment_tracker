@@ -1,6 +1,6 @@
-export interface DropdownMenuType {
+export interface DropdownMenuType<T> {
     label: string | number;
-    value: string | number;
+    value: T;
 }
 
 export interface TransactionDataType {
