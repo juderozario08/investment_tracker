@@ -3,15 +3,14 @@ import { View } from "react-native";
 import { Theme } from "../theming/types";
 import { ThemedText } from "./ThemedText";
 import { DropdownProps } from "react-native-element-dropdown/lib/typescript/components/Dropdown/model";
+import { useTheme } from "../theming";
 
 interface Props<T> extends Omit<DropdownProps<T>, 'labelField' | 'valueField'> {
-    theme: Theme;
     labelField?: keyof T | string;
     valueField?: keyof T | string;
 }
 
 export const ThemedDropdown = <T,>({
-    theme,
     labelField = "label",
     valueField = "value",
     style,
@@ -26,6 +25,7 @@ export const ThemedDropdown = <T,>({
     renderItem,
     ...props
 }: Props<T>) => {
+    const theme = useTheme();
     return (
         <Dropdown
             style={[{
@@ -35,7 +35,7 @@ export const ThemedDropdown = <T,>({
                 paddingRight: 10,
                 width: 150
             }, style]}
-            selectedTextStyle={[selectedTextStyle ?? { color: theme.colors.text, fontSize: 14, backgroundColor: theme.colors.muted }]}
+            selectedTextStyle={[selectedTextStyle, { color: theme.colors.text, fontSize: 14, backgroundColor: theme.colors.muted }]}
             containerStyle={[{ backgroundColor: theme.colors.card, borderRadius: 5 }, containerStyle]}
             itemTextStyle={[{ color: theme.colors.text }, itemTextStyle]}
             labelField={labelField}

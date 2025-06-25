@@ -1,23 +1,26 @@
-import { KeyboardAvoidingView, Modal, StyleSheet, View } from "react-native";
+import { KeyboardAvoidingView, Modal, ModalProps, StyleSheet, View } from "react-native";
 import { X } from "react-native-feather";
-import { ReactNode } from "react";
 import { useTheme } from "../theming";
 import { FadingPressable } from "./FadingPressable";
 
-const ThemedModal: React.FC<{
+interface ThemedModalProps extends ModalProps {
     isVisible: boolean;
     setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-    children: ReactNode;
-}> = ({ isVisible, setIsVisible, children }) => {
+}
+
+export const ThemedModal: React.FC<ThemedModalProps> = ({ isVisible, setIsVisible, children, ...props }) => {
     const theme = useTheme();
     return (
         <Modal
             animationType="slide"
             transparent={true}
             visible={isVisible}
-            onRequestClose={() => {
+            onRequestClose={(e) => {
+                if (props.onRequestClose) {
+                    props.onRequestClose(e);
+                }
                 setIsVisible(!isVisible);
-            }}>
+            }} {...props}>
             <KeyboardAvoidingView style={[styles.centeredView]}>
                 <View style={[styles.modalView, { backgroundColor: theme.colors.muted }]}>
                     {/* Close Modal Button */}
@@ -33,8 +36,6 @@ const ThemedModal: React.FC<{
         </Modal>
     )
 }
-
-export default ThemedModal;
 
 const styles = StyleSheet.create({
     centeredView: {

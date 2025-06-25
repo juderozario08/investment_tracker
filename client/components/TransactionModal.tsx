@@ -1,6 +1,6 @@
 import { SetStateAction, useEffect, useMemo, useState } from "react";
 import { TransactionCategoryOptions, TransactionIncomeTagOptions, TransactionInvestTagOptions, TransactionSpendingTagOptions } from "../library/constants";
-import ThemedModal from "./ThemedModal";
+import { ThemedModal } from "./ThemedModal";
 import { View, StyleSheet, Text, TextInput } from "react-native";
 import { SingleDatePicker } from "./SingleDatePicker";
 import { ThemedDropdown } from "./ThemedDropdown";

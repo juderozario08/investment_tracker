@@ -12,3 +12,5 @@ export interface TransactionDataType {
     date: Date;
     note?: string;
 }
+
+export type CategoryTypes = "income" | "spending" | "investment";

@@ -11,3 +11,6 @@ export const springConfig: SpringConfig = {
     reduceMotion: ReduceMotion.System,
 };
 
+export const FAST_ANIMATION_DURATION = 100;
+export const STANDARD_ANIMATION_DURATION = 300;
+export const SLOW_ANIMATION_DURATION = 500;

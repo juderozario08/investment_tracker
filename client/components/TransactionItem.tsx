@@ -1,20 +1,20 @@
 import Reanimated, { SharedValue, runOnJS, useAnimatedStyle } from "react-native-reanimated";
 import { TransactionDataType } from "../library/types";
-import { Theme } from "../theming/types";
 import { FadingPressable } from "./FadingPressable";
 import { Trash } from "react-native-feather";
 import { Text, View } from "react-native";
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { ThemedText } from "./ThemedText";
+import { useTheme } from "../theming";
 
 export const TransactionItem: React.FC<{
     setDetails: React.Dispatch<React.SetStateAction<TransactionDataType>>,
     setIsVisible: React.Dispatch<React.SetStateAction<boolean>>,
     transaction: TransactionDataType,
     removeTransaction: (id: string) => void,
-    theme: Theme
-}> = ({ setDetails, transaction, setIsVisible, theme, removeTransaction }) => {
+}> = ({ setDetails, transaction, setIsVisible, removeTransaction }) => {
 
+    const theme = useTheme();
     const renderRightActions = (_: SharedValue<number>, drag: SharedValue<number>) => {
         'worklet'
         return (

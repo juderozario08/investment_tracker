@@ -3,7 +3,7 @@ import { TransactionDataType } from '../../library/types';
 import { styles } from './styles'
 import { useTheme } from '../../theming';
 import { TransactionModal } from '../../components/TransactionModal';
-import { Plus, PlusCircle } from 'react-native-feather';
+import { Plus } from 'react-native-feather';
 import { DailyCard } from '../../components/DailyCard';
 import { TopMenu } from '../../components/TopMenu';
 import { useDataContext } from '../../context/DataContext';
@@ -14,6 +14,7 @@ import { FlatList, ListRenderItem, Text, View } from 'react-native';
 import { MonthSwitcher } from '../../components/MonthSwitcher';
 import { MonthTotal } from '../../components/MonthTotal';
 import { GestureView } from '../../components/Views/GestureView';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const Transactions = () => {
     const theme = useTheme();
@@ -43,7 +44,7 @@ export const Transactions = () => {
     }
 
     return (
-        <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
+        <SafeAreaView edges={["top"]} style={[styles.container, { backgroundColor: theme.colors.background }]}>
             {/* Tob Bar */}
             <TopMenu>
                 <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
@@ -88,6 +89,6 @@ export const Transactions = () => {
                     setDetails(getDefaultTransactionValue(date));
                     setIsVisible(false);
                 }} />
-        </View>
+        </SafeAreaView>
     )
 }
