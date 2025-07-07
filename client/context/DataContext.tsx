@@ -15,7 +15,7 @@ type AmountsType = {
     spending: number;
 }
 
-type DataContextType = {
+export type DataContextType = {
     data: TransactionDataType[];
     setData: React.Dispatch<React.SetStateAction<TransactionDataType[]>>;
     monthlyAmounts: AmountsType;

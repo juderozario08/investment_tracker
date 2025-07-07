@@ -1412,7 +1412,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-safe-area-context (5.4.1):
+  - react-native-safe-area-context (5.5.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1427,8 +1427,8 @@ PODS:
     - React-hermes
     - React-ImageManager
     - React-jsi
-    - react-native-safe-area-context/common (= 5.4.1)
-    - react-native-safe-area-context/fabric (= 5.4.1)
+    - react-native-safe-area-context/common (= 5.5.1)
+    - react-native-safe-area-context/fabric (= 5.5.1)
     - React-NativeModulesApple
     - React-RCTFabric
     - React-renderercss
@@ -1438,7 +1438,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-safe-area-context/common (5.4.1):
+  - react-native-safe-area-context/common (5.5.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1462,7 +1462,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
-  - react-native-safe-area-context/fabric (5.4.1):
+  - react-native-safe-area-context/fabric (5.5.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -1487,6 +1487,7 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - react-native-vector-icons-material-design-icons (12.0.1)
   - React-NativeModulesApple (0.79.2):
     - glog
     - hermes-engine
@@ -1809,7 +1810,7 @@ PODS:
     - React-logger (= 0.79.2)
     - React-perflogger (= 0.79.2)
     - React-utils (= 0.79.2)
-  - RNGestureHandler (2.25.0):
+  - RNGestureHandler (2.27.1):
     - DoubleConversion
     - glog
     - hermes-engine
@@ -2107,6 +2108,7 @@ DEPENDENCIES:
   - react-native-mmkv-storage (from `../node_modules/react-native-mmkv-storage`)
   - react-native-pager-view (from `../node_modules/react-native-pager-view`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
+  - "react-native-vector-icons-material-design-icons (from `../node_modules/@react-native-vector-icons/material-design-icons`)"
   - React-NativeModulesApple (from `../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios`)
   - React-oscompat (from `../node_modules/react-native/ReactCommon/oscompat`)
   - React-perflogger (from `../node_modules/react-native/ReactCommon/reactperflogger`)
@@ -2240,6 +2242,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-pager-view"
   react-native-safe-area-context:
     :path: "../node_modules/react-native-safe-area-context"
+  react-native-vector-icons-material-design-icons:
+    :path: "../node_modules/@react-native-vector-icons/material-design-icons"
   React-NativeModulesApple:
     :path: "../node_modules/react-native/ReactCommon/react/nativemodule/core/platform/ios"
   React-oscompat:
@@ -2359,7 +2363,8 @@ SPEC CHECKSUMS:
   react-native-get-random-values: d16467cf726c618e9c7a8c3c39c31faa2244bbba
   react-native-mmkv-storage: a4cd876b4d56480ad3daff64f5934624306cfbe1
   react-native-pager-view: 919534782a0489f7e2aeeb9a8b8959edfd3f067a
-  react-native-safe-area-context: 5594ec631ede9c311c5c0efa244228eff845ce88
+  react-native-safe-area-context: 091add53da15b67c76b176724725581b29a1cde3
+  react-native-vector-icons-material-design-icons: fa35dd305942c95e838767cea9ef1934bf0aafc2
   React-NativeModulesApple: 2c4377e139522c3d73f5df582e4f051a838ff25e
   React-oscompat: ef5df1c734f19b8003e149317d041b8ce1f7d29c
   React-perflogger: 9a151e0b4c933c9205fd648c246506a83f31395d
@@ -2391,7 +2396,7 @@ SPEC CHECKSUMS:
   ReactAppDependencyProvider: 04d5eb15eb46be6720e17a4a7fa92940a776e584
   ReactCodegen: c63eda03ba1d94353fb97b031fc84f75a0d125ba
   ReactCommon: 76d2dc87136d0a667678668b86f0fca0c16fdeb0
-  RNGestureHandler: ebef699ea17e7c0006c1074e1e423ead60ce0121
+  RNGestureHandler: e9dfbf95010aa6aa3212dcdefb0d38a42006cbab
   RNReanimated: 722d67dfde539bfe29b572878f4bc805f727726b
   RNScreens: 482e9707f9826230810c92e765751af53826d509
   RNSVG: 8a1054afe490b5d63b9792d7ae3c1fde8c05cdd0

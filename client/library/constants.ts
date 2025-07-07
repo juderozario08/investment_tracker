@@ -1,6 +1,6 @@
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from "uuid";
-import type { DropdownMenuType, TransactionDataType } from "./types";
+import type { CategoryTypes, DropdownMenuType, IncomeTagTypes, InvestmentTagTypes, SpendingTagTypes, TransactionDataType } from "./types";
 
 export const Months: string[] = [
     "Jan",
@@ -19,13 +19,13 @@ export const Months: string[] = [
 
 export const Days: string[] = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-export const TransactionCategoryOptions: DropdownMenuType<string>[] = [
+export const TransactionCategoryOptions: DropdownMenuType<CategoryTypes>[] = [
     { label: "Income", value: "income" },
     { label: "Spending", value: "spending" },
     { label: "Investment", value: "investment" },
 ];
 
-export const TransactionSpendingTagOptions: DropdownMenuType<string>[] = [
+export const TransactionSpendingTagOptions: DropdownMenuType<SpendingTagTypes>[] = [
     { label: "Food", value: "Food" },
     { label: "Household", value: "Household" },
     { label: "Transport", value: "Transport" },
@@ -33,11 +33,10 @@ export const TransactionSpendingTagOptions: DropdownMenuType<string>[] = [
     { label: "Entertainment", value: "Entertainment" },
     { label: "Hobby", value: "Hobby" },
     { label: "Gift", value: "Gift" },
-    { label: "Hobby", value: "Hobby" },
     { label: "Other", value: "Other" },
 ];
 
-export const TransactionIncomeTagOptions: DropdownMenuType<string>[] = [
+export const TransactionIncomeTagOptions: DropdownMenuType<IncomeTagTypes>[] = [
     { label: "Salary", value: "Salary" },
     { label: "Freelance", value: "Freelance" },
     { label: "Allowance", value: "Allowance" },
@@ -46,7 +45,7 @@ export const TransactionIncomeTagOptions: DropdownMenuType<string>[] = [
     { label: "Other", value: "Other" },
 ];
 
-export const TransactionInvestTagOptions: DropdownMenuType<string>[] = [
+export const TransactionInvestTagOptions: DropdownMenuType<InvestmentTagTypes>[] = [
     { label: "ETF", value: "ETF" },
     { label: "Stock", value: "Stock" },
     { label: "Crypto", value: "Crypto" },
@@ -58,10 +57,58 @@ export const getDefaultTransactionValue = (date: Date): TransactionDataType => {
     return {
         id: uuidv4(),
         category: "spending",
-        tag: "",
+        tag: "Other",
         name: "",
         amount: "",
         date: d,
         note: ''
     }
 }
+
+export const chartColors = {
+    // Categories
+    "income": "#009FFF",
+    "incomeGradient": "#006DFF",
+    "spending": "#FFA5BA",
+    "spendingGradient": "#FF7F97",
+    "investment": "#B38BFF",
+    "investmentGradient": "#9B5DE5",
+
+    // Spending tags
+    "Food": "#FF9F1C",
+    "FoodGradient": "#FF7C00",
+    "Household": "#B5E48C",
+    "HouseholdGradient": "#99D98C",
+    "Transport": "#6A4C93",
+    "TransportGradient": "#8E6BB4",
+    "Bills & Utilities": "#80CED7",
+    "Bills & UtilitiesGradient": "#4DB8C4",
+    "Entertainment": "#FF6F91",
+    "EntertainmentGradient": "#FF4D6D",
+    "Hobby": "#F3CA40",
+    "HobbyGradient": "#F9A620",
+    "Gift": "#F15BB5",
+    "GiftGradient": "#FF85C1",
+    "Other": "#A0C4FF",
+    "OtherGradient": "#89B6FF",
+
+    // Income tags
+    "Salary": "#00BBF9",
+    "SalaryGradient": "#0096C7",
+    "Freelance": "#3F88C5",
+    "FreelanceGradient": "#2667A0",
+    "Allowance": "#AACC00",
+    "AllowanceGradient": "#94C600",
+    "Refunds": "#FFBC42",
+    "RefundsGradient": "#FFA600",
+
+    // Investment tags
+    "ETF": "#845EC2",
+    "ETFGradient": "#7A57D1",
+    "Stock": "#00C9A7",
+    "StockGradient": "#00B29B",
+    "Crypto": "#FF5E5B",
+    "CryptoGradient": "#FF3B30",
+    "Savings": "#4D96FF",
+    "SavingsGradient": "#256DFF"
+};

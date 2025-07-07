@@ -1,18 +1,13 @@
-import { SafeAreaView, StyleSheet, View } from "react-native"
-import { useTheme } from "../../../theming"
+import { View } from "react-native"
+import { useTheme } from "../../../theming";
+import { styles } from "../styles";
+import { ThemedText } from "../../../components/ThemedText";
 
 export const Monthly = () => {
     const theme = useTheme();
     return (
-        <SafeAreaView style={[{
-            backgroundColor: theme.colors.background
-        }, styles.container]}>
-        </SafeAreaView>
+        <View style={styles.container}>
+            <ThemedText>Monthly</ThemedText>
+        </View>
     )
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    }
-})

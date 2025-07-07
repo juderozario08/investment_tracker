@@ -8,10 +8,10 @@ import { ThemedText } from "./ThemedText";
 import { useTheme } from "../theming";
 
 export const TransactionItem: React.FC<{
-    setDetails: React.Dispatch<React.SetStateAction<TransactionDataType>>,
-    setIsVisible: React.Dispatch<React.SetStateAction<boolean>>,
-    transaction: TransactionDataType,
-    removeTransaction: (id: string) => void,
+    setDetails: React.Dispatch<React.SetStateAction<TransactionDataType>>;
+    setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+    transaction: TransactionDataType;
+    removeTransaction: (id: string) => void;
 }> = ({ setDetails, transaction, setIsVisible, removeTransaction }) => {
 
     const theme = useTheme();

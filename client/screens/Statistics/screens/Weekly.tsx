@@ -3,11 +3,11 @@ import { useTheme } from "../../../theming";
 import { styles } from "../styles";
 import { ThemedText } from "../../../components/ThemedText";
 
-export const Yearly = () => {
+export const Weekly = () => {
     const theme = useTheme();
     return (
         <View style={styles.container}>
-            <ThemedText>Yearly</ThemedText>
+            <ThemedText>Weekly</ThemedText>
         </View>
     )
 }
