@@ -1,8 +1,9 @@
-import { View, Text, StyleSheet } from "react-native"
-import { useTheme } from "../theming";
-import { useDataContext } from "../context/DataContext";
-import { useEffect, useState } from "react";
-import { ThemedText } from "./ThemedText";
+/* eslint-disable react-native/no-inline-styles */
+import { View, Text, StyleSheet } from 'react-native';
+import { useTheme } from '../theming';
+import { useDataContext } from '../context/DataContext';
+import { useEffect, useState } from 'react';
+import { ThemedText } from './ThemedText';
 
 export const MonthTotal = () => {
     const theme = useTheme();
@@ -42,8 +43,8 @@ export const MonthTotal = () => {
                 <Text style={[{ color: total > 0 ? theme.colors.income : theme.colors.spending }]}>${Math.abs(total)}</Text>
             </View>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     categoryTotalView: {
@@ -52,6 +53,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         gap: 8,
         paddingBottom: 2,
-        paddingTop: 2
-    }
-})
+        paddingTop: 2,
+    },
+});

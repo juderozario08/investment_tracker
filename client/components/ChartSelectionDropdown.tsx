@@ -1,8 +1,9 @@
-import { View } from "react-native";
-import { ThemedText } from "./ThemedText";
-import { ThemedDropdown } from "./ThemedDropdown";
-import { DropdownMenuType } from "../library/types";
-import { ChartTypes } from "../library/enums";
+/* eslint-disable react-native/no-inline-styles */
+import { View } from 'react-native';
+import { ThemedText } from './ThemedText';
+import { ThemedDropdown } from './ThemedDropdown';
+import { DropdownMenuType } from '../library/types';
+import { ChartTypes } from '../library/enums';
 
 export type ChartTypeNames = keyof typeof ChartTypes;
 interface ChartSelectionDropdownProps {
@@ -13,17 +14,17 @@ interface ChartSelectionDropdownProps {
 export const ChartSelectionDropdown: React.FC<ChartSelectionDropdownProps> = ({ selectedChart, setSelectedChart, chartSelectionList }) => {
     return (
         <View style={{
-            flexDirection: "row",
+            flexDirection: 'row',
             gap: 20,
-            alignItems: "center",
-            justifyContent: "center",
-            paddingBottom: 10
+            alignItems: 'center',
+            justifyContent: 'center',
+            paddingBottom: 10,
         }}>
             <ThemedText>Graph Type</ThemedText>
             <ThemedDropdown
                 data={chartSelectionList.map<DropdownMenuType<ChartTypeNames>>((t) => ({
                     label: ChartTypes[t],
-                    value: t
+                    value: t,
                 }))}
                 selectedTextStyle={{ paddingVertical: 3, paddingHorizontal: 5 }}
                 value={selectedChart}
@@ -31,6 +32,6 @@ export const ChartSelectionDropdown: React.FC<ChartSelectionDropdownProps> = ({ 
                     setSelectedChart(item.value);
                 }} />
         </View>
-    )
-}
+    );
+};
 

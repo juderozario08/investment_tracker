@@ -1,9 +1,9 @@
-import { Dropdown } from "react-native-element-dropdown";
-import { View } from "react-native";
-import { Theme } from "../theming/types";
-import { ThemedText } from "./ThemedText";
-import { DropdownProps } from "react-native-element-dropdown/lib/typescript/components/Dropdown/model";
-import { useTheme } from "../theming";
+/* eslint-disable react-native/no-inline-styles */
+import { Dropdown } from 'react-native-element-dropdown';
+import { View } from 'react-native';
+import { ThemedText } from './ThemedText';
+import { DropdownProps } from 'react-native-element-dropdown/lib/typescript/components/Dropdown/model';
+import { useTheme } from '../theming';
 
 interface Props<T> extends Omit<DropdownProps<T>, 'labelField' | 'valueField'> {
     labelField?: keyof T | string;
@@ -11,8 +11,8 @@ interface Props<T> extends Omit<DropdownProps<T>, 'labelField' | 'valueField'> {
 }
 
 export const ThemedDropdown = <T,>({
-    labelField = "label",
-    valueField = "value",
+    labelField = 'label',
+    valueField = 'value',
     style,
     containerStyle,
     itemTextStyle,
@@ -33,7 +33,7 @@ export const ThemedDropdown = <T,>({
                 borderColor: 'transparent',
                 borderWidth: 0.5,
                 paddingRight: 10,
-                width: 150
+                width: 150,
             }, style]}
             selectedTextStyle={[selectedTextStyle, { color: theme.colors.text, fontSize: 14, backgroundColor: theme.colors.muted }]}
             containerStyle={[{ backgroundColor: theme.colors.card, borderRadius: 5 }, containerStyle]}
@@ -41,10 +41,10 @@ export const ThemedDropdown = <T,>({
             labelField={labelField}
             valueField={valueField}
             search={search ?? false}
-            searchPlaceholder={searchPlaceholder ?? "Search"}
+            searchPlaceholder={searchPlaceholder ?? 'Search'}
             inputSearchStyle={search ?
                 [inputSearchStyle, { color: theme.colors.text, height: 40 }] : null}
-            placeholder={placeholder ?? ""}
+            placeholder={placeholder ?? ''}
             placeholderStyle={[{ color: theme.colors.textSubtle }, placeholderStyle]}
             renderItem={renderItem ?? ((item, selected) => (
                 <View style={{
@@ -57,5 +57,5 @@ export const ThemedDropdown = <T,>({
                 </View>
             ))}
             {...props} />
-    )
-}
+    );
+};

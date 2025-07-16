@@ -1,6 +1,6 @@
-import { View } from "react-native"
-import { useTheme } from "../theming"
-import { ReactNode } from "react";
+import { View } from 'react-native';
+import { useTheme } from '../theming';
+import { ReactNode } from 'react';
 
 export const TopMenu: React.FC<{
     children?: ReactNode
@@ -10,5 +10,5 @@ export const TopMenu: React.FC<{
         <View style={[{ backgroundColor: theme.colors.muted }]}>
             {children}
         </View>
-    )
-}
+    );
+};

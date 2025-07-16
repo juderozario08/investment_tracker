@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, ReactNode, useEffect, useRef } from "react";
+import { createContext, useContext, useState, useEffect, useRef, PropsWithChildren, useMemo } from "react";
 import { TransactionDataType } from "../library/types";
 import {
     addTransactionToStorage,
@@ -21,7 +21,6 @@ export type DataContextType = {
     monthlyAmounts: AmountsType;
     setMonthlyAmounts: React.Dispatch<React.SetStateAction<AmountsType>>;
     groupedByDate: Map<string, TransactionDataType[]>,
-    setGroupedByDate: React.Dispatch<React.SetStateAction<Map<string, TransactionDataType[]>>>;
     addTransaction: (t: TransactionDataType) => void;
     removeTransaction: (id: string) => void;
     editTransaction: (t: TransactionDataType) => void;
@@ -30,37 +29,36 @@ export type DataContextType = {
 
 const Context = createContext<DataContextType | undefined>(undefined);
 
-export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [data, setData] = useState<TransactionDataType[]>([]);
-    const [groupedByDate, setGroupedByDate] = useState(new Map<string, TransactionDataType[]>());
+export function convertToGroupedMap(data: TransactionDataType[]): Map<string, TransactionDataType[]> {
+    const map = new Map<string, TransactionDataType[]>();
+    for (const tx of data) {
+        const key = tx.date.toISOString();
+        if (!map.has(key)) {
+            map.set(key, []);
+        }
+        map.get(key)!.push(tx);
+    }
+    return map;
+}
 
+export const DataProvider = ({ children }: PropsWithChildren) => {
     const { date } = useDateContext();
 
-    // Organizing all the data to group by date
-    const groupByDate = (): Map<string, TransactionDataType[]> => {
-        const result: Map<string, TransactionDataType[]> = new Map<string, TransactionDataType[]>();
-        for (const transaction of data) {
-            const key = transaction.date.toString();
-            if (!result.has(key)) {
-                result.set(key, []);
-            }
-            result.get(key)!.push(transaction);
-        }
-        return result;
-    };
+    const [data, setData] = useState<TransactionDataType[]>([]);
+    const groupedByDate = useMemo(() => convertToGroupedMap(data), [data]);
 
-    const addTransaction = (t: TransactionDataType) => {
-        addTransactionToStorage(t);
+    const addTransaction = async (t: TransactionDataType) => {
+        await addTransactionToStorage(t);
         setData(prev => [...prev, t]);
     };
 
-    const removeTransaction = (id: string) => {
-        removeTransactionFromLocalStorage(id);
+    const removeTransaction = async (id: string) => {
+        await removeTransactionFromLocalStorage(id);
         setData(prev => prev.filter(t => t.id !== id));
     };
 
-    const editTransaction = (updated: TransactionDataType) => {
-        editTransactionInLocalStorage(updated);
+    const editTransaction = async (updated: TransactionDataType) => {
+        await editTransactionInLocalStorage(updated);
         setData(prev => prev.map(t => t.id === updated.id ? updated : t));
     };
 
@@ -72,20 +70,32 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const hasInitialized = useRef<boolean>(false);
 
     useEffect(() => {
-        setData(loadTransactionsFromStorage());
+        loadTransactionsFromStorage()
+            .then((data) => {
+                setData(data);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     }, []);
-
-    /* Setting date groups */
-    useEffect(() => {
-        const grouped = groupByDate();
-        setGroupedByDate(grouped);
-    }, [data]);
 
     const [monthlyAmounts, setMonthlyAmounts] = useState<AmountsType>({
         income: 0,
         spending: 0,
         investments: 0
     });
+
+    /* Setting total amounts each time months or data changes */
+    useEffect(() => {
+        if (!hasInitialized.current) {
+            if (groupedByDate.size > 0) {
+                calculateAndSetMonthlyAmounts();
+                hasInitialized.current = true;
+            }
+        } else {
+            calculateAndSetMonthlyAmounts();
+        }
+    }, [date, groupedByDate]);
 
     const calculateAndSetMonthlyAmounts = () => {
         let totalInvestment = 0;
@@ -111,32 +121,20 @@ export const DataProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         })
     };
 
-    /* Setting total amounts each time months or data changes */
-    useEffect(() => {
-        if (!hasInitialized.current) {
-            if (groupedByDate.size > 0) {
-                calculateAndSetMonthlyAmounts();
-                hasInitialized.current = true;
-            }
-        } else {
-            calculateAndSetMonthlyAmounts();
-        }
-    }, [date, groupedByDate]);
-
+    const contextValue = useMemo(() => ({
+        data,
+        setData,
+        addTransaction,
+        removeTransaction,
+        editTransaction,
+        clearTransaction,
+        groupedByDate,
+        monthlyAmounts,
+        setMonthlyAmounts
+    }), [data, groupedByDate, monthlyAmounts]);
 
     return (
-        <Context.Provider value={{
-            data,
-            setData,
-            addTransaction,
-            removeTransaction,
-            editTransaction,
-            clearTransaction,
-            groupedByDate,
-            setGroupedByDate,
-            monthlyAmounts,
-            setMonthlyAmounts
-        }}>
+        <Context.Provider value={contextValue}>
             {children}
         </Context.Provider>
     );

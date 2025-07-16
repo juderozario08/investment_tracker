@@ -1,7 +1,8 @@
-import { StyleSheet, View } from "react-native";
-import { ChartSelectionDropdown, ChartTypeNames } from "./ChartSelectionDropdown";
-import { ThemedText } from "./ThemedText";
-import { GraphRenderer } from "./GraphRenderer";
+/* eslint-disable react-native/no-inline-styles */
+import { StyleSheet, View } from 'react-native';
+import { ChartSelectionDropdown, ChartTypeNames } from './ChartSelectionDropdown';
+import { ThemedText } from './ThemedText';
+import { GraphRenderer } from './GraphRenderer';
 
 export const ChartOverview: React.FC<{
     title?: string;
@@ -19,9 +20,9 @@ export const ChartOverview: React.FC<{
                 </ThemedText>
             </View>}
             <View style={{
-                alignItems: "center",
+                alignItems: 'center',
                 paddingVertical: 20,
-                flex: 1
+                flex: 1,
             }}>
                 <ChartSelectionDropdown
                     selectedChart={selectedChart}
@@ -33,13 +34,13 @@ export const ChartOverview: React.FC<{
                         data={selectedChartData} />}
             </View>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     title: {
         fontSize: 20,
-        fontWeight: "bold",
-        textAlign: "center"
+        fontWeight: 'bold',
+        textAlign: 'center',
     },
-})
+});

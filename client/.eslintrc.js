@@ -1,4 +1,13 @@
 module.exports = {
-  root: true,
-  extends: '@react-native',
+    root: true,
+    plugins: [
+        "react-hooks"
+    ],
+    extends: [
+        "@react-native"
+    ],
+    rules: {
+        "react-hooks/rules-of-hooks": "error",
+        "react-hooks/exhaustive-deps": "warn"
+    }
 };

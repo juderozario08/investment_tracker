@@ -1,4 +1,4 @@
-import DatePicker from "react-native-date-picker";
+import DatePicker from 'react-native-date-picker';
 
 export const SingleDatePicker: React.FC<{
     visible: boolean;
@@ -13,13 +13,13 @@ export const SingleDatePicker: React.FC<{
             modal
             open={visible}
             date={date}
-            onConfirm={(date) => {
-                setOpen(false)
-                setDate(date)
+            onConfirm={(d) => {
+                setOpen(false);
+                setDate(d);
             }}
             onCancel={() => {
-                setOpen(false)
+                setOpen(false);
             }}
         />
-    )
-}
+    );
+};

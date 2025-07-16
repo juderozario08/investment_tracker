@@ -1,5 +1,5 @@
-import { ReactNode, useRef } from "react";
-import { PanResponder, StyleProp, View, ViewStyle } from "react-native";
+import { ReactNode, useRef } from 'react';
+import { PanResponder, StyleProp, View, ViewStyle } from 'react-native';
 
 export const GestureView: React.FC<{
     onLeftSwipe: () => void;
@@ -31,5 +31,5 @@ export const GestureView: React.FC<{
             {children}
         </View>
 
-    )
-}
+    );
+};

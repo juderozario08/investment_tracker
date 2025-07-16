@@ -1,6 +1,6 @@
-import { ReactNode, useRef } from "react";
-import { PanResponder, StyleProp, ViewStyle } from "react-native";
-import Reanimated from "react-native-reanimated";
+import { ReactNode, useRef } from 'react';
+import { PanResponder, StyleProp, ViewStyle } from 'react-native';
+import Reanimated from 'react-native-reanimated';
 
 export const GestureScrollView: React.FC<{
     onLeftSwipe: () => void;
@@ -32,5 +32,5 @@ export const GestureScrollView: React.FC<{
             {children}
         </Reanimated.ScrollView>
 
-    )
-}
+    );
+};

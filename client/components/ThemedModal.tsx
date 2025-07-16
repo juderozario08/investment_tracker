@@ -1,14 +1,15 @@
-import { KeyboardAvoidingView, Modal, ModalProps, StyleSheet, View } from "react-native";
-import { X } from "react-native-feather";
-import { useTheme } from "../theming";
-import { FadingPressable } from "./FadingPressable";
+import { KeyboardAvoidingView, Modal, ModalProps, StyleSheet, View } from 'react-native';
+import { X } from 'react-native-feather';
+import { useTheme } from '../theming';
+import { FadingPressable } from './FadingPressable';
 
 interface ThemedModalProps extends ModalProps {
     isVisible: boolean;
     setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
+    onClosePress?: () => void;
 }
 
-export const ThemedModal: React.FC<ThemedModalProps> = ({ isVisible, setIsVisible, children, ...props }) => {
+export const ThemedModal: React.FC<ThemedModalProps> = ({ isVisible, setIsVisible, onClosePress, children, ...props }) => {
     const theme = useTheme();
     return (
         <Modal
@@ -24,9 +25,17 @@ export const ThemedModal: React.FC<ThemedModalProps> = ({ isVisible, setIsVisibl
             <KeyboardAvoidingView style={[styles.centeredView]}>
                 <View style={[styles.modalView, { backgroundColor: theme.colors.muted }]}>
                     {/* Close Modal Button */}
-                    <View style={{ position: 'absolute', right: 0, top: 0, padding: 15 }}>
+                    {/* eslint-disable-next-line react-native/no-inline-styles */}
+                    <View style={[{ position: 'absolute', right: 0, top: 0, padding: 15 }]}>
                         <FadingPressable
-                            onPress={() => setIsVisible(!isVisible)}>
+                            onPress={() => {
+                                if (onClosePress) {
+                                    onClosePress();
+                                } else {
+                                    setIsVisible(!isVisible);
+                                }
+                            }}>
+                            {/* eslint-disable-next-line react-native/no-inline-styles */}
                             <X color={'grey'} width={20} style={{ padding: 5 }} />
                         </FadingPressable>
                     </View>
@@ -34,8 +43,8 @@ export const ThemedModal: React.FC<ThemedModalProps> = ({ isVisible, setIsVisibl
                 </View>
             </KeyboardAvoidingView>
         </Modal>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     centeredView: {
@@ -47,14 +56,14 @@ const styles = StyleSheet.create({
     modalView: {
         justifyContent: 'center',
         alignSelf: 'center',
-        marginVertical: 10,
-        marginHorizontal: 5,
         borderRadius: 10,
-        paddingHorizontal: 35,
-        paddingTop: 35,
-        paddingBottom: 25,
         shadowRadius: 4,
         elevation: 10,
         maxHeight: '90%',
+        marginVertical: 10,
+        marginHorizontal: 5,
+        paddingHorizontal: 35,
+        paddingTop: 35,
+        paddingBottom: 25,
     },
-})
+});

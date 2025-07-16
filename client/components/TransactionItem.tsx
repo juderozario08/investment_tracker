@@ -1,11 +1,12 @@
-import Reanimated, { SharedValue, runOnJS, useAnimatedStyle } from "react-native-reanimated";
-import { TransactionDataType } from "../library/types";
-import { FadingPressable } from "./FadingPressable";
-import { Trash } from "react-native-feather";
-import { Text, View } from "react-native";
+/* eslint-disable react-native/no-inline-styles */
+import Reanimated, { SharedValue, runOnJS, useAnimatedStyle } from 'react-native-reanimated';
+import { TransactionDataType } from '../library/types';
+import { FadingPressable } from './FadingPressable';
+import { Trash } from 'react-native-feather';
+import { Text, View } from 'react-native';
 import Swipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
-import { ThemedText } from "./ThemedText";
-import { useTheme } from "../theming";
+import { ThemedText } from './ThemedText';
+import { useTheme } from '../theming';
 
 export const TransactionItem: React.FC<{
     setDetails: React.Dispatch<React.SetStateAction<TransactionDataType>>;
@@ -16,7 +17,7 @@ export const TransactionItem: React.FC<{
 
     const theme = useTheme();
     const renderRightActions = (_: SharedValue<number>, drag: SharedValue<number>) => {
-        'worklet'
+        'worklet';
         return (
             <RightActions
                 drag={drag}
@@ -29,8 +30,8 @@ export const TransactionItem: React.FC<{
         <Swipeable renderRightActions={renderRightActions} friction={2}>
             <FadingPressable
                 style={{
-                    flexDirection: "row",
-                    justifyContent: "space-between",
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
                     alignItems: 'center',
                     margin: 10,
                 }}
@@ -38,7 +39,7 @@ export const TransactionItem: React.FC<{
                     setDetails(transaction);
                     setIsVisible(true);
                 }}>
-                <View style={{ flexDirection: "row" }}>
+                <View style={{ flexDirection: 'row' }}>
                     <ThemedText style={{ width: 100 }}>
                         {transaction.tag}
                     </ThemedText>
@@ -50,13 +51,13 @@ export const TransactionItem: React.FC<{
                     style={[{
                         color: transaction.category === 'spending' ?
                             theme.colors.spending : transaction.category === 'income' ?
-                                theme.colors.income : theme.colors.investment
+                                theme.colors.income : theme.colors.investment,
                     }]}
                 >{`$${transaction.amount}`}</Text>
             </FadingPressable>
         </Swipeable>
-    )
-}
+    );
+};
 
 
 const RightActions = ({ drag, onPress }: { drag: SharedValue<number>, onPress: () => void }) => {
@@ -71,7 +72,7 @@ const RightActions = ({ drag, onPress }: { drag: SharedValue<number>, onPress: (
                     backgroundColor: 'red',
                     justifyContent: 'center',
                     borderRadius: 5,
-                    paddingVertical: 3
+                    paddingVertical: 3,
                 }}
                 onPress={onPress}
             >

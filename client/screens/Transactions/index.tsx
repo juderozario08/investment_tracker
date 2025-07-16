@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { TransactionDataType } from '../../library/types';
-import { styles } from './styles'
+import { styles } from './styles';
 import { useTheme } from '../../theming';
 import { TransactionModal } from '../../components/TransactionModal';
 import { Plus } from 'react-native-feather';
@@ -31,7 +31,7 @@ export const Transactions = () => {
                 const d = new Date(val);
                 return d.getMonth() === date.getMonth() && d.getFullYear() === date.getFullYear();
             }));
-    }, [date, groupedByDate])
+    }, [date, groupedByDate]);
 
     const renderItem: ListRenderItem<string> = ({ item, index }) => {
         return (
@@ -40,21 +40,21 @@ export const Transactions = () => {
                 date={new Date(item)}
                 delay={index}
             />
-        )
-    }
+        );
+    };
 
     return (
-        <SafeAreaView edges={["top"]} style={[styles.container, { backgroundColor: theme.colors.background }]}>
+        <SafeAreaView edges={['top']} style={[styles.container, { backgroundColor: theme.colors.background }]}>
             {/* Tob Bar */}
             <TopMenu>
-                <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+                {/* eslint-disable-next-line react-native/no-inline-styles */}
+                <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <MonthSwitcher />
                     {/* Add transaction button */}
                     <FadingPressable
                         onPress={() => setIsVisible(true)}
-                        style={{
-                            padding: 10,
-                        }}
+                        // eslint-disable-next-line react-native/no-inline-styles
+                        style={{ padding: 10 }}
                     >
                         <Plus
                             color={theme.colors.textSubtle}
@@ -67,17 +67,23 @@ export const Transactions = () => {
             </TopMenu>
 
             {/* Daily Transaction Cards Per Month */}
+            {/* eslint-disable-next-line react-native/no-inline-styles */}
             <GestureView onLeftSwipe={nextMonth} onRightSwipe={prevMonth} style={{ flex: 1, padding: 10 }}>
                 {filteredDates.length > 0 ?
                     <FlatList
                         data={filteredDates}
                         renderItem={renderItem}
-                        style={{ flexGrow: 1, }}
+                        // eslint-disable-next-line react-native/no-inline-styles
+                        style={{ flexGrow: 1 }}
                         showsVerticalScrollIndicator={false}
                     /> :
-                    <Text style={{ padding: 16, textAlign: 'center', color: 'gray', paddingTop: "25%" }}>
-                        No transactions found for this month.
-                    </Text>
+                    <View>
+                        {/* eslint-disable-next-line react-native/no-inline-styles */}
+                        <Text style={{ padding: 16, textAlign: 'center', color: 'gray', paddingTop: '25%' }}>
+                            No transactions found for this month.
+                        </Text>
+                    </View>
+
                 }
             </GestureView>
 
@@ -90,5 +96,5 @@ export const Transactions = () => {
                     setIsVisible(false);
                 }} />
         </SafeAreaView>
-    )
-}
+    );
+};

@@ -1,8 +1,9 @@
-import { View } from "react-native";
-import { CategoryTypes, IncomeTagTypes, InvestmentTagTypes, SpendingTagTypes } from "../library/types";
-import { chartColors } from "../library/constants";
-import { capitalizeString } from "../library/helper";
-import { ThemedText } from "./ThemedText";
+/* eslint-disable react-native/no-inline-styles */
+import { View } from 'react-native';
+import { CategoryTypes, IncomeTagTypes, InvestmentTagTypes, SpendingTagTypes } from '../library/types';
+import { chartColors } from '../library/constants';
+import { capitalizeString } from '../library/helper';
+import { ThemedText } from './ThemedText';
 
 interface LegendProps {
     legendsLabels: (CategoryTypes | InvestmentTagTypes | SpendingTagTypes | IncomeTagTypes)[];
@@ -12,21 +13,21 @@ export const Legends: React.FC<LegendProps> = ({ legendsLabels }) => {
     return (
         <View
             style={{
-                flexDirection: "row",
-                flexWrap: "wrap",
+                flexDirection: 'row',
+                flexWrap: 'wrap',
                 gap: 30,
                 paddingVertical: 10,
-                justifyContent: "center",
+                justifyContent: 'center',
                 paddingHorizontal: 20,
-                alignItems: "center",
+                alignItems: 'center',
             }}
         >
             {legendsLabels.map((t, index) => {
                 return (
                     <View
                         style={{
-                            flexDirection: "row",
-                            alignItems: "center",
+                            flexDirection: 'row',
+                            alignItems: 'center',
                         }}
                         key={index}
                     >

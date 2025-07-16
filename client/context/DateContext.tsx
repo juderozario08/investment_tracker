@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext, useState } from "react"
+import { PropsWithChildren, createContext, useContext, useState } from 'react';
 
 type DateContextType = {
     date: Date;
@@ -9,7 +9,7 @@ type DateContextType = {
 
 const Context = createContext<DateContextType | undefined>(undefined);
 
-export const DateProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export function DateProvider({ children }: PropsWithChildren) {
     const [date, setDate] = useState<Date>((() => {
         const d = new Date();
         return new Date(d.getFullYear(), d.getMonth(), d.getDate(), 0, 0, 0);
@@ -54,11 +54,11 @@ export const DateProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         <Context.Provider value={{ date, setDate, nextMonth, prevMonth }}>
             {children}
         </Context.Provider>
-    )
+    );
 }
 
 export const useDateContext = () => {
     const context = useContext(Context);
-    if (!context) throw new Error("useDataContext must be used within a DateProvider");
+    if (!context) { throw new Error('useDataContext must be used within a DateProvider'); }
     return context;
 };

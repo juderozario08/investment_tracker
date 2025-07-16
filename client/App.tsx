@@ -7,16 +7,16 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 const App = () => {
     return (
-        <GestureHandlerRootView style={{ flex: 1 }}>
-            <DateProvider>
-                <DataProvider>
+        <DateProvider>
+            <DataProvider>
+                <GestureHandlerRootView style={{ flex: 1 }}>
                     <NavigationContainer>
                         <AppNavigator />
                         <StatusBar />
                     </NavigationContainer>
-                </DataProvider>
-            </DateProvider>
-        </GestureHandlerRootView>
+                </GestureHandlerRootView>
+            </DataProvider>
+        </DateProvider>
     )
 }
 
