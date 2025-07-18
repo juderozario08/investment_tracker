@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react-native/no-inline-styles */
 import { SetStateAction, useEffect, useMemo, useState } from 'react';
 import { TransactionCategoryOptions, TransactionIncomeTagOptions, TransactionInvestTagOptions, TransactionSpendingTagOptions } from '../library/constants';
 import { ThemedModal } from './ThemedModal';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
-import { SingleDatePicker } from './SingleDatePicker';
 import { ThemedDropdown } from './ThemedDropdown';
 import { validateAmount, validateCategory, validateName, validateTag } from '../library/validation';
 import { DropdownMenuType, IncomeTagTypes, InvestmentTagTypes, SpendingTagTypes, TransactionDataType } from '../library/types';
@@ -10,6 +11,8 @@ import { useTheme } from '../theming';
 import { FadingPressable } from './FadingPressable';
 import { Calendar } from 'react-native-feather';
 import { ThemedText } from './ThemedText';
+import { NativeCalendarModeSingle } from './NativeCalendar';
+import { DateType } from 'react-native-ui-datepicker';
 
 interface TransactionModalProps {
     isVisibleState: [boolean, React.Dispatch<SetStateAction<boolean>>];
@@ -27,7 +30,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
     const [isVisible, setIsVisible] = isVisibleState;
     const [details, setDetails] = detailsState;
 
-    const [open, setOpen] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     const [errors, setErrors] = useState({
         category: true,
@@ -54,26 +57,37 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
 
     useEffect(() => {
         handleUpdate('tag', details.tag);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [tagList]);
+
+    const [modalDate, setModalDate] = useState<DateType>();
+
+    useEffect(() => {
+        setModalDate(details.date);
+    }, [details.date]);
 
     return (
         <ThemedModal isVisible={isVisible} setIsVisible={setIsVisible}>
             {/* Date & Time Section */}
             <View style={styles.modalFields}>
                 <ThemedText style={styles.modalText}>Date:</ThemedText>
-                {/* eslint-disable-next-line react-native/no-inline-styles */}
-                <FadingPressable style={{ flexDirection: 'row', alignItems: 'center' }} onPress={() => { setOpen(true); }}>
-                    {/* eslint-disable-next-line react-native/no-inline-styles */}
+                <FadingPressable style={{ flexDirection: 'row', alignItems: 'center' }} onPress={() => { setVisible(true); }}>
                     <Text style={{ color: theme.colors.text, marginRight: 10, marginTop: 5 }}>{getFormattedDate(details.date)}</Text>
                     <Calendar color={'gray'} />
                 </FadingPressable>
-                <SingleDatePicker
-                    visible={open}
-                    setOpen={setOpen}
-                    setDate={(val: Date) => handleUpdate('date', val)}
-                    date={details.date}
-                />
+                <NativeCalendarModeSingle
+                    modalDate={modalDate}
+                    setModalDate={setModalDate}
+                    isVisible={visible}
+                    setIsVisible={setVisible}
+                    onPressCancel={() => {
+                        setVisible(false);
+                    }}
+                    onPressSubmit={() => {
+                        if (modalDate) {
+                            handleUpdate('date', new Date(modalDate.toString()));
+                        }
+                        setVisible(false);
+                    }} />
             </View>
 
             {/* Category Dropdown */}
@@ -87,7 +101,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
                         handleValidation('category', validateCategory(value));
                         handleUpdate('category', value);
                     }}
-                    // eslint-disable-next-line react-native/no-inline-styles
+
                     style={{ width: 150 }}
                 />
             </View>
@@ -114,7 +128,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
                 <ThemedText style={styles.modalText}>Name:</ThemedText>
                 <TextInput
                     value={details.name}
-                    // eslint-disable-next-line react-native/no-inline-styles
+
                     style={{ color: theme.colors.text, width: 140, marginBottom: -7, paddingHorizontal: 0 }}
                     onChangeText={(text) => {
                         handleValidation('name', validateName(text));
@@ -126,14 +140,14 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
             {/* Amount Input */}
             <View style={styles.modalFields}>
                 <ThemedText style={styles.modalText}>Amount:</ThemedText>
-                {/* eslint-disable-next-line react-native/no-inline-styles */}
+                {}
                 {details.amount && <ThemedText style={{ marginTop: 10 }}>$</ThemedText>}
                 <TextInput
                     keyboardType="numeric"
                     value={details.amount}
                     placeholder="Enter Amount"
                     placeholderTextColor={theme.colors.textSubtle}
-                    // eslint-disable-next-line react-native/no-inline-styles
+
                     style={{ color: theme.colors.text, width: 140, marginBottom: -7 }}
                     onChangeText={(amount) => {
                         handleValidation('amount', validateAmount(amount));
@@ -146,7 +160,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
             <View>
                 <ThemedText style={styles.modalText}>Note:</ThemedText>
                 <TextInput
-                    // eslint-disable-next-line react-native/no-inline-styles
+
                     style={{
                         marginTop: 10,
                         color: theme.colors.text,
@@ -168,7 +182,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
 
             {/* Submit Button */}
             <FadingPressable
-                // eslint-disable-next-line react-native/no-inline-styles
+
                 style={{
                     backgroundColor: theme.colors.primary,
                     borderRadius: 10,
@@ -180,7 +194,7 @@ export const TransactionModal: React.FC<TransactionModalProps> = ({
                 onPress={onSubmit}
             >
                 <ThemedText
-                    // eslint-disable-next-line react-native/no-inline-styles
+
                     style={{ textAlign: 'center', fontSize: 16 }}>
                     Submit
                 </ThemedText>

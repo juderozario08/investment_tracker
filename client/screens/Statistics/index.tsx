@@ -22,16 +22,15 @@ import { STANDARD_ANIMATION_DURATION, getTimingConfig } from '../../library/anim
 import { DateType } from 'react-native-ui-datepicker';
 import { RangeTypes } from './types';
 import { getDatesInRange } from './helpers/functions';
-import { TopMenu } from '../../components/TopMenu';
 import { MonthSwitcher } from '../../components/MonthSwitcher';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useDataContext } from '../../context/DataContext';
 import { useDateContext } from '../../context/DateContext';
 import { YearSwitcher } from '../../components/YearSwitcher';
-import { NativeCalendar } from '../../components/NativeCalendar';
+import { NativeCalendarModeMultiple } from '../../components/NativeCalendar';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
-const AnimatedPressable = Animated.createAnimatedComponent(FadingPressable);
+const AnimatedFadingPressable = Animated.createAnimatedComponent(FadingPressable);
 
 const originalHeight = 135;
 const targetHeight = 0;
@@ -64,9 +63,10 @@ const getYearDates = (year: number): Date[] => {
 
 const RangeButton: React.FC<{
     rangeSelected: RangeTypes;
+    setPrevRangeSelected: React.Dispatch<React.SetStateAction<RangeTypes | undefined>>;
     setRangeSelected: React.Dispatch<React.SetStateAction<RangeTypes>>;
     text: RangeTypes;
-}> = ({ rangeSelected, setRangeSelected, text }) => {
+}> = ({ rangeSelected, setRangeSelected, setPrevRangeSelected, text }) => {
     const theme = useTheme();
     return (
         <FadingPressable style={[{
@@ -75,7 +75,12 @@ const RangeButton: React.FC<{
             padding: 10,
             borderColor: theme.colors.primary,
         }, rangeSelected === text && { backgroundColor: theme.colors.primary }]}
-            onPress={() => setRangeSelected(text)}
+            onPress={() => {
+                setRangeSelected(prev => {
+                    setPrevRangeSelected(prev);
+                    return text;
+                });
+            }}
         >
             <Text style={[
                 rangeSelected === text ?
@@ -92,16 +97,19 @@ export const Statistics = () => {
     const { date } = useDateContext();
     const { groupedByDate, removeTransaction, editTransaction } = useDataContext();
 
-    const [rangeSelected, setRangeSelected] = useState<RangeTypes>('Daily');
+    const [prevRangeSelected, setPrevRangeSelected] = useState<RangeTypes | undefined>();
+    const [rangeSelected, setRangeSelected] = useState<RangeTypes>('Monthly');
 
+    const [modalDates, setModalDates] = useState<DateType[]>([]);
     const [dateRange, setDateRange] = useState<DateType[]>([]);
     const [dateRangeModalVisible, setDateRangeModalVisible] = useState<boolean>(false);
 
     const [transactions, setTransactions] = useState<TransactionDataType[]>([]);
+    const [selectedTransactions, setSelectedTransactions] = useState<TransactionDataType[]>([]);
 
     const [year, setYear] = useState<number>(new Date().getFullYear());
 
-    const [slideViewVisible, setSlideViewVisible] = useState<boolean>(true);
+    const [slideViewVisible, setSlideViewVisible] = useState<boolean>(false);
 
     function getTransactions() {
         const trxs: TransactionDataType[] = [];
@@ -128,7 +136,7 @@ export const Statistics = () => {
             const d = getDatesInRange(rangeSelected);
             setDateRange(d);
         }
-    }, [rangeSelected]);
+    }, [rangeSelected, year, date]);
 
     useEffect(() => {
         getTransactions();
@@ -175,52 +183,61 @@ export const Statistics = () => {
                     }}>
                         <RangeButton
                             rangeSelected={rangeSelected}
+                            setPrevRangeSelected={setPrevRangeSelected}
                             setRangeSelected={setRangeSelected}
                             text={'Daily'} />
                         <RangeButton
                             rangeSelected={rangeSelected}
+                            setPrevRangeSelected={setPrevRangeSelected}
                             setRangeSelected={setRangeSelected}
                             text={'Weekly'} />
                         <RangeButton
                             rangeSelected={rangeSelected}
+                            setPrevRangeSelected={setPrevRangeSelected}
                             setRangeSelected={setRangeSelected}
                             text={'Monthly'} />
                         <RangeButton
                             rangeSelected={rangeSelected}
+                            setPrevRangeSelected={setPrevRangeSelected}
                             setRangeSelected={setRangeSelected}
                             text={'Yearly'} />
                         <RangeButton
                             rangeSelected={rangeSelected}
+                            setPrevRangeSelected={setPrevRangeSelected}
                             setRangeSelected={setRangeSelected}
                             text={'YTD'} />
                         <RangeButton
                             rangeSelected={rangeSelected}
+                            setPrevRangeSelected={setPrevRangeSelected}
                             setRangeSelected={setRangeSelected}
                             text={'Range'} />
                     </View>
                 </AnimatedView>
-                <View style={{ backgroundColor: theme.colors.muted, width: '100%', alignItems: 'center' }}>
-                    <AnimatedPressable
+                <View
+                    style={{
+                        backgroundColor: theme.colors.muted,
+                        position: 'relative',
+                    }}
+                >
+                    <View style={{ alignItems: 'flex-start' }}>
+                        {rangeSelected === 'Monthly' && <MonthSwitcher />}
+                        {rangeSelected === 'Yearly' && <YearSwitcher year={year} setYear={setYear} />}
+                    </View>
+
+                    <AnimatedFadingPressable
                         onPress={() => setButtonsVisible(!buttonsVisible)}
                         style={[
-                            animatedChevronStyle,
+                            animatedChevronStyle, {
+                                position: 'absolute',
+                                alignSelf: 'center',
+                                top: 8,
+                            },
                         ]}
                     >
                         <ChevronUp color="grey" width={40} height={40} />
-                    </AnimatedPressable>
+                    </AnimatedFadingPressable>
                 </View>
 
-                {/* Monthly Stats*/}
-                {rangeSelected === 'Monthly' &&
-                    <TopMenu>
-                        <MonthSwitcher />
-                    </TopMenu>}
-
-                {/* Yearly Stats */}
-                {rangeSelected === 'Yearly' &&
-                    <TopMenu>
-                        <YearSwitcher year={year} setYear={setYear} />
-                    </TopMenu>}
 
                 {transactions.length > 0 ?
                     <ScrollView showsVerticalScrollIndicator={false}>
@@ -236,15 +253,17 @@ export const Statistics = () => {
                     </ScrollView> :
                     <View style={styles.centeredNonFilledView}>
                         <ThemedText style={{ fontSize: 20 }}>
-                            No transactions for the day
+                            No transactions available
                         </ThemedText>
                     </View>
                 }
-                <NativeCalendar
-                    mode="multiple"
+                <NativeCalendarModeMultiple
+                    modalDates={modalDates}
+                    setModalDates={setModalDates}
                     isVisible={dateRangeModalVisible}
                     setIsVisible={setDateRangeModalVisible}
-                    setDates={setDateRange} />
+                    onPressCancel={() => { }}
+                    onPressSubmit={() => { }} />
             </SafeAreaView>
             <SlideDailyTransaction
                 visible={slideViewVisible}
@@ -255,7 +274,6 @@ export const Statistics = () => {
         </View>
     );
 };
-
 
 const SlideDailyTransaction: React.FC<{
     visible: boolean;
@@ -290,7 +308,6 @@ const SlideDailyTransaction: React.FC<{
         <AnimatedView
             pointerEvents={visible ? 'auto' : 'none'}
             style={[
-
                 {
                     backgroundColor: theme.colors.muted,
                     position: 'absolute',
@@ -322,14 +339,12 @@ const SlideDailyTransaction: React.FC<{
             </View>
             {
                 transactions.length === 0 ?
-
                     <View style={{
                         backgroundColor: theme.colors.background,
                         borderRadius: 10,
                         padding: 10,
                         marginTop: 10,
                     }}>
-                        {}
                         <ThemedText style={{
                             textAlign: 'center',
                             fontSize: 16,

@@ -4,20 +4,30 @@ import DateTimePicker, { DateType, useDefaultStyles } from 'react-native-ui-date
 import { FadingPressable } from './FadingPressable';
 import { ThemedText } from './ThemedText';
 import { useTheme } from '../theming';
-import { useState } from 'react';
 
-type NativeCalendarProps = {
-    mode: 'single' | 'multiple';
+type NativeCalendarBaseProps = {
     isVisible: boolean;
     setIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
-    setDate?: React.Dispatch<React.SetStateAction<DateType>>;
-    setDates?: React.Dispatch<React.SetStateAction<DateType[]>>;
-};
+    onPressCancel: () => void;
+    onPressSubmit: () => void;
+}
 
-export const NativeCalendar: React.FC<NativeCalendarProps> = ({ mode, isVisible, setIsVisible, setDates, setDate }) => {
+interface NativeCalendarProps extends NativeCalendarBaseProps {
+    children?: React.ReactNode;
+}
+
+interface MultipleModeNativeCalendarProps extends NativeCalendarBaseProps {
+    modalDates: DateType[];
+    setModalDates: React.Dispatch<React.SetStateAction<DateType[]>>;
+}
+
+interface SingleModeNativeCalendarProps extends NativeCalendarBaseProps {
+    modalDate: DateType;
+    setModalDate: React.Dispatch<React.SetStateAction<DateType>>;
+}
+
+const NativeCalendar: React.FC<NativeCalendarProps> = ({ isVisible, setIsVisible, onPressCancel, onPressSubmit, children }) => {
     const theme = useTheme();
-    const [modalDates, setModalDates] = useState<DateType[]>();
-    const [modalDate, setModalDate] = useState<DateType>();
     return (
         <Modal
             animationType="slide"
@@ -28,15 +38,7 @@ export const NativeCalendar: React.FC<NativeCalendarProps> = ({ mode, isVisible,
             }}>
             <KeyboardAvoidingView style={[styles.centeredView]}>
                 <View style={[styles.modalView, { backgroundColor: theme.colors.background }]}>
-                    {/* TODO: Make it so that it can support both Single and Multiple as options */}
-                    {mode === 'multiple' &&
-                        <MultipleModeCalendar
-                            modalDates={modalDates || []}
-                            setModalDates={setModalDates} />}
-                    {mode === 'single' &&
-                        <SingleModeCalendar
-                            modalDate={modalDate}
-                            setModalDate={setModalDate} />}
+                    {children}
                     <View style={{
                         flexDirection: 'row',
                         justifyContent: 'space-evenly',
@@ -48,7 +50,7 @@ export const NativeCalendar: React.FC<NativeCalendarProps> = ({ mode, isVisible,
                                 borderRadius: 10,
                             }}
                             onPress={() => {
-                                setIsVisible(false);
+                                onPressCancel();
                             }}
                         >
                             <ThemedText style={{ fontSize: 16 }}>Cancel</ThemedText>
@@ -60,12 +62,7 @@ export const NativeCalendar: React.FC<NativeCalendarProps> = ({ mode, isVisible,
                                 borderRadius: 10,
                             }}
                             onPress={() => {
-                                if (modalDates) {
-                                    setDates && setDates(modalDates);
-                                } else if (modalDate) {
-                                    setDate && setDate(modalDate);
-                                }
-                                setIsVisible(false);
+                                onPressSubmit();
                             }}
                         >
                             <ThemedText style={{ fontSize: 16 }}>Submit</ThemedText>
@@ -77,67 +74,57 @@ export const NativeCalendar: React.FC<NativeCalendarProps> = ({ mode, isVisible,
     );
 };
 
-type MultipleModeCalendarProps = {
-    modalDates: DateType[];
-    setModalDates: React.Dispatch<React.SetStateAction<DateType[]>>;
-}
-
-const MultipleModeCalendar: React.FC<MultipleModeCalendarProps> = ({ modalDates, setModalDates }) => {
+export const NativeCalendarModeMultiple: React.FC<MultipleModeNativeCalendarProps> = ({ modalDates, setModalDates, ...props }) => {
     const theme = useTheme();
     const defaultStyle = useDefaultStyles();
     return (
-        <DateTimePicker
-            mode="multiple"
-            dates={modalDates}
-            style={{
-                backgroundColor: theme.colors.background,
-                borderRadius: 10,
-                padding: 5,
-                marginTop: 10,
-            }}
-            styles={{
-                ...defaultStyle,
-                today: { borderColor: 'white', borderWidth: 1 },
-                range_fill: { backgroundColor: '#222222' },
-                range_start: { backgroundColor: 'white', color: 'black' },
-                range_end: { backgroundColor: 'white', color: 'black' },
-            }}
-            multiRangeMode
-            maxDate={new Date()}
-            onChange={({ dates }) => {
-                setModalDates(dates);
-            }}
-        />
+        <NativeCalendar {...props}>
+            <DateTimePicker
+                mode="multiple"
+                dates={modalDates}
+                style={{
+                    backgroundColor: theme.colors.background,
+                    borderRadius: 10,
+                    padding: 5,
+                    marginTop: 10,
+                }}
+                styles={{
+                    ...defaultStyle,
+                    today: { borderColor: 'white', borderWidth: 1 },
+                    range_fill: { backgroundColor: '#222222' },
+                    range_start: { backgroundColor: 'white', color: 'black' },
+                    range_end: { backgroundColor: 'white', color: 'black' },
+                }}
+                multiRangeMode
+                maxDate={new Date()}
+                onChange={({ dates }) => setModalDates(dates)}
+            />
+        </NativeCalendar>
     );
 };
 
-type SingleModeCalendarProps = {
-    modalDate: DateType;
-    setModalDate: React.Dispatch<React.SetStateAction<DateType>>;
-}
-
-const SingleModeCalendar: React.FC<SingleModeCalendarProps> = ({ modalDate, setModalDate }) => {
+export const NativeCalendarModeSingle: React.FC<SingleModeNativeCalendarProps> = ({ modalDate, setModalDate, ...props }) => {
     const theme = useTheme();
     const defaultStyle = useDefaultStyles();
     return (
-        <DateTimePicker
-            mode="single"
-            date={modalDate}
-            style={{
-                backgroundColor: theme.colors.background,
-                borderRadius: 10,
-                padding: 5,
-                marginTop: 10,
-            }}
-            styles={{
-                ...defaultStyle,
-                today: { borderColor: 'white', borderWidth: 1 },
-            }}
-            maxDate={new Date()}
-            onChange={({ date }) => {
-                setModalDate(date);
-            }}
-        />
+        <NativeCalendar {...props}>
+            <DateTimePicker
+                mode="single"
+                date={modalDate}
+                style={{
+                    backgroundColor: theme.colors.background,
+                    borderRadius: 10,
+                    padding: 5,
+                    marginTop: 10,
+                }}
+                styles={{
+                    ...defaultStyle,
+                    today: { borderColor: 'white', borderWidth: 1 },
+                }}
+                maxDate={new Date()}
+                onChange={({ date }) => setModalDate(date)}
+            />
+        </NativeCalendar>
     );
 };
 
