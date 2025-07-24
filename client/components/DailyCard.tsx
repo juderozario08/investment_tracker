@@ -65,7 +65,9 @@ export const DailyCard: React.FC<{
     const total = totals.income - totals.spending;
 
     const [isVisible, setIsVisible] = useState<boolean>(false);
-    const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue(date));
+    const [transaction, setTransaction] = useState<TransactionDataType>(
+        getDefaultTransactionValue(date)
+    );
 
     return (
         <Reanimated.View style={animatedStyle}>
@@ -97,7 +99,7 @@ export const DailyCard: React.FC<{
                     {transactions.map((transaction, idx) => (
                         <TransactionItem
                             key={idx}
-                            setDetails={setDetails}
+                            setDetails={setTransaction}
                             setIsVisible={setIsVisible}
                             transaction={transaction}
                             removeTransaction={removeTransaction}
@@ -105,9 +107,9 @@ export const DailyCard: React.FC<{
                     ))}
                     <TransactionModal
                         isVisibleState={[isVisible, setIsVisible]}
-                        detailsState={[details, setDetails]}
+                        transactionState={[transaction, setTransaction]}
                         onSubmit={() => {
-                            editTransaction(details);
+                            editTransaction(transaction);
                             setIsVisible(false);
                         }} />
                 </ScrollView>

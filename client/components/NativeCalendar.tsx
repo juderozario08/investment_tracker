@@ -14,11 +14,15 @@ type NativeCalendarBaseProps = {
 
 interface NativeCalendarProps extends NativeCalendarBaseProps {
     children?: React.ReactNode;
+    clearSelection?: boolean;
+    onClearSelectionPress?: () => void;
 }
 
 interface MultipleModeNativeCalendarProps extends NativeCalendarBaseProps {
     modalDates: DateType[];
     setModalDates: React.Dispatch<React.SetStateAction<DateType[]>>;
+    clearSelection?: boolean;
+    onClearSelectionPress?: () => void;
 }
 
 interface SingleModeNativeCalendarProps extends NativeCalendarBaseProps {
@@ -26,7 +30,7 @@ interface SingleModeNativeCalendarProps extends NativeCalendarBaseProps {
     setModalDate: React.Dispatch<React.SetStateAction<DateType>>;
 }
 
-const NativeCalendar: React.FC<NativeCalendarProps> = ({ isVisible, setIsVisible, onPressCancel, onPressSubmit, children }) => {
+const NativeCalendar: React.FC<NativeCalendarProps> = ({ isVisible, setIsVisible, onPressCancel, onPressSubmit, children, clearSelection, onClearSelectionPress }) => {
     const theme = useTheme();
     return (
         <Modal
@@ -67,6 +71,17 @@ const NativeCalendar: React.FC<NativeCalendarProps> = ({ isVisible, setIsVisible
                         >
                             <ThemedText style={{ fontSize: 16 }}>Submit</ThemedText>
                         </FadingPressable>
+                        {clearSelection &&
+                            <FadingPressable
+                                style={{
+                                    backgroundColor: 'grey',
+                                    padding: 10,
+                                    borderRadius: 10,
+                                }}
+                                onPress={onClearSelectionPress}>
+                                <ThemedText style={{ fontSize: 16 }}>Clear</ThemedText>
+                            </FadingPressable>
+                        }
                     </View>
                 </View>
             </KeyboardAvoidingView>

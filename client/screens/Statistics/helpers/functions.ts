@@ -1,32 +1,29 @@
 import { barDataItem, pieDataItem } from 'react-native-gifted-charts';
-import { chartColors } from '../../../library/constants';
-import { capitalizeString } from '../../../library/helper';
-import { CategoryTypes, IncomeTagTypes, InvestmentTagTypes, SpendingTagTypes } from '../../../library/types';
 import { RangeTypes } from '../types';
+import { Alert } from 'react-native';
+import { capitalizeString } from '../../../library/helper';
+import { ChartColors } from '../../../library/constants';
+import { AllTagTypes } from '../../../library/types';
 
-export const generatePieData = <T extends SpendingTagTypes | IncomeTagTypes | InvestmentTagTypes | CategoryTypes>(
-    value: number,
-    tag: T,
-    onPress?: Function
-): pieDataItem => ({
+export const generatePieData = (value: number, tag: AllTagTypes, onPress?: Function): pieDataItem => ({
     value,
-    gradientCenterColor: chartColors[`${tag}Gradient` as keyof typeof chartColors],
-    color: chartColors[tag as keyof typeof chartColors],
+    gradientCenterColor: ChartColors[`${tag}Gradient`],
+    color: ChartColors[tag],
     onPress: onPress,
 });
 
-export function generateBarData<T extends SpendingTagTypes | IncomeTagTypes | InvestmentTagTypes | CategoryTypes>(
+export function generateBarData(
     value: number,
-    tag: T,
-    onPress?: Function
+    tag: AllTagTypes,
+    onPress?: (t: AllTagTypes) => void
 ): barDataItem {
-    return ({
+    return {
         value,
-        gradientColor: chartColors[`${tag}Gradient`],
-        frontColor: chartColors[tag],
+        gradientColor: ChartColors[`${tag}Gradient`],
+        frontColor: ChartColors[tag],
         label: capitalizeString(tag),
-        onPress: onPress,
-    });
+        onPress: onPress ? () => onPress(tag) : undefined,
+    };
 }
 
 function getFirstDateForRange(range: RangeTypes) {
@@ -55,4 +52,47 @@ export function getDatesInRange(range: RangeTypes): Date[] {
         }
     }
     return result;
+}
+
+export function getDateSelectionAlert(previousRangeSelected: RangeTypes, onOkayPress: () => void) {
+    Alert.alert(
+        'Date(s) Required',
+        `Please select a date or multiple dates and press "Submit" in order to continue or press Okay if you want to go back to your ${previousRangeSelected} view.`,
+        [
+            {
+                text: 'Cancel',
+                style: 'destructive',
+            },
+            {
+                text: 'Okay',
+                style: 'default',
+                onPress: () => onOkayPress(),
+            },
+        ]
+    );
+}
+
+
+export function getMonthDates(date: Date) {
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+    const result: Date[] = [];
+    let current = new Date(firstDay);
+    while (current <= lastDay) {
+        result.push(new Date(current));
+        current.setDate(current.getDate() + 1);
+    }
+    return result;
+}
+
+export function getYearDates(year: number): Date[] {
+    const dates: Date[] = [];
+    const date = new Date(year, 0, 1);
+
+    while (date.getFullYear() === year) {
+        dates.push(new Date(date));
+        date.setDate(date.getDate() + 1);
+    }
+
+    return dates;
 }

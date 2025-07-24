@@ -65,7 +65,7 @@ export const getDefaultTransactionValue = (date: Date): TransactionDataType => {
     };
 };
 
-export const chartColors = {
+export const ChartColors = {
     // Categories
     'income': '#009FFF',
     'incomeGradient': '#006DFF',

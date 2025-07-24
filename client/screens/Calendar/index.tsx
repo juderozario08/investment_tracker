@@ -62,7 +62,7 @@ export const Calendar = () => {
                         result[index].spending += Number(val.amount);
                     } else if (val.category === 'income') {
                         result[index].income += Number(val.amount);
-                    } else if (val.category === 'investing') {
+                    } else if (val.category === 'investment') {
                         result[index].investments += Number(val.amount);
                     }
                 });
@@ -145,7 +145,9 @@ const TransactionsFromSelectedDate: React.FC<{
 
     useEffect(() => {
         if (visible) {
-            translateY.value = withTiming(screenHeight, { duration: STANDARD_ANIMATION_DURATION });
+            translateY.value = withTiming(
+                screenHeight,
+                { duration: STANDARD_ANIMATION_DURATION });
         }
     }, [date]);
 
@@ -153,9 +155,7 @@ const TransactionsFromSelectedDate: React.FC<{
         if (!visible) { return; }
 
         const updatedTransactions = groupedByDate.get(selectedDate.toISOString()) ?? [];
-        const updateTransactions = () => {
-            setTransactions(updatedTransactions);
-        };
+        const updateTransactions = () => setTransactions(updatedTransactions);
 
         translateY.value = withSequence(
             withTiming(screenHeight, { duration: STANDARD_ANIMATION_DURATION }, (isFinished) => {
@@ -170,26 +170,23 @@ const TransactionsFromSelectedDate: React.FC<{
     return (
         <AnimatedView
             pointerEvents={visible ? 'auto' : 'none'}
-            style={[
-                {
-                    backgroundColor: theme.colors.muted,
-                    position: 'absolute',
-                    width: '100%',
-                    bottom: 0,
-                    borderTopRightRadius: 12,
-                    borderTopLeftRadius: 12,
-                    padding: 16,
-                    paddingBottom: 30,
-                    zIndex: 1000,
-                    elevation: 5,
-                    shadowColor: '#fff',
-                    shadowOpacity: 0.5,
-                    shadowRadius: 20,
-                    maxHeight: '50%',
-                },
-                animatedStyle,
-            ]}>
-            <View style={{ flexDirection: 'row-reverse' }}>
+            style={[{
+                backgroundColor: theme.colors.muted,
+                position: 'absolute',
+                width: '100%',
+                bottom: 0,
+                borderTopRightRadius: 12,
+                borderTopLeftRadius: 12,
+                padding: 16,
+                paddingBottom: 30,
+                zIndex: 1000,
+                elevation: 5,
+                shadowColor: '#fff',
+                shadowOpacity: 0.5,
+                shadowRadius: 20,
+                maxHeight: '50%',
+            }, animatedStyle]}>
+            <View style={{ flexDirection: 'row-reverse', paddingBottom: 10 }}>
                 <FadingPressable onPress={() => {
                     translateY.value = withTiming(500, { duration: STANDARD_ANIMATION_DURATION }, () => {
                         'worklet';
@@ -199,53 +196,51 @@ const TransactionsFromSelectedDate: React.FC<{
                     <X color={'grey'} width={20} style={{ padding: 5 }} />
                 </FadingPressable>
             </View>
-            {
-                transactions.length === 0 ?
-                    <View style={{
-                        backgroundColor: theme.colors.background,
-                        borderRadius: 10,
-                        padding: 10,
-                        marginTop: 10,
-                    }}>
+            {transactions.length === 0 ?
+                <View style={{
+                    backgroundColor: theme.colors.background,
+                    borderRadius: 10,
+                    padding: 10,
+                    marginTop: 10,
+                }}>
+                    <ThemedText style={{
+                        textAlign: 'center',
+                        fontSize: 16,
+                    }}>No Transactions were recorded this day!</ThemedText>
+                </View>
+                : <View>
+                    <View style={{ paddingBottom: 20 }}>
                         <ThemedText style={{
                             textAlign: 'center',
                             fontSize: 16,
-                        }}>No Transactions were recorded this day!</ThemedText>
+                            fontWeight: 'bold',
+                        }}>Transactions for {Months[selectedDate.getMonth()]} {selectedDate.getDate()}, {selectedDate.getFullYear()}</ThemedText>
                     </View>
-                    : <View>
-                        <View style={{ paddingBottom: 20 }}>
-                            <ThemedText style={{
-                                textAlign: 'center',
-                                fontSize: 16,
-                                fontWeight: 'bold',
-                            }}>Transactions for {Months[selectedDate.getMonth()]} {selectedDate.getDate()}, {selectedDate.getFullYear()}</ThemedText>
-                        </View>
-                        <ScrollView style={{
-                            backgroundColor: theme.colors.background,
-                            borderRadius: 10,
-                            padding: 10,
-                            gap: 10,
-                        }}>
-                            {
-                                transactions.map((val) => (
-                                    <TransactionItem
-                                        key={val.id}
-                                        setDetails={setDetails}
-                                        setIsVisible={setIsVisible}
-                                        transaction={val}
-                                        removeTransaction={removeTransaction} />
-                                ))
-                            }
-                            <TransactionModal
-                                isVisibleState={[isVisible, setIsVisible]}
-                                detailsState={[details, setDetails]}
-                                onSubmit={() => {
-                                    editTransaction(details);
-                                    setIsVisible(false);
-                                }} />
-                        </ScrollView>
-                    </View>
-            }
+                    <ScrollView style={{
+                        backgroundColor: theme.colors.background,
+                        borderRadius: 10,
+                        padding: 10,
+                        gap: 10,
+                    }}>
+                        {
+                            transactions.map((val) => (
+                                <TransactionItem
+                                    key={val.id}
+                                    setDetails={setDetails}
+                                    setIsVisible={setIsVisible}
+                                    transaction={val}
+                                    removeTransaction={removeTransaction} />
+                            ))
+                        }
+                        <TransactionModal
+                            isVisibleState={[isVisible, setIsVisible]}
+                            transactionState={[details, setDetails]}
+                            onSubmit={() => {
+                                editTransaction(details);
+                                setIsVisible(false);
+                            }} />
+                    </ScrollView>
+                </View>}
         </AnimatedView>
     );
 };

@@ -16,19 +16,19 @@ import { DateType } from 'react-native-ui-datepicker';
 
 interface TransactionModalProps {
     isVisibleState: [boolean, React.Dispatch<SetStateAction<boolean>>];
-    detailsState: [TransactionDataType, React.Dispatch<SetStateAction<TransactionDataType>>];
+    transactionState: [TransactionDataType, React.Dispatch<SetStateAction<TransactionDataType>>];
     onSubmit: () => void;
 }
 
 export const TransactionModal: React.FC<TransactionModalProps> = ({
     isVisibleState,
-    detailsState,
+    transactionState,
     onSubmit,
 }) => {
     const theme = useTheme();
 
     const [isVisible, setIsVisible] = isVisibleState;
-    const [details, setDetails] = detailsState;
+    const [details, setDetails] = transactionState;
 
     const [visible, setVisible] = useState(false);
 

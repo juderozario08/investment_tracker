@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import { useEffect, useState } from 'react';
 import { TransactionDataType } from '../../library/types';
 import { styles } from './styles';
@@ -21,7 +22,9 @@ export const Transactions = () => {
     const { addTransaction, groupedByDate } = useDataContext();
     const { date, prevMonth, nextMonth } = useDateContext();
     const [isVisible, setIsVisible] = useState<boolean>(false);
-    const [details, setDetails] = useState<TransactionDataType>(getDefaultTransactionValue(date));
+    const [transaction, setTransaction] = useState<TransactionDataType>(
+        getDefaultTransactionValue(date)
+    );
     const [filteredDates, setFilteredDates] = useState<string[]>([]);
 
     useEffect(() => {
@@ -47,13 +50,13 @@ export const Transactions = () => {
         <SafeAreaView edges={['top']} style={[styles.container, { backgroundColor: theme.colors.background }]}>
             {/* Tob Bar */}
             <TopMenu>
-                {/* eslint-disable-next-line react-native/no-inline-styles */}
+                {}
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' }}>
                     <MonthSwitcher />
                     {/* Add transaction button */}
                     <FadingPressable
                         onPress={() => setIsVisible(true)}
-                        // eslint-disable-next-line react-native/no-inline-styles
+
                         style={{ padding: 10 }}
                     >
                         <Plus
@@ -67,32 +70,27 @@ export const Transactions = () => {
             </TopMenu>
 
             {/* Daily Transaction Cards Per Month */}
-            {/* eslint-disable-next-line react-native/no-inline-styles */}
             <GestureView onLeftSwipe={nextMonth} onRightSwipe={prevMonth} style={{ flex: 1, padding: 10 }}>
                 {filteredDates.length > 0 ?
                     <FlatList
                         data={filteredDates}
                         renderItem={renderItem}
-                        // eslint-disable-next-line react-native/no-inline-styles
                         style={{ flexGrow: 1 }}
                         showsVerticalScrollIndicator={false}
                     /> :
                     <View>
-                        {/* eslint-disable-next-line react-native/no-inline-styles */}
                         <Text style={{ padding: 16, textAlign: 'center', color: 'gray', paddingTop: '25%' }}>
                             No transactions found for this month.
                         </Text>
-                    </View>
-
-                }
+                    </View>}
             </GestureView>
 
             <TransactionModal
                 isVisibleState={[isVisible, setIsVisible]}
-                detailsState={[details, setDetails]}
+                transactionState={[transaction, setTransaction]}
                 onSubmit={() => {
-                    addTransaction(details);
-                    setDetails(getDefaultTransactionValue(date));
+                    addTransaction(transaction);
+                    setTransaction(getDefaultTransactionValue(date));
                     setIsVisible(false);
                 }} />
         </SafeAreaView>
