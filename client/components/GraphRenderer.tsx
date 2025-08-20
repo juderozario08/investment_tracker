@@ -11,6 +11,7 @@ import { capitalizeString } from '../library/helper';
 import { ChartColors } from '../library/constants';
 import { BarChart, PieChart, barDataItem, lineDataItem, pieDataItem } from 'react-native-gifted-charts';
 import { generateBarData, generatePieData } from '../screens/Statistics/helpers/functions';
+import { useTheme } from '../theming';
 
 interface GraphComponentProps {
     mode: ChartTypeNames;
@@ -18,6 +19,7 @@ interface GraphComponentProps {
     data: TransactionDataType[];
     chartSelectionList: ChartTypeNames[];
     noOfSections?: number;
+    text?: string;
     donut?: boolean;
     centerLabelComponent?: Function;
     legends?: AllTagTypes[];
@@ -47,6 +49,15 @@ export const GraphComponent: React.FC<GraphComponentProps> = ({ mode, ...props }
     const [selectedChart, setSelectedChart] = useState<ChartTypeNames>(mode);
     return (
         <View style={{ paddingVertical: 20 }}>
+            {props.text && (
+                <View style={{ paddingBottom: 20, paddingTop: 10 }}>
+                    <ThemedText style={{
+                        textAlign: 'center',
+                        fontSize: 20,
+                        fontWeight: 'bold',
+                    }}>{props.text}</ThemedText>
+                </View>
+            )}
             <ChartSelectionDropdown
                 selectedChart={selectedChart}
                 setSelectedChart={setSelectedChart}
@@ -65,7 +76,6 @@ export const GraphComponent: React.FC<GraphComponentProps> = ({ mode, ...props }
 
 const BarChartComponent: React.FC<BarChartComponentProps> = (props) => {
     const [barData, setBarData] = useState<barDataItem[]>([]);
-    const [numOfBars, setNumOfBars] = useState<number>(1);
 
     useEffect(() => {
         const result = new Map<AllTagTypes, number>();
@@ -75,28 +85,36 @@ const BarChartComponent: React.FC<BarChartComponentProps> = (props) => {
             result.set(d[props.lookupType], current + Number(d.amount));
         });
 
-        setNumOfBars(Array.from(result.keys()).length);
-
-        const newBarData = Array.from(result.keys()).map(t =>
-            generateBarData(result.get(t) ?? 0, t, () => props.onPress?.(t))
-        );
+        const newBarData = Array.from(result.keys()).map((t) => {
+            const amount = result.get(t);
+            return generateBarData(amount ?? 0, t, () => props.onPress?.(t));
+        });
 
         setBarData(newBarData);
     }, [props.data]);
 
     return (
-        <View style={{ paddingVertical: 10, paddingRight: 20, alignSelf: 'center' }}>
+        <View style={{ paddingVertical: 10, paddingRight: 35, alignSelf: 'center' }}>
             <BarChart
+                key={barData.length}
                 data={barData}
+                showGradient
                 frontColor={'white'}
                 yAxisTextStyle={{ color: 'white' }}
                 xAxisLabelTextStyle={{ color: 'white' }}
                 yAxisColor={'white'}
                 xAxisColor={'white'}
-                barWidth={Dimensions.get('window').width / (2 * numOfBars)}
+                xAxisThickness={0}
+                yAxisThickness={0}
+                barWidth={65}
+                width={Dimensions.get('window').width - 140}
+                barBorderRadius={10}
                 dashWidth={1}
-                isAnimated
                 autoCenterTooltip
+                isAnimated
+                animationDuration={800}
+                noOfSections={6}
+                scrollAnimation
                 gradientColor={'white'}
                 renderTooltip={(item: any) => {
                     return (
@@ -111,6 +129,7 @@ const BarChartComponent: React.FC<BarChartComponentProps> = (props) => {
 };
 
 const PieChartComponent: React.FC<PieChartComponentProps> = (props) => {
+    const theme = useTheme();
     const [pieData, setPieData] = useState<pieDataItem[]>([]);
     const [legendLabels, setLegendLabels] = useState<AllTagTypes[]>([]);
 
@@ -138,10 +157,10 @@ const PieChartComponent: React.FC<PieChartComponentProps> = (props) => {
             <PieChart
                 data={pieData}
                 focusOnPress
-                donut={props.donut ?? false}
-                showGradient
-                innerRadius={80}
-                innerCircleColor={'#232B5D'}
+                sectionAutoFocus
+                donut={props.donut ?? true}
+                innerRadius={65}
+                innerCircleColor={theme.colors.background}
                 centerLabelComponent={props.centerLabelComponent}
             />
             <Legends legendLabels={legendLabels} />

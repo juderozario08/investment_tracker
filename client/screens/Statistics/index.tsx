@@ -1,6 +1,6 @@
 /* eslint-disable react-native/no-inline-styles */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { Dimensions, StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { useTheme } from '../../theming';
 import { useEffect, useState } from 'react';
 import { TransactionDataType } from '../../library/types';
@@ -10,14 +10,12 @@ import { TransactionItem } from '../../components/TransactionItem';
 import { getDefaultTransactionValue } from '../../library/constants';
 import { TransactionModal } from '../../components/TransactionModal';
 import Animated, {
-    runOnJS,
     useAnimatedStyle,
     useSharedValue,
-    withSequence,
     withTiming,
 } from 'react-native-reanimated';
 import { FadingPressable } from '../../components/FadingPressable';
-import { Calendar, ChevronUp, X } from 'react-native-feather';
+import { Calendar, ChevronUp } from 'react-native-feather';
 import { STANDARD_ANIMATION_DURATION, getTimingConfig } from '../../library/animationConfigs';
 import { DateType } from 'react-native-ui-datepicker';
 import { RangeTypes } from './types';
@@ -29,6 +27,7 @@ import { useDateContext } from '../../context/DateContext';
 import { YearSwitcher } from '../../components/YearSwitcher';
 import { NativeCalendarModeMultiple } from '../../components/NativeCalendar';
 import { GraphComponent } from '../../components/GraphRenderer';
+import { SlideUpView } from '../../components/SlideUpView';
 
 const AnimatedView = Animated.createAnimatedComponent(View);
 const AnimatedFadingPressable = Animated.createAnimatedComponent(FadingPressable);
@@ -100,6 +99,11 @@ export const Statistics = () => {
     const rotate = useSharedValue<number>(0);
     const animatedButtonContainerStyle = useAnimatedStyle(() => ({ height: height.value }));
     const animatedChevronStyle = useAnimatedStyle(() => ({ transform: [{ rotate: `${rotate.value}deg` }] }));
+
+    const [isVisible, setIsVisible] = useState<boolean>(false);
+    const [selectedTransaction, setSelectedTransaction] = useState<TransactionDataType>(
+        getDefaultTransactionValue(new Date())
+    );
 
     useEffect(() => {
         if (!buttonsVisible) {
@@ -197,10 +201,12 @@ export const Statistics = () => {
                         {/*Account Overview*/}
                         <GraphComponent
                             mode={'Bar'}
+                            text="Account Overview"
                             lookupType="category"
                             data={transactions}
                             chartSelectionList={['Bar', 'Pie']}
                             noOfSections={6}
+                            donut
                             onPress={(t) => {
                                 setSelectedTransactions(transactions.filter(a => a.category === t));
                                 setSlideViewVisible(true);
@@ -210,6 +216,7 @@ export const Statistics = () => {
                         {/*Income Overview*/}
                         <GraphComponent
                             mode={'Bar'}
+                            text="Income Overview"
                             lookupType="tag"
                             data={transactions.filter(t => t.category === 'income')}
                             chartSelectionList={['Bar', 'Pie']}
@@ -224,6 +231,7 @@ export const Statistics = () => {
                         <GraphComponent
                             mode={'Bar'}
                             lookupType="tag"
+                            text="Spending Overview"
                             data={transactions.filter(t => t.category === 'spending')}
                             chartSelectionList={['Bar', 'Pie']}
                             noOfSections={2}
@@ -237,6 +245,7 @@ export const Statistics = () => {
                         <GraphComponent
                             mode={'Bar'}
                             lookupType="tag"
+                            text="Investment Overview"
                             data={transactions.filter(t => t.category === 'investment')}
                             chartSelectionList={['Bar', 'Pie']}
                             noOfSections={2}
@@ -292,102 +301,51 @@ export const Statistics = () => {
 
             </SafeAreaView>
 
-            <SlideDailyTransaction
+            <SlideUpView
                 visible={slideViewVisible}
                 setVisible={setSlideViewVisible}
-                transactions={selectedTransactions}
-                removeTransaction={removeTransaction}
-                editTransaction={editTransaction} />
-        </View>
-    );
-};
-
-const SlideDailyTransaction: React.FC<{
-    visible: boolean;
-    setVisible: React.Dispatch<React.SetStateAction<boolean>>;
-    transactions: TransactionDataType[];
-    removeTransaction: (id: string) => void;
-    editTransaction: (t: TransactionDataType) => void;
-}> = ({ visible, setVisible, transactions, editTransaction, removeTransaction }) => {
-    const theme = useTheme();
-
-    // Slide Animation
-    const screenHeight = Dimensions.get('screen').height;
-    const translateY = useSharedValue<number>(screenHeight);
-    const animatedStyle = useAnimatedStyle(() => ({
-        transform: [{ translateY: translateY.value }],
-    }));
-
-    const [isVisible, setIsVisible] = useState<boolean>(false);
-    const [selectedTransaction, setSelectedTransaction] = useState<TransactionDataType>(
-        getDefaultTransactionValue(new Date())
-    );
-
-    useEffect(() => {
-        if (!visible) { return; }
-
-        translateY.value = withSequence(
-            withTiming(screenHeight, { duration: STANDARD_ANIMATION_DURATION }),
-            withTiming(0, { duration: STANDARD_ANIMATION_DURATION })
-        );
-
-    }, [transactions]);
-
-    return (
-        <AnimatedView
-            pointerEvents={visible ? 'auto' : 'none'}
-            style={[
-                { backgroundColor: theme.colors.muted },
-                styles.slideViewTransactionView,
-                animatedStyle,
-            ]}>
-            <View style={{ flexDirection: 'row-reverse', paddingBottom: 10 }}>
-                <FadingPressable onPress={() => {
-                    translateY.value = withTiming(500, { duration: STANDARD_ANIMATION_DURATION }, () => {
-                        'worklet';
-                        runOnJS(setVisible)(false);
-                    });
-                }}>
-                    <X color={'grey'} width={20} style={{ padding: 5 }} />
-                </FadingPressable>
-            </View>
-            {transactions.length === 0 ?
-                <View style={{
-                    backgroundColor: theme.colors.background,
-                    borderRadius: 10,
-                    padding: 10,
-                    marginTop: 10,
-                }}>
-                    <ThemedText style={{
-                        textAlign: 'center',
-                        fontSize: 16,
-                    }}>No Transactions were recorded this day!</ThemedText>
-                </View>
-                : <View>
-                    <ScrollView style={{
+                deps={[selectedTransactions]}
+            >
+                {selectedTransactions.length === 0 ?
+                    <View style={{
                         backgroundColor: theme.colors.background,
                         borderRadius: 10,
                         padding: 10,
-                        gap: 10,
+                        marginTop: 10,
                     }}>
-                        {transactions.map((val) => (
-                            <TransactionItem
-                                key={val.id}
-                                setDetails={setSelectedTransaction}
-                                setIsVisible={setIsVisible}
-                                transaction={val}
-                                removeTransaction={removeTransaction} />
-                        ))}
-                        <TransactionModal
-                            isVisibleState={[isVisible, setIsVisible]}
-                            transactionState={[selectedTransaction, setSelectedTransaction]}
-                            onSubmit={() => {
-                                editTransaction(selectedTransaction);
-                                setIsVisible(false);
-                            }} />
-                    </ScrollView>
-                </View>}
-        </AnimatedView>
+                        <ThemedText style={{
+                            textAlign: 'center',
+                            fontSize: 16,
+                        }}>No Transactions were recorded this day!</ThemedText>
+                    </View>
+                    : <View>
+                        <ScrollView style={{
+                            backgroundColor: theme.colors.background,
+                            borderRadius: 10,
+                            padding: 10,
+                            gap: 10,
+                        }}>
+
+                            {selectedTransactions.map((val) => (
+                                <TransactionItem
+                                    key={val.id}
+                                    setDetails={setSelectedTransaction}
+                                    setIsVisible={setIsVisible}
+                                    transaction={val}
+                                    removeTransaction={removeTransaction} />
+                            ))}
+                            <TransactionModal
+                                isVisibleState={[isVisible, setIsVisible]}
+                                transactionState={[selectedTransaction, setSelectedTransaction]}
+                                onSubmit={() => {
+                                    editTransaction(selectedTransaction);
+                                    setIsVisible(false);
+                                }} />
+                        </ScrollView>
+                    </View>}
+            </SlideUpView>
+
+        </View>
     );
 };
 
@@ -422,7 +380,7 @@ const DateRangeButton: React.FC<{
     );
 };
 
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
     container: {
         flex: 1,
     },
@@ -456,20 +414,5 @@ export const styles = StyleSheet.create({
         marginVertical: 10,
         marginHorizontal: 5,
         paddingBottom: 20,
-    },
-    slideViewTransactionView: {
-        position: 'absolute',
-        width: '100%',
-        bottom: 0,
-        borderTopRightRadius: 12,
-        borderTopLeftRadius: 12,
-        padding: 16,
-        paddingBottom: 30,
-        zIndex: 1000,
-        elevation: 5,
-        shadowColor: '#fff',
-        shadowOpacity: 0.5,
-        shadowRadius: 20,
-        maxHeight: '50%',
     },
 });

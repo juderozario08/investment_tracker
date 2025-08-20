@@ -10,6 +10,7 @@
         "test": "jest"
     },
     "dependencies": {
+        "@react-native-documents/picker": "^10.1.5",
         "@react-native-vector-icons/material-design-icons": "^12.0.1",
         "@react-navigation/bottom-tabs": "^7.3.13",
         "@react-navigation/native": "^7.1.10",

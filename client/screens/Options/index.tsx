@@ -1,6 +1,6 @@
-import { View, StyleSheet } from "react-native"
-import { useTheme } from "../../theming"
-import { ThemedText } from "../../components/ThemedText";
+import { View, StyleSheet } from 'react-native';
+import { useTheme } from '../../theming';
+import { ThemedText } from '../../components/ThemedText';
 
 export const Options = () => {
     const theme = useTheme();
@@ -8,8 +8,8 @@ export const Options = () => {
         <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
             <ThemedText>Options!</ThemedText>
         </View>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     container: {
