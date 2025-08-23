@@ -40,7 +40,7 @@ const App = () => {
                             tabBarStyle: { backgroundColor: theme.colors.tabBarBackground },
                             tabBarActiveTintColor: String(theme.colors.tabBarActive),
                             tabBarInactiveTintColor: String(theme.colors.tabBarInactive),
-                        }} initialRouteName="Statistics">
+                        }} initialRouteName="More">
                             <Tab.Screen name={'Transactions'} component={Transactions} options={{
                                 tabBarIcon: ({ focused }) => getTabColor(BookOpen, focused ? theme.colors.tabBarActive : theme.colors.tabBarInactive),
                             }} />
