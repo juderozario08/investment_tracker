@@ -32,11 +32,12 @@ type AmountsType = {
 }
 
 export const Calendar = () => {
-    const theme = useTheme();
+    const theme = useTheme(); // Context
 
-    const { date, nextMonth, prevMonth } = useDateContext();
-    const { groupedByDate } = useDataContext();
+    const { date, nextMonth, prevMonth } = useDateContext(); // Context
+    const { groupedByDate } = useDataContext(); // Context
 
+    // Use States
     const [dates, setDates] = useState<number[]>([]);
     const [selectedDate, setSelectedDate] = useState<Date>(date);
     const [amounts, setAmounts] = useState<AmountsType[]>([]);
