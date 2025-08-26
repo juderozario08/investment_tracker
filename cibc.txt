@@ -1,0 +1,368 @@
+[
+  {
+    table: [
+      [Array], [Array],
+      [Array], [Array],
+      [Array], [Array],
+      [Array], [Array],
+      [Array], [Array]
+    ],
+    text: 'JUDE ROZARIO\n' +
+      'CIBC Dividend® Visa* Card\n' +
+      'Account number\n' +
+      '4505 XXXX XXXX 7960\n' +
+      'Statement Date\n' +
+      'August 12, 2025\n' +
+      'Your account at a glance\n' +
+      'August statement period\n' +
+      'July 13to August 12, 2025\n' +
+      'Previous balance $17.19\n' +
+      'Contact us\n' +
+      'Payments $1,394.47\n' +
+      'Customer Service 1 800 465-4653\n' +
+      'Other credits 573.13\n' +
+      'Lost/Stolen 1 800 663-4575\n' +
+      'Total credits - $1,967.60 TTY 1 877 331-3338\n' +
+      'Online www.cibc.com\n' +
+      'Purchases 2,702.29\n' +
+      'Summary Credit\n' +
+      'Cash advances 0.00\n' +
+      'Interest 0.00 Limit $3,000.00\n' +
+      'Fees 0.00 Available $2,248.12\n' +
+      'Total charges + $2,702.29 Interest rates\n' +
+      'Annual\n' +
+      'Total balance = $751.88\n' +
+      'Regular purchases 21.99%\n' +
+      'Your payment due this month Cash advances 22.99%\n' +
+      'Amount Due1 $751.88\n' +
+      'Your Cash Back\n' +
+      'Minimum Payment2 $10.00 As at last statement + 26.73\n' +
+      'Please pay this amount by Sep 02, 2025 This statement\n' +
+      'Promotions + 92.31\n' +
+      '2% Cash Back + 0.70\n' +
+      '1% Cash Back + 10.91\n' +
+      '0.5% Cash Back + 5.64\n' +
+      'Cash Back redeemed - 129.68\n' +
+      'Total Cash Back = 6.61\n' +
+      'Cash back redeemed is credited within 5 days.\n' +
+      "Refer to 'Your message centre' for details.\n" +
+      'Tear Off here Please turn over - Transactions begin on page 2 Page 1 of 6\n' +
+      '018174\n' +
+      'JUDE ROZARIO\n' +
+      '3430 KINGSTON RD\n' +
+      '22 CIBC\n' +
+      'SCARBOROUGH ON M1M 1R5 PO BOX 4595 STN A\n' +
+      'TORONTO ON M5W 4X9\n' +
+      '00004505530354867960000000007518800000000010005\n' +
+      '471810-881\n' +
+      'CIBC Dividend Visa Payment options Account number 4505 XXXX XXXX 7960\n' +
+      '• Online Banking: www.cibc.com\n' +
+      'Card • Telephone Banking: 1 800 465-CIBC (2422) Amount Due $751.88\n' +
+      '• CIBC bank machines and most financial\n' +
+      'institutions Minimum Payment due by\n' +
+      '• Mail: Return completed slip with your cheque Sep 02, 2025 $10.00\n' +
+      'or money order payable toCIBC.\n' +
+      'For general inquiries call Total payment enclosed $_____________\n' +
+      '1 800 465-4653\n' +
+      'Do not staple or attach correspondence.\n' +
+      '*0301680000*\n' +
+      '*0000861030*'
+  },
+  {
+    table: null,
+    text: 'Transactions\n' +
+      'from July 13 to August 12, 2025\n' +
+      'Your payments\n' +
+      'Trans Post\n' +
+      'date date Description Amount($)\n' +
+      'Jul 11 Jul 14 PAYMENT THANK YOU/PAIEMENT MERCI 17.19\n' +
+      'Jul 19 Jul 22 PAYMENT THANK YOU/PAIEMENT MERCI 232.67\n' +
+      'Jul 23 Jul 25 PAYMENT THANK YOU/PAIEMENT MERCI 44.61\n' +
+      'Aug 03 Aug 06 PAYMENT THANK YOU/PAIEMENT MERCI 300.00\n' +
+      'Aug 08 Aug 11 PAYMENT THANK YOU/PAIEMENT MERCI 800.00\n' +
+      'Total payments $1,394.47\n' +
+      'Your new charges and credits\n' +
+      'Ý\n' +
+      'Identifies Cash Back Multiplier transactions that have earned enhanced cash back rewards. Any returns/credits are deducted at the\n' +
+      'same rate(s).\n' +
+      'Trans Post\n' +
+      'date date Description Spend Categories Amount($)\n' +
+      'Card number 4505 XXXX XXXX 7960\n' +
+      'Ý\n' +
+      'Jul 11 Jul 14 MOS MOS COFFEE TORONTO ON Restaurants 3.44\n' +
+      'Jul 11 Jul 14 WAL-MART SUPERCENTER#1117SCARBOROUGH ON Retail and Grocery 56.47\n' +
+      'Jul 12 Jul 14 STAPLES STORE #26 TORONTO ON Retail and Grocery 2.68\n' +
+      'Jul 12 Jul 14 STAPLES STORE #26 TORONTO ON Retail and Grocery 8.89\n' +
+      'Ý\n' +
+      "Jul 12 Jul 14 JACK ASTOR'S SCARBOROUGH SCARBOROUGH ON Restaurants 98.49\n" +
+      'Ý\n' +
+      'Jul 14 Jul 15 PR TORONTO EATON CENTER TORONTO ON Restaurants 9.04\n' +
+      'Ý\n' +
+      'Jul 14 Jul 16 STARBUCKS COFFEE #8051 TORONTO ON Restaurants 3.94\n' +
+      'Ý\n' +
+      'Jul 15 Jul 16 PR TORONTO EATON CENTER TORONTO ON Restaurants 4.52\n' +
+      'Ý\n' +
+      'Jul 15 Jul 17 STARBUCKS 04497 TORONTO ON Restaurants 3.94\n' +
+      'Ý\n' +
+      'Jul 15 Jul 17 ASIAN GOURMET TORONTO ON Restaurants 12.40\n' +
+      'Ý\n' +
+      'Jul 16 Jul 17 TIM HORTONS #5363 TORONTO ON Restaurants 7.45\n' +
+      'Jul 16 Jul 17 DOLLARAMA #1201 TORONTO ON Retail and Grocery 1.41\n' +
+      'Jul 16 Jul 18 TMU FIN SERVICES TORONTO ON Health and Education 20.00\n' +
+      'Ý\n' +
+      'Jul 17 Jul 21 POPEYES 8209 SCARBOROUGH ON Restaurants 11.28\n' +
+      'Jul 18 Jul 21 STAPLES STORE #26 TORONTO ON Retail and Grocery 2.68\n' +
+      'Ý\n' +
+      "Jul 19 Jul 21 OSMOW'S SHAWARMA TORONTO ON Restaurants 16.36\n" +
+      'Jul 21 Jul 22 GATEWAY NEWSSTAND #145 SCARBOROUGH ON Retail and Grocery 5.25\n' +
+      'Ý\n' +
+      'Jul 21 Jul 22 PR TORONTO EATON CENTER TORONTO ON Restaurants 9.04\n' +
+      'Ý\n' +
+      'Jul 21 Jul 23 STARBUCKS 04497 TORONTO ON Restaurants 3.94\n' +
+      'Page 2 of 6\n' +
+      'Information about your CIBC Dividend Visa Card account\n' +
+      '2\n' +
+      'If you find an error or irregularity (including possible unauthorized or Amount Due, your payment due date will change back to your regular Minimum Payment is the minimum amount you must pay this\n' +
+      'fraudulent Transactions) in this statement you must tell us within 30 payment due date. month and it includes your monthly installment payments due (if\n' +
+      'days of this Statement Date. If you do not, we may regard this statement applicable).\n' +
+      'as final (except for credits posted in error). Your statement (including the Balance and Minimum Payment) only\n' +
+      'How we charge interest:. . If interest is charged on a Purchase, it reflects Transactions that were posted as of the Statement Date. If you\n' +
+      'is charged retroactively from the Transaction date. You have a minimum made a payment but it has not yet been posted, it will appear on your For more information, please refer to the CIBC Cardholder Agreement.\n' +
+      '21 day interest-free grace period for new Purchases. You can avoid next monthly statement and any interest charges will be adjusted based\n' +
+      'interest on those new Purchases by paying your new balance in full by on the transaction date and payment amount. The payment due date is ® Registered trademark of CIBC.\n' +
+      'the payment due date. determined under Eastern Standard Time (EST) meaning payments are * Trademark of Visa International Service Association and used under license.\n' +
+      'Interest is charged on Cash Advances from the date they are taken. considered received by us on the payment due date if made by 11:59pm\n' +
+      'Interest is charged on Convenience Cheques and Balance Transfers from EST. Payments made by mail or through another financial institution\n' +
+      'the date they are posted to your credit card account. We stop charging can take several days to be received by us. Please make your payments\n' +
+      'interest on the day we receive a payment which covers the amount of accordingly. Check CIBC Online Banking for the status of your payments\n' +
+      'the Purchase, Cash Advance, Balance Transfer or Convenience Cheque, and your most up to date Balance.\n' +
+      'as the case may be, as described in the Application of Payments section\n' +
+      'of your CIBC Cardholder Agreement. **Foreign currency Transactions, except Convenience Cheques, are\n' +
+      'converted to Canadian dollars on or after the Transaction date and no\n' +
+      'If you choose to convert an eligible Purchase into an Installment Plan, later than the Transaction posting date. At the time of currency\n' +
+      'interest will be charged on that Installment Plan at the interest rate you conversion, you are charged the same conversion rate CIBC must pay,\n' +
+      'agreed to at the time of conversion and in the manner set out in the plus a fee of 2.5% of the converted amount, on both debits and credits.\n' +
+      'Installment Plan Terms and Conditions. We convert a foreign currency Convenience Cheque or payment at our\n' +
+      'branch selling rate for Canadian dollars in effect at the time we process\n' +
+      "Payment period extensions:. If you didn't pay the Amount Due it.\n" +
+      'on your last monthly statement, we have extended your payment due 1\n' +
+      'date this month to give you extra time to make your payment. Interest Amount Due is the amount you must pay if you want to avoid\n' +
+      'will continue to accrue for the extended period. When we receive your interest on your regular purchases shown on this statement.'
+  },
+  {
+    table: null,
+    text: '471810-881-\n' +
+      'Prepared for: JUDE ROZARIO July 13 to August 12, 2025 Account number: 4505 XXXX XXXX 7960\n' +
+      'Your new charges and credits (continued)\n' +
+      'Trans Post\n' +
+      'date date Description Spend Categories Amount($)\n' +
+      'Card number 4505 XXXX XXXX 7960\n' +
+      'Ý\n' +
+      'Jul 22 Jul 24 STARBUCKS COFFEE #8051 TORONTO ON Restaurants 14.68\n' +
+      'Ý\n' +
+      'Jul 22 Jul 24 STARBUCKS 04497 TORONTO ON Restaurants 3.94\n' +
+      'Ý\n' +
+      'Jul 22 Jul 25 ASIAN GOURMET TORONTO ON Restaurants 11.30\n' +
+      'Jul 23 Jul 24 STAPLES STORE #26 TORONTO ON Retail and Grocery 2.68\n' +
+      'Jul 23 Jul 24 STAPLES STORE #26 TORONTO ON Retail and Grocery 713.41\n' +
+      'Ý\n' +
+      'Jul 23 Jul 24 METRO 759 TORONTO ON Retail and Grocery 8.43\n' +
+      'Ý\n' +
+      'Jul 23 Jul 25 STARBUCKS 04497 TORONTO ON Restaurants 3.94\n' +
+      'Jul 24 Jul 25 AMZN Mktp CA*JI9E517Z3 WWW.AMAZON.CAON Personal and Household Expenses 101.69\n' +
+      'Jul 24 Jul 25 GATEWAY NEWSSTAND #145 SCARBOROUGH ON Retail and Grocery 2.75\n' +
+      'Ý\n' +
+      'Jul 24 Jul 25 BELL MOBILITY VERDUN QC Personal and Household Expenses 64.76\n' +
+      'Jul 25 Jul 28 STAPLES STORE #26 TORONTO ON Retail and Grocery 2.68\n' +
+      'Ý\n' +
+      'Jul 25 Jul 28 PR TORONTO EATON CENTER TORONTO ON Restaurants 19.20\n' +
+      'Ý\n' +
+      'Jul 25 Jul 28 STARBUCKS 04497 TORONTO ON Restaurants 3.62\n' +
+      'Ý\n' +
+      'Jul 26 Jul 28 POPEYES 8209 SCARBOROUGH ON Restaurants 18.63\n' +
+      'Jul 28 Jul 29 STEAMGAMES.COM 4259522985912-1844160 WA Retail and Grocery 11.85\n' +
+      'Ý\n' +
+      'Jul 28 Jul 29 UBER* TRIP UBER.COM/CA/EON Transportation 12.36\n' +
+      'Ý\n' +
+      'Jul 28 Jul 29 ROGERS ******7884 888-764-3771 ON Personal and Household Expenses 90.40\n' +
+      'Jul 28 Jul 29 STAPLES STORE #26 TORONTO ON Retail and Grocery 24.64\n' +
+      'Ý\n' +
+      'Jul 29 Jul 30 UBER CANADA/UBERTRIP TORONTO ON Transportation 11.99\n' +
+      'Ý\n' +
+      'Jul 29 Jul 30 METRO 808 SCARBOROUGH ON Retail and Grocery 25.24\n' +
+      'Ý\n' +
+      'Jul 30 Jul 31 PR TORONTO EATON CENTER TORONTO ON Restaurants 9.04\n' +
+      'Jul 30 Jul 31 STAPLES STORE #26 TORONTO ON Retail and Grocery 421.58\n' +
+      'Jul 30 Jul 31 STAPLES STORE #26 TORONTO ON Retail and Grocery -416.58\n' +
+      'Ý\n' +
+      'Jul 30 Jul 31 UBER CANADA/UBEREATS TORONTO ON Restaurants 21.51\n' +
+      'Ý\n' +
+      'Jul 30 Jul 31 UBER CANADA/UBERTRIP TORONTO ON Transportation 9.38\n' +
+      'Ý\n' +
+      'Jul 30 Aug 01 STARBUCKS 04497 TORONTO ON Restaurants 3.62\n' +
+      'Ý\n' +
+      'Jul 30 Aug 01 UBER CANADA/UBERTRIP TORONTO ON Transportation 7.98\n' +
+      'Ý\n' +
+      'Jul 31 Aug 01 POPEYES 8209 SCARBOROUGH ON Restaurants 18.63\n' +
+      'Ý\n' +
+      'Jul 31 Aug 01 TIM HORTONS #2007 SCARBOROUGH ON Restaurants 7.10\n' +
+      'Jul 31 Aug 01 DOLLARAMA #1201 TORONTO ON Retail and Grocery 4.29\n' +
+      'Ý\n' +
+      'Jul 31 Aug 05 PRESTO FARE/PNBZNFQZCW TORONTO ON Transportation 3.30\n' +
+      'Aug 01 Aug 05 CASHBACK/REMISE EN ARGENT Other Transactions -129.68\n' +
+      'Ý\n' +
+      'Aug 01 Aug 05 CHURCHS CHICKEN 11032 TORONTO ON Restaurants 15.58\n' +
+      'Ý\n' +
+      'Aug 01 Aug 05 UBER* TRIP UBER.COM/CA/EON Transportation 10.74\n' +
+      'Aug 02 Aug 05 STEAMGAMES.COM 4259522985912-1844160 WA Retail and Grocery 26.87\n' +
+      'Aug 02 Aug 05 STEAMGAMES.COM 4259522985912-1844160 WA Retail and Grocery -14.45\n' +
+      'Aug 02 Aug 05 STEAMGAMES.COM 4259522985912-1844160 WA Retail and Grocery -12.42\n' +
+      'Aug 02 Aug 05 AMZN Mktp CA*Q76JQ4HH3 WWW.AMAZON.CAON Personal and Household Expenses 22.59\n' +
+      'Aug 02 Aug 05 DOLLARAMA #1201 TORONTO ON Retail and Grocery 5.65\n' +
+      'Ý\n' +
+      'Aug 02 Aug 05 UBER CANADA/UBERTRIP TORONTO ON Transportation 7.65\n' +
+      'Ý\n' +
+      'Aug 02 Aug 05 GYU HITO JAPANESE BBQ TORONTO ON Restaurants 147.39\n' +
+      'Ý\n' +
+      'Aug 03 Aug 05 UBER CANADA/UBERTRIP TORONTO ON Transportation 29.82\n' +
+      'Ý Aug 03 Aug 05 UBER CANADA/UBERTRIP TORONTO ON Transportation 10.91\n' +
+      'Ý\n' +
+      'Aug 03 Aug 05 UBER CANADA/UBERTRIP TORONTO ON Transportation 21.41\n' +
+      'Aug 03 Aug 05 STAPLES STORE #26 TORONTO ON Retail and Grocery 2.68\n' +
+      'Page 3 of 6\n' +
+      '*0302690000*\n' +
+      '*0000962030*'
+  },
+  {
+    table: null,
+    text: 'Your new charges and credits (continued)\n' +
+      'Trans Post\n' +
+      'date date Description Spend Categories Amount($)\n' +
+      'Card number 4505 XXXX XXXX 7960\n' +
+      'Ý\n' +
+      "Aug 03 Aug 05 CHURCH'S CHICKEN EAST YORK ON Restaurants 15.53\n" +
+      'Ý\n' +
+      'Aug 04 Aug 05 PR TORONTO EATON CENTER TORONTO ON Restaurants 16.94\n' +
+      'Ý\n' +
+      'Aug 04 Aug 05 UBER CANADA/UBERTRIP TORONTO ON Transportation 15.14\n' +
+      'Ý\n' +
+      'Aug 04 Aug 05 UBER CANADA/UBERTRIP TORONTO ON Transportation 4.84\n' +
+      'Ý\n' +
+      'Aug 04 Aug 05 SUSHI-Q EATON NORTH TORONTO ON Restaurants 8.86\n' +
+      'Ý\n' +
+      'Aug 04 Aug 05 SUSHI-Q EATON NORTH TORONTO ON Restaurants 2.77\n' +
+      'Ý\n' +
+      'Aug 05 Aug 06 Uber Holdings Canada Inc.Toronto ON Restaurants 25.73\n' +
+      'Ý\n' +
+      'Aug 05 Aug 06 UBER *TRIP HELP.UBER.COM Toronto ON Transportation 12.02\n' +
+      'Ý\n' +
+      'Aug 06 Aug 08 STARBUCKS 04497 TORONTO ON Restaurants 3.62\n' +
+      'Aug 06 Aug 08 AJISEN RAMEN CHURCH TORONTO ON Retail and Grocery 92.63\n' +
+      'Ý\n' +
+      'Aug 07 Aug 08 UBER CANADA/UBERTRIP TORONTO ON Transportation 5.41\n' +
+      'Ý\n' +
+      'Aug 07 Aug 08 PRESTO AUTL TORONTO ON Transportation 40.00\n' +
+      'Ý\n' +
+      'Aug 07 Aug 08 PATTIES EXPRESS TORONTO ON Restaurants 2.51\n' +
+      'Aug 07 Aug 08 SEPHORA EATON CENTRE TORONTO ON Personal and Household Expenses 38.42\n' +
+      'Ý\n' +
+      'Aug 07 Aug 08 JOLLIBEE TORONTO ON Restaurants 13.55\n' +
+      'Aug 08 Aug 11 STAPLES STORE #26 TORONTO ON Retail and Grocery 2.68\n' +
+      'Ý\n' +
+      'Aug 08 Aug 11 PR TORONTO EATON CENTER TORONTO ON Restaurants 6.78\n' +
+      'Ý\n' +
+      'Aug 08 Aug 11 UBER CANADA/UBERTRIP TORONTO ON Transportation 8.80\n' +
+      'Ý\n' +
+      'Aug 08 Aug 11 UBER CANADA/UBERTRIP TORONTO ON Transportation 7.12\n' +
+      'Ý\n' +
+      'Aug 08 Aug 11 UBER CANADA/UBERTRIP TORONTO ON Transportation 25.50\n' +
+      'Ý\n' +
+      'Aug 09 Aug 11 UBER CANADA/UBERTRIP TORONTO ON Transportation 27.02\n' +
+      'Ý\n' +
+      'Aug 09 Aug 11 UBER CANADA/UBERTRIP TORONTO ON Transportation 9.25\n' +
+      'Aug 09 Aug 11 STAPLES STORE #26 TORONTO ON Retail and Grocery 2.00\n' +
+      'Ý\n' +
+      'Aug 09 Aug 11 POPEYES 8209 SCARBOROUGH ON Restaurants 15.24\n' +
+      'Ý\n' +
+      'Aug 10 Aug 11 PR TORONTO EATON CENTER TORONTO ON Restaurants 16.94\n' +
+      'Ý\n' +
+      'Aug 11 Aug 12 UBER *TRIP HELP.UBER.COM Toronto ON Transportation 4.37\n' +
+      'Ý\n' +
+      'Aug 11 Aug 12 UBER CANADA/UBEREATS TORONTO ON Restaurants 21.49\n' +
+      'Ý\n' +
+      'Aug 11 Aug 12 UBER CANADA/UBERTRIP TORONTO ON Transportation 5.94\n' +
+      'Ý\n' +
+      'Aug 11 Aug 12 UBER CANADA/UBERTRIP TORONTO ON Transportation 12.35\n' +
+      'Ý\n' +
+      'Aug 11 Aug 12 METRO 808 SCARBOROUGH ON Retail and Grocery 1.71\n' +
+      'Total for 4505 XXXX XXXX 7960 $2,129.16\n' +
+      'Page 4 of 6'
+  },
+  {
+    table: null,
+    text: '471810-881-\n' +
+      'Prepared for: JUDE ROZARIO July 13 to August 12, 2025 Account number: 4505 XXXX XXXX 7960\n' +
+      'CIBC CreditSmartTM* Spend Report\n' +
+      'This month Year-to-date\n' +
+      'Spend Categories Transactions Amount($) Budget ($) Difference ($) Transactions Amount ($)\n' +
+      'Personal and Household Expenses 5 317.86 - - 5 317.86\n' +
+      'Retail and Grocery 26 985.70 - - 26 985.70\n' +
+      'Transportation 23 303.30 - - 23 303.30\n' +
+      'Restaurants 38 631.98 - - 40 649.17\n' +
+      'Health and Education 1 20.00 - - 1 20.00\n' +
+      'Other Transactions 1 -129.68 - - 1 -129.68\n' +
+      'Total 94 2,129.16 96 $2,146.35\n' +
+      'Transactions are assigned a spend category based on where the goods or services are purchased, not on what was purchased. For example,\n' +
+      'items purchased at a convenience store in a gas station will appear under Transportation, not Retail and Grocery.\n' +
+      'A negative difference (–) means you spent more than you budgeted.\n' +
+      'Amount($) Budget ($) Difference ($)\n' +
+      'Total Monthly Budget 2,129.16 - -\n' +
+      'Reminder: If you only make the minimum payment every month, it will take approximately 6 year(s) and 4 month(s) to pay the\n' +
+      'total balance shown on this statement. This estimate assumes each statement period is 30 days and that you pay your minimum\n' +
+      'payment on time every month.\n' +
+      'Your message centre\n' +
+      'Time to Indulge! You’ve been rewarded for your purchases with cash back – just for you. You will see a credit within 5 days\n' +
+      'of the date the redemption request is made. You can also view the credit for cash back redeemed in your transaction details\n' +
+      '® ®\n' +
+      'on CIBC Online Banking or the CIBC Mobile Banking App.\n' +
+      'Best of all, there’s no limit on the total amount of cash back you can earn. Your cash back will grow over time, and once it\n' +
+      '® ®\n' +
+      'reaches $10 or more, you can redeem it through CIBC Online Banking or the CIBC Mobile Banking App.\n' +
+      '® ®\n' +
+      'Did you know? You can set up a cash back balance alert through CIBC Online Banking or the CIBC Mobile Banking App to\n' +
+      'inform you as soon as your cash back balance reaches an amount of your choosing, and receive alerts every 90 days if your\n' +
+      'cash back balance is at or above your chosen amount. Visit www.cibc.com/cashbackalert for details.\n' +
+      'Important Notice:\n' +
+      'To stay on top of your account and avoid missing a payment and potential fees in the event of mail delivery delays, register for\n' +
+      'CIBC Online Banking® and CIBC Mobile Banking®. You can also sign up to receive your statements electronically and enable\n' +
+      'alerts so you never miss a statement. For more information, please visit cibc.com/alerts.\n' +
+      'Taking a road trip? CIBC customers can enjoy deals and benefits with Budget Car Rental. Save up to 25% off base rental car\n' +
+      'rates at participating locations in Canada and the U.S. Terms and conditions apply. Visit CIBC.com to learn more about how\n' +
+      'you can save with Budget.\n' +
+      'Need to send money abroad? Consider paying with an eligible CIBC credit card when you send a CIBC Global Money Transfer.\n' +
+      'There are no CIBC transfer fees and cash advance fees do not apply. Terms and conditions apply. Ask us for more details or\n' +
+      'visit CIBC.com/transfer.\n' +
+      'Select or change your credit card PIN digitally through your CIBC Online Banking or Mobile Banking app with four simple steps:\n' +
+      '1. Sign on to CIBC Online Banking or the Mobile Banking app.\n' +
+      '2. Select your CIBC credit card account.\n' +
+      '3. Select the Manage My Card menu.\n' +
+      '4. Click Choose PIN and follow the prompts.\n' +
+      'Earn cash back everywhere you shop! Use your CIBC Dividend Visa Card for kitchen appliances, concert tickets, pet food and\n' +
+      'all other eligible purchases to earn cash back on your everyday spend. Visit CIBC.com/dividend for more ways to earn.\n' +
+      'Page 5 of 6\n' +
+      '*0303700000*\n' +
+      '*0000073030*'
+  },
+  {
+    table: null,
+    text: 'Your message centre\n' +
+      '(continued)\n' +
+      'Earn 1% cash back on all eligible gas, electric vehicle charging, transportation and dining purchases and recurring payments\n' +
+      'with your CIBC Dividend Visa Card. This includes train tickets, ride sharing services, coffee shops, bars, cell phone bills and\n' +
+      'more. Make the most out of your everyday spend with no limit on the amount of cash back you can earn. Terms and\n' +
+      'conditions apply. To learn more, visit CIBC.com/dividend.\n' +
+      'Details of Promotional Awards\n' +
+      'ACQUISITION PROMO BONUS $92.31\n' +
+      'Page 6 of 6'
+  }
+]

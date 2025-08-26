@@ -1,0 +1,446 @@
+[
+  {
+    table: null,
+    text: 'RBC® ION+TM Visa‡\n' +
+      'JUDE ANTHONY ROZARIO 4510 15** **** 4173\n' +
+      'STATEMENT FROM MAY 27 TO JUN 25, 2025\n' +
+      '1 OF 6\n' +
+      'PREVIOUS ACCOUNT BALANCE $405.18\n' +
+      'IMPORTANT INFORMATION\n' +
+      'AVION POINTS\n' +
+      'JUDE ANTHONY ROZARIO Previous Points balance 13,088\n' +
+      '4510 15** **** 4173 - PRIMARY Points earned this statement 1,917\n' +
+      'TRANSACTION POSTING Bonus points earned this statement 2,956\n' +
+      'ACTIVITY DESCRIPTION AMOUNT ($)\n' +
+      'DATE DATE Points redeemed this statement (8,600)\n' +
+      'MAY 25 MAY 27 POPEYES 8209 SCARBOROUGH ON $9.04 New points balance 9,361\n' +
+      '74703415146101543001040\n' +
+      'MAY 26 MAY 27 BELL MOBILITY VERDUN QC $64.46 CONTACT US\n' +
+      '74064495146820136615248 Customer Service / Lost & Stolen 1-800-769-2512\n' +
+      'MAY 26 MAY 28 DAVES HOT CHICKEN TORONTO ON $14.68 Collect Outside North America (416) 974-7780\n' +
+      '74064495147820112489021 Rewards Website avionrewards.com\n' +
+      'MAY 27 MAY 29 STARBUCKS 04497 TORONTO ON $6.72\n' +
+      '74703415148103059011973 PAYMENTS & INTEREST RATES\n' +
+      'MAY 27 MAY 29 STARBUCKS 04497 TORONTO ON $3.62\n' +
+      'Minimum payment $10.00\n' +
+      '74703415148103059012377 Payment due date JUL 16, 2025\n' +
+      'MAY 27 MAY 29 SHOPPERS DRUG MART 826 SCARBOROUGH ON $10.16\n' +
+      'Credit limit $15,500.00\n' +
+      '74500015148882606127134 Available credit $14,820.50\n' +
+      'MAY 27 MAY 28 UBER CANADA/UBEREATS TORONTO ON $17.07\n' +
+      'Annual interest rates:\n' +
+      '74064495147820160403841 Purchases 20.99%\n' +
+      'MAY 27 MAY 28 UBER CANADA/UBERTRIP TORONTO ON $15.00\n' +
+      'Cash advances 22.99%\n' +
+      '74064495147820165119558\n' +
+      'MAY 28 MAY 29 UBER* TRIP UBER.COM/CA/EON $13.30 CALCULATING YOUR BALANCE\n' +
+      '74083425148100010519655\n' +
+      'Previous Account Balance $405.18\n' +
+      'MAY 28 MAY 29 UBER* EATS UBER.COM/CA/EON $24.95\n' +
+      'Payments & credits -$1,660.36\n' +
+      '74083425148100014629898\n' +
+      'Purchases & debits $1,930.68\n' +
+      'MAY 28 MAY 29 METRO 808 SCARBOROUGH ON $10.70\n' +
+      'Cash advances $0.00\n' +
+      '74500015148838484433697\n' +
+      'Interest $0.00\n' +
+      'MAY 28 MAY 29 METRO 808 SCARBOROUGH ON $49.93\n' +
+      'Fees $4.00\n' +
+      '74500015148838484436260\n' +
+      'Total Account Balance $679.50\n' +
+      'MAY 28 MAY 30 PIZZA PIZZA # 111 SCARBOROUGH ON $7.90\n' +
+      '74529005148920219109004 NEW BALANCE $679.50\n' +
+      'MAY 29 MAY 30 STAPLES STORE #26 TORONTO ON $0.64\n' +
+      '74064495149820164828959\n' +
+      'MAY 29 MAY 30 SHAKE SHACK 2 TORONTO ON $24.83\n' +
+      '74872715150121507514268\n' +
+      'MAY 29 MAY 29 PAYMENT - THANK YOU / PAIEMENT - MERCI -$525.43\n' +
+      '74510205149619983976202\n' +
+      'MAY 30 JUN 02 UBER CANADA/UBERTRIP TORONTO ON $28.25\n' +
+      '74064495150820172129909\n' +
+      'MAY 30 JUN 02 AJISEN RAMEN CHURCH TORONTO ON $79.96\n' +
+      '74064495151820112980303\n' +
+      'RBC ROYAL BANK NEW BALANCE MINIMUM PAYMENT PAYMENT DUE DATE AMOUNT PAID\n' +
+      'CREDIT CARD PAYMENT CENTRE $679.50 $10.00 JUL 16, 2025 $\n' +
+      'P.O. BOX 4016, STATION “A”\n' +
+      'TORONTO, ONTARIO M5W 2E6\n' +
+      'RBC® ION+TM Visa‡\n' +
+      '4510 15** **** 4173\n' +
+      'Quick, convenient and secure ways to pay your credit card bill:\n' +
+      '· RBC Online Banking at www.rbcroyalbank.com/online\n' +
+      'JUDE ANTHONY ROZARIO · RBC Mobile app – text “RBC” to 722722 to download\n' +
+      'SUITE 22\n' +
+      'Other payment options include:\n' +
+      '3430 KINGSTON RD\n' +
+      '· RBC Royal Bank ATM\n' +
+      'SCARBOROUGH ON M1M 1R5\n' +
+      '· Telephone Banking 1-800-769-2511\n' +
+      '· Visit an RBC Royal Bank branch'
+  },
+  {
+    table: null,
+    text: 'RBC® ION+TM Visa‡\n' +
+      'JUDE ANTHONY ROZARIO 4510 15** **** 4173\n' +
+      'STATEMENT FROM MAY 27 TO JUN 25, 2025\n' +
+      '2 OF 6\n' +
+      'Thank you for choosing RBC Royal Bank\n' +
+      'JUDE ANTHONY ROZARIO\n' +
+      '4510 15** **** 4173 - PRIMARY (continued)\n' +
+      'TRANSACTION POSTING\n' +
+      'ACTIVITY DESCRIPTION AMOUNT ($)\n' +
+      'DATE DATE\n' +
+      'MAY 30 MAY 30 PAYMENT - THANK YOU / PAIEMENT - MERCI -$119.38\n' +
+      '74510205150619987458203\n' +
+      'MAY 30 MAY 30 PAYMENT - THANK YOU / PAIEMENT - MERCI -$33.37\n' +
+      '74510205150619987459201\n' +
+      'MAY 31 JUN 02 UBER CANADA/UBERTRIP TORONTO ON $11.08\n' +
+      '74064495151820159799293\n' +
+      'MAY 31 JUN 02 POPEYES #12933 TORONTO ON $18.63\n' +
+      '74703415152106544645464\n' +
+      'JUN 01 JUN 02 PRESTO AUTL TORONTO ON $40.00\n' +
+      '74064495152820159840088\n' +
+      'JUN 01 JUN 02 UBER CANADA/UBERTRIP TORONTO ON $25.77\n' +
+      '74064495152820154646381\n' +
+      'JUN 01 JUN 02 241 PIZZA #0199 TORONTO ON $5.65\n' +
+      '74703415153107264065841\n' +
+      'JUN 01 JUN 02 COCA COLA BRAMPTON ON BRAMPTON ON $6.00\n' +
+      '74872715153151533798434\n' +
+      "JUN 01 JUN 02 MCDONALD'S #40568 TORONTO ON $5.64\n" +
+      '74064495153820112404054\n' +
+      'JUN 02 JUN 04 STARBUCKS 04497 TORONTO ON $3.62\n' +
+      '74703415154108390518447\n' +
+      'JUN 02 JUN 03 TST-MATCHA MATCHA - 40 TORONTO ON $8.48\n' +
+      '74099865153001322256096\n' +
+      'JUN 02 JUN 03 UBER CANADA/UBEREATS TORONTO ON $17.66\n' +
+      '74064495153820148640853\n' +
+      'JUN 02 JUN 03 UBER CANADA/UBERTRIP TORONTO ON $13.39\n' +
+      '74064495153820153064759\n' +
+      'JUN 02 JUN 02 GATEWAY NEWSSTAND #145 SCARBOROUGH $2.75\n' +
+      'ON\n' +
+      '74064495153820132023314\n' +
+      'JUN 03 JUN 05 UBER* TRIP UBER.COM/CA/EON $6.65\n' +
+      '74083425155100008865409\n' +
+      'JUN 03 JUN 04 UBER CANADA/UBERTRIP TORONTO ON $23.25\n' +
+      '74064495154820170819622\n' +
+      'JUN 04 JUN 05 GATEWAY NEWSSTAND #145 SCARBOROUGH $2.75\n' +
+      'ON\n' +
+      '74064495155820153663897\n' +
+      'JUN 04 JUN 05 UBER CANADA/UBEREATS TORONTO ON $16.97\n' +
+      '74064495155820162058774\n' +
+      'JUN 04 JUN 05 UBER CANADA/UBERTRIP TORONTO ON $6.11\n' +
+      '74064495155820169015892\n' +
+      'JUN 04 JUN 05 UBER CANADA/UBERTRIP TORONTO ON $8.21\n' +
+      '74064495155820169489436\n' +
+      'JUN 04 JUN 06 STARBUCKS 04497 TORONTO ON $3.62\n' +
+      '74703415156100215470571\n' +
+      'JUN 05 JUN 06 UBER CANADA/UBERTRIP TORONTO ON $36.84\n' +
+      '74064495156820153138105\n' +
+      'JUN 06 JUN 09 STAPLES STORE #26 TORONTO ON $35.38\n' +
+      '74064495157820140779556\n' +
+      'JUN 06 JUN 09 UBER CANADA/UBERTRIP TORONTO ON $30.61\n' +
+      '74064495157820174157109\n' +
+      "JUN 06 JUN 09 ROCCO'S NO FRILLS #364 TORONTO ON $10.17\n" +
+      '74500015157882687589036\n' +
+      'JUN 06 JUN 09 UBER* TRIP UBER.COM/CA/EON $8.96\n' +
+      '74083425158100007887856\n' +
+      'JUN 06 JUN 09 241 PIZZA #0199 TORONTO ON $7.11\n' +
+      '74703415158101902452961\n' +
+      'JUN 07 JUN 09 UBER CANADA/UBEREATS TORONTO ON $16.04\n' +
+      '74064495158820151985513\n' +
+      'JUN 07 JUN 09 UBER CANADA/UBERTRIP TORONTO ON $9.19\n' +
+      '74064495158820160960036'
+  },
+  {
+    table: null,
+    text: 'RBC® ION+TM Visa‡\n' +
+      'JUDE ANTHONY ROZARIO 4510 15** **** 4173\n' +
+      'STATEMENT FROM MAY 27 TO JUN 25, 2025\n' +
+      '3 OF 6\n' +
+      'JUDE ANTHONY ROZARIO\n' +
+      '4510 15** **** 4173 - PRIMARY (continued)\n' +
+      'TRANSACTION POSTING\n' +
+      'ACTIVITY DESCRIPTION AMOUNT ($)\n' +
+      'DATE DATE\n' +
+      "JUN 07 JUN 09 LI'S HAKKA NO.1 RESTAURA TORONTO ON $33.34\n" +
+      '74450775159004001606738\n' +
+      'JUN 07 JUN 09 METRO 808 SCARBOROUGH ON $33.89\n' +
+      '74500015158838428208285\n' +
+      'JUN 07 JUN 09 METRO 808 SCARBOROUGH ON $16.94\n' +
+      '74500015158838428211016\n' +
+      'JUN 07 JUN 09 POPEYES 8209 SCARBOROUGH ON $18.63\n' +
+      '74703415159103273849410\n' +
+      'JUN 07 JUN 09 SHOPPERS DRUG MART 826 SCARBOROUGH ON $10.16\n' +
+      '74500015159882609275753\n' +
+      'JUN 08 JUN 09 UBER CANADA/UBERTRIP TORONTO ON $12.89\n' +
+      '74064495159820151869245\n' +
+      'JUN 08 JUN 09 BARBURRITO SCARBOROUGH ON $20.88\n' +
+      '74064495159820168724052\n' +
+      'JUN 09 JUN 11 STARBUCKS 04497 TORONTO ON $3.94\n' +
+      '74703415161104786517086\n' +
+      'JUN 09 JUN 11 SHOPPERS DRUG MART #14 TORONTO ON $5.39\n' +
+      '74500015161882611425756\n' +
+      'JUN 09 JUN 10 PRESTO AUTL TORONTO ON $40.00\n' +
+      '74064495160820156997949\n' +
+      'JUN 09 JUN 10 DOLLARAMA #1201 TORONTO ON $4.24\n' +
+      '74064495160820140587210\n' +
+      'JUN 09 JUN 10 UBER CANADA/UBERTRIP TORONTO ON $11.85\n' +
+      '74064495160820152290976\n' +
+      'JUN 09 JUN 10 METRO 808 SCARBOROUGH ON $13.37\n' +
+      '74500015160838453558642\n' +
+      'JUN 10 JUN 11 SAINT GERMAIN BAKERY TORONTO ON $16.13\n' +
+      '74064495161820148205871\n' +
+      'JUN 10 JUN 11 PAYBACK WITH POINTS -$50.00\n' +
+      '1249914370\n' +
+      'JUN 10 JUN 10 PAYMENT - THANK YOU / PAIEMENT - MERCI -$50.00\n' +
+      '74510205161619983649208\n' +
+      'JUN 10 JUN 10 PAYMENT - THANK YOU / PAIEMENT - MERCI -$100.00\n' +
+      '74510205161619983650206\n' +
+      'JUN 10 JUN 10 GATEWAY NEWSSTAND #145 SCARBOROUGH $2.75\n' +
+      'ON\n' +
+      '74064495161820123863058\n' +
+      'JUN 11 JUN 12 UBER CANADA/UBERONE TORONTO ON $5.64\n' +
+      '74064495162820165658803\n' +
+      'JUN 11 JUN 12 REPLY COFFEE TORONTO ON $9.25\n' +
+      '74514205162004014291350\n' +
+      'JUN 11 JUN 13 STARBUCKS 04497 TORONTO ON $3.62\n' +
+      '74703415163106587320956\n' +
+      'JUN 11 JUN 13 STARBUCKS 04497 TORONTO ON $6.72\n' +
+      '74703415163106587321020\n' +
+      'JUN 12 JUN 12 CHIPOTLE ONLINE 303-595-4000 NS $19.16\n' +
+      '74703415163106479813332\n' +
+      'JUN 12 JUN 13 UBER* TRIP UBER.COM/CA/EON $19.63\n' +
+      '74083425163100017010302\n' +
+      'JUN 12 JUN 13 CHURCHS TEXAS CHICKEN TORONTO ON $16.94\n' +
+      '74450775163004014231437\n' +
+      'JUN 13 JUN 16 GATEWAY NEWSSTAND #145 SCARBOROUGH $2.75\n' +
+      'ON\n' +
+      '74064495164820157054860\n' +
+      'JUN 13 JUN 16 SZECHUAN EXPRESS TORONTO ON $7.35\n' +
+      '74064495164820161266831\n' +
+      'JUN 13 JUN 16 UBER CANADA/UBERTRIP TORONTO ON $25.09\n' +
+      '74064495164820174982036\n' +
+      'JUN 13 JUN 13 PAYMENT - THANK YOU / PAIEMENT - MERCI -$567.19\n' +
+      '74510205164619985926205'
+  },
+  {
+    table: null,
+    text: 'RBC® ION+TM Visa‡\n' +
+      'JUDE ANTHONY ROZARIO 4510 15** **** 4173\n' +
+      'STATEMENT FROM MAY 27 TO JUN 25, 2025\n' +
+      '4 OF 6\n' +
+      'JUDE ANTHONY ROZARIO\n' +
+      '4510 15** **** 4173 - PRIMARY (continued)\n' +
+      'TRANSACTION POSTING\n' +
+      'ACTIVITY DESCRIPTION AMOUNT ($)\n' +
+      'DATE DATE\n' +
+      'JUN 13 JUN 13 PAYMENT - THANK YOU / PAIEMENT - MERCI -$47.00\n' +
+      '74510205164619985927203\n' +
+      'JUN 14 JUN 16 UBER* EATS UBER.COM/CA/EON $2.00\n' +
+      '74083425165100013810414\n' +
+      'JUN 14 JUN 16 UBER CANADA TORONTO ON -$13.99\n' +
+      '74064495165820150146134\n' +
+      'JUN 14 JUN 16 UBER CANADA/UBEREATS TORONTO ON $19.81\n' +
+      '74064495165820152834232\n' +
+      'JUN 14 JUN 16 KUNG FU TEA ON ADELAIDE TORONTO ON $9.33\n' +
+      '74064375166004017026747\n' +
+      'JUN 14 JUN 16 UBER CANADA/UBERTRIP TORONTO ON $11.67\n' +
+      '74064495166820152352036\n' +
+      'JUN 15 JUN 16 GATEWAY NEWSSTAND #145 SCARBOROUGH $15.25\n' +
+      'ON\n' +
+      '74064495166820138773487\n' +
+      'JUN 15 JUN 16 UBER CANADA/UBERTRIP TORONTO ON $25.64\n' +
+      '74064495166820155609259\n' +
+      'JUN 15 JUN 16 DOMINOS PIZZA 10460 TORONTO ON $16.94\n' +
+      '74703415167100050967563\n' +
+      'JUN 15 JUN 16 METRO 808 SCARBOROUGH ON $12.64\n' +
+      '74500015166838429472229\n' +
+      'JUN 15 JUN 18 WAL-MART SUPERCENTER#1117SCARBOROUGH $6.47\n' +
+      'ON\n' +
+      '74529005167900509347809\n' +
+      'JUN 15 JUN 18 DAIRY QUEEN #12162 SCARBOROUGH ON $43.00\n' +
+      '74529005167920129226803\n' +
+      'JUN 16 JUN 16 UBER* EATS UBER.COM/CA/EON $87.36\n' +
+      '74083425167100002487990\n' +
+      'JUN 16 JUN 17 HOPP/O/2506161118 TORONTO ON $14.07\n' +
+      '74099865167001306031097\n' +
+      'JUN 16 JUN 17 UBER CANADA/UBERTRIP TORONTO ON $7.95\n' +
+      '74064495167820153331434\n' +
+      'JUN 16 JUN 17 UBER CANADA/UBERTRIP TORONTO ON $10.65\n' +
+      '74064495167820156626020\n' +
+      'JUN 16 JUN 17 SHOPPERS DRUG MART #82 TORONTO ON $0.90\n' +
+      '74500015167882635170739\n' +
+      'JUN 16 JUN 18 SHOPPERS DRUG MART #14 TORONTO ON $80.91\n' +
+      '74500015168882685446137\n' +
+      'JUN 16 JUN 16 PAYMENT - THANK YOU / PAIEMENT - MERCI -$150.00\n' +
+      '74510205167619983104208\n' +
+      'JUN 17 JUN 19 STARBUCKS 04497 TORONTO ON $3.62\n' +
+      '74703415169102052802200\n' +
+      'JUN 17 JUN 19 POPEYES 8209 SCARBOROUGH ON $18.63\n' +
+      '74703415169102340568787\n' +
+      'JUN 17 JUN 17 SPOTIFY P37C05463D STOCKHOLM $7.22\n' +
+      '74987505168000717575037\n' +
+      'JUN 17 JUN 18 UBER* TRIP UBER.COM/CA/EON $14.05\n' +
+      '74083425168100018175547\n' +
+      'JUN 17 JUN 18 METRO 759 TORONTO ON $4.99\n' +
+      '74500015168838465934221\n' +
+      'JUN 17 JUN 17 GATEWAY NEWSSTAND #145 SCARBOROUGH $2.75\n' +
+      'ON\n' +
+      '74064495168820132999912\n' +
+      'JUN 18 JUN 19 UBER CANADA/UBERTRIP TORONTO ON $5.80\n' +
+      '74064495169820152513717\n' +
+      'JUN 18 JUN 19 PRESTO AUTL TORONTO ON $40.00\n' +
+      '74064495169820158522860\n' +
+      'JUN 18 JUN 19 UBER CANADA/UBERTRIP TORONTO ON $15.08\n' +
+      '74064495169820149319228'
+  },
+  {
+    table: null,
+    text: 'RBC® ION+TM Visa‡\n' +
+      'JUDE ANTHONY ROZARIO 4510 15** **** 4173\n' +
+      'STATEMENT FROM MAY 27 TO JUN 25, 2025\n' +
+      '5 OF 6\n' +
+      'JUDE ANTHONY ROZARIO\n' +
+      '4510 15** **** 4173 - PRIMARY (continued)\n' +
+      'TRANSACTION POSTING\n' +
+      'ACTIVITY DESCRIPTION AMOUNT ($)\n' +
+      'DATE DATE\n' +
+      'JUN 18 JUN 19 UBER CANADA/UBERTRIP TORONTO ON $6.03\n' +
+      '74064495169820152367569\n' +
+      'JUN 18 JUN 19 REPLY COFFEE TORONTO ON $7.63\n' +
+      '74514205169004015300641\n' +
+      'JUN 18 JUN 20 AJISEN RAMEN CHURCH TORONTO ON $79.87\n' +
+      '74064495170820111460346\n' +
+      'JUN 19 JUN 19 HOPP/O/2506190206 TORONTO ON $5.05\n' +
+      '74099865170000012846066\n' +
+      'JUN 19 JUN 20 HOPP/O/2506191623 TORONTO ON $28.21\n' +
+      '74099865170000042921095\n' +
+      'JUN 19 JUN 20 STAPLES STORE #26 TORONTO ON $2.68\n' +
+      '74064495170820165318911\n' +
+      'JUN 20 JUN 23 UBER* TRIP UBER.COM/CA/EON $22.62\n' +
+      '74083425171100010065667\n' +
+      'JUN 20 JUN 23 PR TORONTO EATON CENTER TORONTO ON $12.98\n' +
+      '74514205171004007008521\n' +
+      'JUN 20 JUN 23 DOLLARAMA #1201 TORONTO ON $2.26\n' +
+      '74064495171820161608850\n' +
+      'JUN 20 JUN 23 UBER CANADA/UBERTRIP TORONTO ON $5.97\n' +
+      '74064495171820176862054\n' +
+      'JUN 20 JUN 23 PATTIES EXPRESS TORONTO ON $2.51\n' +
+      '74064495171820182169023\n' +
+      'JUN 20 JUN 23 METRO 759 TORONTO ON $6.68\n' +
+      '74500015171838409746538\n' +
+      'JUN 20 JUN 23 SHOPPERS DRUG MART #82 TORONTO ON $10.16\n' +
+      '74500015171882645587686\n' +
+      'JUN 20 JUN 23 STARBUCKS 04497 TORONTO ON $3.62\n' +
+      '74703415172101776620216\n' +
+      'JUN 20 JUN 23 ASIAN GOURMET TORONTO ON $12.40\n' +
+      '74529005171920448943009\n' +
+      'JUN 21 JUN 23 HOPP/O/2506210049 TORONTO ON $6.66\n' +
+      '74099865172000008584083\n' +
+      'JUN 21 JUN 23 BATALA SUPERMARKET SCARBOROUGH ON $10.78\n' +
+      '74064495172820132404966\n' +
+      'JUN 21 JUN 23 UBER CANADA/UBEREATS TORONTO ON $24.00\n' +
+      '74064495172820153059517\n' +
+      'JUN 21 JUN 23 METRO 808 SCARBOROUGH ON $13.37\n' +
+      '74500015172838424427626\n' +
+      'JUN 22 JUN 23 MOS MOS COFFEE TORONTO ON $3.44\n' +
+      '74064495173820167431347\n' +
+      'JUN 22 JUN 23 HOPP/O/2506221333 TORONTO ON $13.58\n' +
+      '74099865173000037654054\n' +
+      'JUN 23 JUN 24 REPLY COFFEE TORONTO ON $6.73\n' +
+      '74514205174004015276505\n' +
+      'JUN 23 JUN 24 CHIPOTLE 1236 TORONTO ON $38.31\n' +
+      '74703415175104235408766\n' +
+      'JUN 24 JUN 25 UBER CANADA/UBERTRIP TORONTO ON $6.12\n' +
+      '74064495175820148796691\n' +
+      'JUN 25 JUN 25 ANNUAL FEE $4.00\n' +
+      'JUN 25 JUN 25 ANNUAL FEE REBATE -$4.00\n' +
+      'TOTAL ACCOUNT BALANCE $679.50'
+  },
+  {
+    table: null,
+    text: 'RBC® ION+TM Visa‡\n' +
+      'JUDE ANTHONY ROZARIO 4510 15** **** 4173\n' +
+      'STATEMENT FROM MAY 27 TO JUN 25, 2025\n' +
+      '6 OF 6\n' +
+      'Time to Pay\n' +
+      'If you make only the Minimum Payment each month, we estimate it will\n' +
+      'take 6 year(s) and 0 month(s) to fully repay the outstanding balance. Our\n' +
+      'estimate is based on the Total Account Balance shown on this statement\n' +
+      'and your current credit card account terms. This estimate is intended solely\n' +
+      'to illustrate how making only the Minimum Payment will increase the time\n' +
+      'it takes to pay your balance and is not a recommended long term\n' +
+      'repayment plan.\n' +
+      'INTEREST RATE CHART\n' +
+      'Description Rate (%) Remaining Balance** Expiry Date\n' +
+      'Purchases & Fees 20.99 $679.50\n' +
+      '** The "Determination of Interest" section on the back of your statement explains how interest is\n' +
+      'charged and how you may avoid interest charges on purchases and fees and the "Applying your\n' +
+      'payments" section explains how payments are applied to the Remaining Balances shown above.'
+  },
+  {
+    table: null,
+    text: 'IMPORTANT INFORMATION ABOUT YOUR RBC ROYAL BANK CREDIT CARD STATEMENT Interest Rate Chart. This chart sets out the interest rate(s) that apply to the Total Account Balance, any remaining\n' +
+      'The following is a summary of certain terms and conditions of your credit card account and details about some of balances associated with those rates, and expiry dates for any promotional and installment plan rates. Offers that\n' +
+      'the information shown on your statement. Please refer to your credit card agreement for complete terms and we may have made to you but which you are not using are not shown as they will not have any associated\n' +
+      'conditions for your account. For more tips on reading your statement, go to rbc.com/cardstatement. balances. If you lose a promotional rate due to a missed payment, the Interest Rate Chart will continue to display\n' +
+      'New Balance. The Total Account Balance as of your Statement Date minus the total amount of Installments Not Yet that promotional rate until the loss takes effect. The expiry date for an installment plan rate reflects the due date of\n' +
+      'Due as shown on your statement. This is the amount you must pay to avoid interest on your regular purchases and the final installment plan payment for that plan. If you lose an installment plan rate before its expiry date due to a\n' +
+      'fees shown on this statement. missed payment, your Interest Rate Chart will be updated in your next statement to reflect this, and any Unpaid\n' +
+      'Statement Period. Your statement covers activity in your account from the day after your previous statement was Plan Principal will be moved to your Purchases & Fees category. If an expiry date falls on a date on which we do\n' +
+      'prepared to the last day of this statement period (your Statement Date). If the date we would ordinarily prepare not process statements, we will continue to provide you with the benefit of the promotional or installment plan rate\n' +
+      'your statement falls on a date on which we do not process statements (such as weekends) we will prepare it on our until our next statement processing date.\n' +
+      'next statement processing date. Your Payment Due Date will be adjusted accordingly. Installment Plan Summary. If you have any installment plans, this chart sets out the details of such plans.\n' +
+      'Total Account Balance. The total amount of your previous account balance, plus all new purchases and debits, cash INTEREST AND OTHER CALCULATIONS\n' +
+      'advances, interest, and fees shown on your statement, minus the amount of any payments and credits which have Determination of interest. You have a minimum 21 day interest-free grace period for new purchases. You can avoid\n' +
+      'been posted to your account on or before your Statement Date. The Total Account Balance includes the total interest on these new purchases by (i) for new purchases (except those converted to installment plans) and fees,\n' +
+      'amount of Installments Not Yet Due as shown on your statement, and is the same as your New Balance if you do paying your New Balance in full by your Payment Due Date, and (ii) for new purchases converted to installment\n' +
+      'not have any installment plans. plans, paying your Total Account Balance in full by your Payment Due Date. If you do not pay your New Balance in\n' +
+      'YOUR RESPONSIBILITIES full by your Payment Due Date, you must pay interest on each new purchase retroactively from the transaction date\n' +
+      'Review your statement carefully. If you think there is an error, omission or irregularity, you must contact us no later until the date we process your payment in full for those purchases. The accrued interest will appear on your next\n' +
+      'than 30 days following your Statement Date at 1-800-769-2512. After 30 days, our records will be considered statement. We continue to charge interest on the unpaid portion of those purchases until you pay the New Balance\n' +
+      'correct except for credits improperly applied to your account. in full on or before its Payment Due Date. Interest related to your purchases could appear on the first statement you\n' +
+      'Report lost or stolen cards. If your card is lost or stolen, or if you have your card but suspect that it or your account receive after we process that payment. This is interest that was not included in the New Balance you paid in full\n' +
+      'number is being used by someone else, log in to RBC Online Banking or the RBC Mobile app and select the “Report because it accrued between the date the monthly statement which showed that New Balance was prepared and\n' +
+      'Lost or Stolen Card” option, or call 1-800-769-2512, immediately. This obligation applies to Primary cardholders, the date you made your payment. For installment plans, interest is not included on your first statement after you\n' +
+      'Co-applicant cardholders and Authorized Users. install a purchase to allow you to benefit from the interest-free grace period if you pay the Total Account Balance in\n' +
+      'full by the Payment Due Date for that statement. If you do not pay this balance in full by the Payment Due Date, the\n' +
+      'Making your payment. You may pay the New Balance (or if you have installment plans, the Total Account Balance)\n' +
+      'accrued interest on the installment plan will appear on your next statement. Fees are treated in the same manner\n' +
+      'in full or in part at any time. However, you must pay at least the Minimum Payment by the Payment Due Date\n' +
+      'as purchases for the purpose of charging interest. Interest is always charged on cash advances from the day the\n' +
+      'shown on the statement each month. If the Payment Due Date falls on a weekend or holiday, we will extend it to\n' +
+      'cash advance is made until the date we process the payment in full for those cash advances. Balance transfers,\n' +
+      'the next business day. Remember to allow sufficient time for payments to reach us by the Payment Due Date.\n' +
+      'cash-like transactions and bill payments made using your credit card at our branch, an ATM or our digital banking\n' +
+      'Payments made by mail or through another financial institution may take several days to reach us and are not\n' +
+      'service are treated as cash advances.\n' +
+      'credited to your account until we have processed them. Branch payments will be credited to your account on the\n' +
+      'same day if made before the earlier of 6:00 p.m. local time or the branch closing time. We do not charge interest on interest.\n' +
+      'Missed payments. Missing payments (which means not making at least the Minimum Payment by the next To calculate your interest shown in the Calculating Your Balance section of your statement, where there is only one\n' +
+      'Statement Date) will affect your interest rates as follows: applicable interest rate in a Statement Period, we add the amount you owe each day, and divide the total by the\n' +
+      '• number of days in the Statement Period. This is your average daily balance. Where you have an installment plan,\n' +
+      'If you miss making any Minimum Payment, you will lose the benefit of any introductory or promotional\n' +
+      'we use the total principal amount of your installment plan still outstanding (including Installments Not Yet Due) as\n' +
+      'interest rate offer in which you are participating, and your standard cash advance and purchase interest\n' +
+      'the amount that you owe each day to calculate your average daily balance. Where you have more than one\n' +
+      'rates will apply to any remaining balance(s) which were subject to that offer (subject to any further\n' +
+      'increases set out below) as of the first day of the third Statement Period following the missed payment (or applicable interest rate in a Statement Period, we determine your average daily balance for each rate. We then\n' +
+      'the expiry date if it is earlier). multiply the average daily balance for each rate by the applicable daily interest rate (obtained by taking the annual\n' +
+      '• interest rate and dividing it by the number of days in the year). We then multiply this value by the total number of\n' +
+      'Where you have installment plans and you miss making any Minimum Payment (including the one due in\n' +
+      'days in the Statement Period to determine the interest we charge you.\n' +
+      'the same Statement Period in which an installment plan is created), all your installment plans will be\n' +
+      'cancelled. Any Monthly Principal amount(s) that you missed paying and your Installments Not Yet Due Applying your payments. We apply payments to your Minimum Payment first, then to the remainder of your New\n' +
+      '(“Unpaid Plan Principal”) will be subject to the interest rate applicable to regular purchases set out on this Balance. If the different amounts that make up your New Balance are subject to different interest rates, we will\n' +
+      'statement in the “Payments & Interest Rates” section under “Annual interest rates” for “Purchases”, allocate any payment in excess of your Minimum Payment in the same proportion as each amount bears to your\n' +
+      'subject to any further increase as described immediately below. This will also be the case for the Unpaid New Balance. If you have paid more than your New Balance, we will apply any excess payment to amounts that\n' +
+      'Plan Principal if you choose to cancel your installment plan(s). See your Installment Plan Terms and have not yet appeared on your monthly statement in the same manner as set out above, and then to Installments\n' +
+      'Conditions for further details.\n' +
+      'Not Yet Due.\n' +
+      'READING YOUR STATEMENT\n' +
+      'Activity Description. Each transaction and amount credited or charged to your account during the Statement Period Foreign currency conversion. The exchange rate shown on your statement, to six decimal places, is calculated by\n' +
+      'is described in this section, including the transaction and posting dates. If the transaction date is not available for dividing the converted Canadian dollar (CAD) amount, rounded to the nearest cent, by the transaction currency\n' +
+      'any transaction, its posting date is used as the transaction date. Transactions converted to installment plans are amount. It may differ from the original benchmark rate because of this rounding. The CAD amount charged to your\n' +
+      'marked by a ^ symbol in the activity description. Interest is always calculated from the transaction date. If there is account is 2.5% over the benchmark rate. Some foreign currency trans'... 1568 more characters
+  }
+]
